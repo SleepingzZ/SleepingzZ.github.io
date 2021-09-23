@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+    <meta name="subtitle" content="淡而无味也是一种味道">
+
+
+
+
+<title>面向对象的由来 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/hexo-theme-Chic/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/hexo-theme-Chic/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/hexo-theme-Chic/js/script.js"></script>
+    
+    <script src="/hexo-theme-Chic/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/hexo-theme-Chic/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/hexo-theme-Chic/archives">Posts</a>
+                
+                    <a class="menu-item" href="/hexo-theme-Chic/category">Categories</a>
+                
+                    <a class="menu-item" href="/hexo-theme-Chic/tag">Tags</a>
+                
+                    <a class="menu-item" href="/hexo-theme-Chic/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/hexo-theme-Chic/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/hexo-theme-Chic/archives">Posts</a>
+                
+                    <a class="menu-item" href="/hexo-theme-Chic/category">Categories</a>
+                
+                    <a class="menu-item" href="/hexo-theme-Chic/tag">Tags</a>
+                
+                    <a class="menu-item" href="/hexo-theme-Chic/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">面向对象的由来</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-September-22&nbsp;&nbsp;13:22</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/hexo-theme-Chic/categories/Python/">Python</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><h2 id="1-1-1940年以前：面向机器"><a href="#1-1-1940年以前：面向机器" class="headerlink" title="1.1 1940年以前：面向机器"></a>1.1 1940年以前：面向机器</h2><p>最早的程序设计都是采用机器语言来编写的,直接使用二进制码来表示机器能够识别和执行的指令和数 据。简单来说,就是直接编写 0 和 1 的序列来代表程序语言。例如:使用 0000 代表 加载(LOAD),0001 代表 存储(STORE)等。<br>机器语言由机器直接执行,速度快,但一个很明显的缺点就是:写起来实在是太困难了,一旦你发现自己<br>写错了,改起来更蛋疼!这样直接导致程序编写效率十分低下,编写程序花费的时间往往是实际运行时间<br>的几十倍或几百倍。<br>有一个关于机器语言和比尔盖茨的笑话,是说比尔盖茨拿着绣花针在一张光盘上戳,把 Windows 给戳出 来了!但如果真的让你去戳,不要说 Windows,连一个简单的“Hello world”都要让人戳到眼睛冒烟!</p>
+<p>由于机器语言实在是太难编写了,于是就发展出了汇编语言。汇编语言亦称符号语言,用助记符代替机器 指令的操作码,用地址符号(Symbol)或标号(Label)代替指令或操作数的地址,。汇编语言由于是采用 了助记符号来编写程序,比用机器语言的二进制代码编程要方便些,在一定程度上简化了编程过程。例如 使用 LOAD 来代替 0000,使用 STORE 来代替 0001。</p>
+<p>即使汇编语言相比机器语言提升了可读性,但其本质上还是一种面向机器的语言,编写同样困难,也很容 易出错。相信很多计算机毕业的学生至今都对学校的汇编课程中的练习程序心有余悸。</p>
+<h2 id="1-2-脱离机器第一步-面向过程"><a href="#1-2-脱离机器第一步-面向过程" class="headerlink" title="1.2 脱离机器第一步:面向过程"></a>1.2 脱离机器第一步:面向过程</h2><p>面向机器的语言通常情况下被认为是一种“低级语言”,为了解决面向机器的语言存在的问题,计算机科 学的前辈们又创建了面向过程的语言。面向过程的语言被认为是一种“高级语言”,相比面向机器的语言 来说,面向过程的语言已经不再关注机器本身的操作指令、存储等方面,而是关注如何一步一步的解决具体的问题,即:解决问题的过程,这应该也是面向过程说法的来由。</p>
+<p>相比面向机器的思想来说,面向过程是一次思想上的飞跃,将程序员从复杂的机器操作和运行的细节中解 放出来,转而关注具体需要解决的问题;面向过程的语言也不再需要和具体的机器绑定,从而具备了移植 性和通用性;面向过程的语言本身也更加容易编写和维护。这些因素叠加起来,大大减轻了程序员的负担, 提升了程序员的工作效率,从而促进了软件行业的快速发展。</p>
+<p>典型的面向过程的语言有:COBOL、FORTRAN、BASIC、C 语言等。</p>
+<h2 id="1-3-第一次软件危机-结构化程序设计"><a href="#1-3-第一次软件危机-结构化程序设计" class="headerlink" title="1.3 第一次软件危机:结构化程序设计"></a>1.3 第一次软件危机:结构化程序设计</h2><p>根本原因就是一些面向过程语言中的goto语句导致的面条式代码，极大的限制了程序的规模。结构化程序设计（英语：Structured programming），一种编程范型。它采用子程序（函数就是一种子程序）、代码区块、for循环以及while循环等结构，来替换传统的goto。希望借此来改善计算机程序的明晰性、质量以及开发时间，并且避免写出面条式代码。</p>
+<p>随着计算机硬件的飞速发展,以及应用复杂度越来越高,软件规模越来越大,原有的程序开发方式已经越 来越不能满足需求了。1960 年代中期开始爆发了第一次软件危机,典型表现有软件质量低下、项目无法 如期完成、项目严重超支等,因为软件而导致的重大事故时有发生。例如 1963 年美国 (<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Mariner_1">http://en.wikipedia.org/wiki/Mariner_1</a>) 的水手一号火箭发射失败事故,就是因为一行 FORTRAN 代码 错误导致的。</p>
+<p>软件危机最典型的例子莫过于 IBM 的 System/360 的操作系统开发。佛瑞德·布鲁克斯(Frederick P. Brooks, Jr.)作为项目主管,率领 2000 多个程序员夜以继日的工作,共计花费了 5000 人一年的工作量,写出将 近 100 万行的源码,总共投入 5 亿美元,是美国的“曼哈顿”原子弹计划投入的 1/4。尽管投入如此巨大, 但项目进度却一再延迟,软件质量也得不到保障。布鲁克斯后来基于这个项目经验而总结的《人月神话》 一书,成了史上最畅销的软件工程书籍。</p>
+<p>为了解决问题,在 1968、1969 年连续召开两次著名的 NATO 会议,会议正式创造了“软件危机”一词, 并提出了针对性的解决方法“软件工程”。虽然“软件工程”提出之后也曾被视为软件领域的银弹,但后 来事实证明,软件工程同样无法解决软件危机。</p>
+<p>差不多同一时间,“结构化程序设计”作为另外一种解决软件危机的方案被提出来了。 Edsger Dijkstra 于 1968 发表了著名的《GOTO 有害论》的论文,引起了长达数年的论战,并由此产生了结构化程序设计方 法。同时,第一个结构化的程序语言 Pascal 也在此时诞生,并迅速流行起来。</p>
+<p>结构化程序设计的主要特点是抛弃 goto 语句,采取“自顶向下、逐步细化、模块化”的指导思想。结构 化程序设计本质上还是一种面向过程的设计思想,但通过“自顶向下、逐步细化、模块化”的方法,将软 件的复杂度控制在一定范围内,从而从整体上降低了软件开发的复杂度。结构化程序方法成为了 1970 年 代软件开发的潮流。</p>
+<p>科学研究证明,人脑存在人类短期记忆一般一次只能记住 5-9 个事物,这就是著名的 7+- 2 原理。结构化 程序设计是面向过程设计思想的一个改进,使得软件开发更加符合人类思维的 7+-2 特点。</p>
+<h2 id="1-4-第二次软件危机-面向对象程序设计"><a href="#1-4-第二次软件危机-面向对象程序设计" class="headerlink" title="1.4 第二次软件危机:面向对象程序设计"></a>1.4 第二次软件危机:面向对象程序设计</h2><p>结构化编程的风靡在一定程度上缓解了软件危机,然而好景不长,随着硬件的快速发展,业务需求越来越</p>
+<p>复杂,以及编程应用领域越来越广泛,第二次软件危机很快就到来了。</p>
+<p>第二次软件危机的根本原因还是在于软件生产力远远跟不上硬件和业务的发展,相比第一次软件危机主要 体现在“复杂性”,第二次软件危机主要体现在“可扩展性”、“可维护性”上面。传统的面向过程(包括 结构化程序设计)方法已经越来越不能适应快速多变的业务需求了,软件领域迫切希望找到新的银弹来解 决软件危机,在这种背景下,面向对象的思想开始流行起来。</p>
+<p>面向对象的思想并不是在第二次软件危机后才出现的,早在 1967 年的 Simula 语言中就开始提出来了,但 第二次软件危机促进了面向对象的发展。 面向对象真正开始流行是在 1980s 年代,主要得益于 C++的功 劳,后来的 Java、C#把面向对象推向了新的高峰。到现在为止,面向对象已经成为了主流的开发思想。</p>
+<p>虽然面向对象开始也被当做解决软件危机的银弹,但事实证明,和软件工程一样,面向对象也不是银弹, 而只是一种新的软件方法而已。</p>
+<p>虽然面向对象并不是解决软件危机的银弹,但和面向过程相比,面向对象的思想更加贴近人类思维的特点, 更加脱离机器思维,是一次软件设计思想上的飞跃。</p>
+<h1 id="二、详细发展历史"><a href="#二、详细发展历史" class="headerlink" title="二、详细发展历史"></a>二、详细发展历史</h1><h2 id="2-1-1940之前"><a href="#2-1-1940之前" class="headerlink" title="2.1 1940之前"></a>2.1 1940之前</h2><p>图：霍列瑞斯式的打孔机(pantograph)，用于1890年的人口普查。<br><a target="_blank" rel="noopener" href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CTR_census_machine.JPG/200px-CTR_census_machine.JPG"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CTR_census_machine.JPG/200px-CTR_census_machine.JPG" alt="霍列瑞斯式的打孔机(pantograph)"></a></p>
+<p>第一个编程语言比现代的计算机还早诞生。首先，这种语言是种编码(en:code)。</p>
+<p>于1801年发明的提花织布机(或称甲卡提花织布机)，运用打孔卡上的坑洞来代表缝纫织布机的手臂动作，以便自动化产生装饰的图案。</p>
+<p>爱达·勒芙蕾丝在1842年至1843年间花费了九个月，将意大利数学家Luigi Menabrea关于查尔斯·巴贝奇新发表机器分析机的回忆录翻译完成。她于那篇文章后面附加了一个用分析机计算伯努利数方法的细节，被部分历史学家认为是世界上第一个电脑程序。</p>
+<p>Herman Hollerith在观察列车长对乘客票根在特定位置打洞的方式后，意识到他可以把信息编码记载到打孔卡上，随后根据这项发现使用打孔卡来编码并纪录1890年的人口统计数据。</p>
+<p>第一个计算机代码是针对他们的应用面设计的。在20世纪的前十年主要是用十进制来算数，后来人们发现不只是用文字，也可以用数字来表现逻辑。举例来说，阿隆佐·邱奇曾以公式化(formulaic)的方式表达λ演算。图灵机是一种纸带标记(tape-marking)机器(就像电话公司用的那种)操作方法抽象化后的集合。图灵机这种通过有限数字(finite number)呈现机器的方式，奠定了程序如同冯·诺伊曼结构计算机中的数据一样地存储的基础。但不同于λ演算，图灵机的代码并没有办法成为高级编程语言的基石，这是是因为它主要的用途是分析算法的复杂度。</p>
+<p>就像许多历史上的”第一次”一样，第一个现代编程语言也很难界定。最一开始是因为硬件限制而限定了语言，打孔卡允许80行(column)的长度，但某几行必须用来记录卡片的顺序。FORTRAN则纳入了一些与英文字词相同的关键字，像是”IF”、”GOTO”(原字词为go to)，以及”CONTINUE”。之后采用磁鼓(magnetic drum)作为存储器使用，也代表计算机程序也必须插入(interleave)到磁鼓的转动(rotation)中。和现今比较起来，这也让编程语言必须更加依赖硬件(hardware-dependent)。</p>
+<p>对部分的人认为必须在”编程语言”的状态确立之前，根据能力(power)以及可读性(human-readability)的程度来决定历史上第一个编程语言是什么语言。提花织布机和查尔斯·巴贝奇所制作的差分机(en:Difference Engine)都具备在大量限制下，简单描述机器应运行行为的语言。也有种并非设计给人类运用的受限特定领域语言(en:domain-specific language)，是将打孔卡运用到自动演奏钢琴(en:player piano)上。</p>
+<h2 id="2-2-1940年代"><a href="#2-2-1940年代" class="headerlink" title="2.2 1940年代"></a>2.2 1940年代</h2><p>最早被确认的现代化、电力引导(electrically powered)的计算机约在1940年代被创造出来。程序员在有限的速度及存储器容量限制之下，撰写人工调整(hand tuned)过的汇编语言程序。而且很快就发现到使用汇编语言的这种撰写方式需要花费大量的脑力(intellectual effort)而且很容易出错(error-prone)。</p>
+<p>康拉德·楚泽于1948年发表了他所设计的Plankalkül编程语言的论文[1]。但是在他有生之年却未能将该语言实现，而他原本的贡献也被其他的发展所孤立。</p>
+<p>在这段期间被开发出来的重要语言包括有：</p>
+<ul>
+<li>  1943 - Plankalkül (Konrad Zuse)</li>
+<li>  1943 - ENIAC coding system</li>
+<li>  1949 - C-10</li>
+</ul>
+<h2 id="2-3-1950与1960年代"><a href="#2-3-1950与1960年代" class="headerlink" title="2.3 1950与1960年代"></a>2.3 1950与1960年代</h2><p>有三个现代编程语言于1950年代被设计出来，这三者所派生的语言直到今日仍旧广泛地被采用：</p>
+<ul>
+<li>  Fortran (1955)，名称取自”FORmula TRANslator”(公式翻译器)，由约翰·巴科斯等人所发明；</li>
+<li>  LISP，名称取自”LISt Processor”(枚举处理器)，由约翰·麦卡锡等人所发明；</li>
+<li>  COBOL，名称取自”COmmon Business Oriented Language”(通用商业导向语言)，由被葛丽丝·霍普深刻影响的Short Range Committee所发明。</li>
+</ul>
+<p>另一个1950年代晚期的里程碑是由美国与欧洲计算机学者针对”算法的新语言”所组成的委员会出版的ALGOL 60报告(名称取自”ALGOrithmic Language”(算法语言))。这份报告强化了当时许多关于计算的想法，并提出了两个语言上的创新功能：</p>
+<ul>
+<li>  嵌套区块结构：可以将有意义的代码片段组群成一个区块(block)，而非转成分散且特定命名的程序。</li>
+<li>  词汇范围(lexical scoping)：区块可以有区块外部无法通过名称访问，属于区块本身的变量、程序以及函数。</li>
+</ul>
+<p>另一个创新则是关于语言的描述方式：</p>
+<p>一种名为巴科斯-诺尔范式 (BNF)的数学化精确符号被用于描述语言的语法。之后的编程语言几乎全部都采用类似BNF的方式来描述程序语法中上下文无关的部分。<br>Algol 60对之后语言的设计上带来了特殊的影响，部分的语言很快的就被广泛采用。后续为了开发Algol的扩充子集合，设计了一个名为Burroughs(en:Burroughs large systems)的大型系统。</p>
+<p>延续Algol的关键构想所产生的成果就是ALGOL 68：</p>
+<ul>
+<li>  语法跟语义变的更加正交(orthogonal)，采用匿名的历程(routines)，采用高级(higher-order)功能的递归式输入(typing)系统等等。</li>
+<li>  整个语言及语义的部分都通过为了描述语言而特别设计的Van Wijngaarden grammar来进行正式的定义，而不仅止于上下文无关的部分。</li>
+</ul>
+<p>Algol 68一些较少被使用到的语言功能(如同步与并行区块)、语法快捷方式的复杂系统，以及类型自动强制转换(coercions)，使得实现者兴趣缺缺，也让Algol 68获得了很难用(diffcult)的名声。尼克劳斯·维尔特就干脆离开该设计委员会，另外再开发出更简单的Pascal语言。</p>
+<p>在这段期间被开发出来的重要语言包括有：</p>
+<ul>
+<li>  1951 - Regional Assembly Language</li>
+<li>  1952 - Autocode</li>
+<li>  1954 - FORTRAN</li>
+<li>  1954 - IPL (LISP的先驱)</li>
+<li>  1955 - FLOW-MATIC (COBOL的先驱)</li>
+<li>  1957 - COMTRAN (COBOL的先驱)</li>
+<li>  1958 - LISP</li>
+<li>  1958 - ALGOL 58</li>
+<li>  1959 - FACT (COBOL的先驱)</li>
+<li>  1959 - COBOL</li>
+<li>  1962 - APL</li>
+<li>  1962 - Simula</li>
+<li>  1962 - SNOBOL</li>
+<li>  1963 - CPL (C的先驱)</li>
+<li>  1964 - BASIC</li>
+<li>  1964 - PL/I</li>
+<li>  1967 - BCPL (C的先驱)</li>
+</ul>
+<h2 id="2-4-1967-1978-–-确立了基础范式"><a href="#2-4-1967-1978-–-确立了基础范式" class="headerlink" title="2.4 1967-1978 – 确立了基础范式"></a>2.4 1967-1978 – 确立了基础范式</h2><p>1960年代晚期至1970年代晚期的期间中，编程语言的发展也有了重大的成果。大多数现在所使用的主要语言范式都是在这段期间中发明的：</p>
+<ul>
+<li>  Simula，于1960年代晚期由奈加特与Dahl以Algol 60超集合的方式发展，同时也是第一个设计支持面向对象进行开发的编程语言。</li>
+<li>  C，于1969至1973年间由贝尔实验室的研究人员丹尼斯·里奇与肯·汤普逊所开发，是一种早期的系统程序设计(en:system programming)语言。</li>
+<li>  Smalltalk，于1970年代中期所开发，是一个完全从零开始(ground-up)设计的面向对象编程语言。</li>
+<li>  Prolog，于1972年由Colmerauer、Roussel，以及Kowalski所设计，是第一个逻辑程序语言。</li>
+<li>  ML，于1973年由罗宾·米尔纳所发明，是一个基于Lisp所建构的多态(polymorphic)类型系统，同时也是静态类型函数编程语言的先驱。</li>
+</ul>
+<p>这些语言都各自演展出自己的家族分支，现今多数现代编程语言的祖先都可以追溯他们其中至少一个以上。</p>
+<p>在1960年代以及1970年代中结构化程序设计的优点也带来许多的争议，特别是在程序开发的过程中完全不使用GOTO。这项争议跟语言本身的设计非常有关系：某些语言并没有包含GOTO，这也强迫程序员必须结构化地编写程序。尽管这个争议在当时吵翻了天，但几乎所有的程序员都同意就算语言本身有提供GOTO的功能，在除了少数罕见的情况下去使用GOTO是种不良的程序风格。结果是之后世代的编程语言设计者发觉到结构化编程语言的争议实在既乏味又令人眼花撩乱。</p>
+<p>在这段期间被开发出来的重要语言包括有：</p>
+<ul>
+<li>  1968 - Logo</li>
+<li>  1970 - Pascal</li>
+<li>  1970 - Forth</li>
+<li>  1972 - C语言</li>
+<li>  1972 - Smalltalk</li>
+<li>  1972 - Prolog</li>
+<li>  1973 - ML</li>
+<li>  1975 - Scheme</li>
+<li>  1978 - SQL (起先只是一种查询语言，扩充之后也具备了程序结构)</li>
+</ul>
+<h2 id="2-5-1980年代-–-增强、模块、性能"><a href="#2-5-1980年代-–-增强、模块、性能" class="headerlink" title="2.5 1980年代 – 增强、模块、性能"></a>2.5 1980年代 – 增强、模块、性能</h2><p>1980年代的编程语言与之前相较显得更为强大。C++合并了面向对象以及系统程序设计。美国政府标准化一种名为Ada的系统编程语言并提供给国防承包商使用。日本以及其他地方运用了大量的资金对采用逻辑编程语言结构的第五代语言进行研究。函数编程语言社区则把焦点转移到标准化ML及Lisp身上。这些活动都不是在开发新的范式，而是在将上个世代发明的构想进一步发扬光大。</p>
+<p>然而，在语言设计上有个重大的新趋势，就是研究运用模块或大型组织化的程序单元来进行大型系统的开发。Modula、Ada，以及ML都在1980年代发展出值得注意的模块化系统。模块化系统常拘泥于采用泛型程序设计结构：泛型存在(generics being)、本质(essence)，参数化模块(parameterized modules)。(参阅多态)</p>
+<p>尽管没有出现新的主要编程语言范式，许多研究人员仍就扩充之前语言的构想并将它们运用到新的内容上。举例来说，Argus以及Emerald系统的语言配合面向对象语言运用到分布式系统上。</p>
+<p>1980年代的编程语言实现情况也有所进展。计算机系统结构中RISC的进展假定硬件应当为编译器设计，而非身为人类的汇编语言程序员。借由中央处理器速度增快的帮助，编译技术也越来越积极，RISC的进展对高级语言编译技术带来不小的关注。</p>
+<p>语言技术持续这些发展并迈入了1990年代。</p>
+<p>在这段期间被开发出来的重要语言包括有：</p>
+<ul>
+<li>  1980 - Ada</li>
+<li>  1983 - C++ (就像有类别的C)</li>
+<li>  1984 - Common Lisp</li>
+<li>  1985 - Eiffel</li>
+<li>  1986 - Erlang</li>
+<li>  1987 - Perl</li>
+<li>  1988 - Tcl</li>
+<li>  1989 - FL (Backus)</li>
+</ul>
+<h2 id="2-6-1990年代-–-互联网时代"><a href="#2-6-1990年代-–-互联网时代" class="headerlink" title="2.6 1990年代 – 互联网时代"></a>2.6 1990年代 – 互联网时代</h2><p>1990年代未见到有什么重大的创新，大多都是以前构想的重组或变化。这段期间主要在推动的哲学是提升程序员的生产力。许多”快速应用程序开发” (RAD) 语言也应运而生，这些语言大多都有相应的集成开发环境、垃圾回收等机制，且大多是先前语言的派生语言。这类型的语言也大多是面向对象的编程语言，包含有Object Pascal、Visual Basic，以及C#。Java则是更加保守的语言，也具备垃圾回收机制。与其他类似语言相比，也受到更多的观注。新的脚本语言则比RAD语言更新更好。这种语言并非直接从其他语言派生，而且新的语法更加开放地(liberal)与功能契合。虽然脚本语言比RAD语言来的更有生产力，但大多会有因为小程序较为简单，但是大型程序则难以使用脚本语言撰写并维护的顾虑。尽管如此，脚本语言还是网络层面的应用上大放异彩。</p>
+<p>在这段期间被开发出来的重要语言包括有：</p>
+<ul>
+<li>  1990 - Haskell</li>
+<li>  1991 - Python</li>
+<li>  1991 - Visual Basic</li>
+<li>  1993 - Ruby</li>
+<li>  1993 - Lua</li>
+<li>  1994 - CLOS (part of ANSI Common Lisp)</li>
+<li>  1995 - Java</li>
+<li>  1995 - Delphi (Object Pascal)</li>
+<li>  1995 - JavaScript</li>
+<li>  1995 - PHP</li>
+<li>  1997 - REBOL</li>
+<li>  1999 - D</li>
+</ul>
+<h2 id="2-7-现今的趋势"><a href="#2-7-现今的趋势" class="headerlink" title="2.7 现今的趋势"></a>2.7 现今的趋势</h2><p>编程语言持续在学术及企业两个层面中发展进化，目前的一些趋势包含有：</p>
+<ul>
+<li>  在语言中增加安全性与可靠性验证机制：额外的堆栈检查、信息流(information flow)控制，以及静态线程安全。</li>
+<li>  提供模块化的替代机制：混入(en:mixin)、委派(en:delegates)，以及观点导向。</li>
+<li>  组件导向(component-oriented)软件开发</li>
+<li>  元编程、反射或是访问抽象语法树(en:Abstract syntax tree)</li>
+<li>  更重视分布式及移动式的应用。</li>
+<li>  与数据库的集成，包含XML及关系数据库。</li>
+<li>  支持使用Unicode编写程序，所以源代码不会受到ASCII字符集的限制，而可以使用像是非拉丁语系的脚本或延伸标点符号。</li>
+<li>  图形用户界面所使用的XML(XUL、XAML)。</li>
+</ul>
+<p>在这段期间被开发出来的重要语言包括有：</p>
+<ul>
+<li>  2001 - C#</li>
+<li>  2001 - Visual Basic .NET</li>
+<li>  2002 - F#</li>
+<li>  2003 - Scala</li>
+<li>  2003 - Factor</li>
+<li>  2006 - Windows PowerShell</li>
+<li>  2007 - Clojure</li>
+<li>  2009 - Go</li>
+<li>  2014 - Swift (编程语言)</li>
+</ul>
+<h2 id="2-8-编程语言发展史上的杰出人物"><a href="#2-8-编程语言发展史上的杰出人物" class="headerlink" title="2.8 编程语言发展史上的杰出人物"></a>2.8 编程语言发展史上的杰出人物</h2><ul>
+<li>  约翰·巴科斯，发明了Fortran。</li>
+<li>  阿兰·库珀，开发了Visual Basic。</li>
+<li>  艾兹格·迪杰斯特拉，开创了正确运用编程语言(proper programming)的框架。</li>
+<li>  詹姆斯·高斯林，开发了Oak，该语言为Java的先驱。</li>
+<li>  安德斯·海尔斯伯格，开发了Turbo Pascal、Delphi，以及C#。</li>
+<li>  葛丽丝·霍普，开发了Flow-Matic，该语言对COBOL造成了影响。</li>
+<li>  肯尼斯·艾佛森，开发了APL，并与Roger Hui合作开发了J。</li>
+<li>  比尔·乔伊，发明了vi，BSD Unix的前期作者，以及SunOS的发起人，该操作系统后来改名为Solaris。</li>
+<li>  艾伦·凯，开创了面向对象编程语言，以及Smalltalk的发起人。</li>
+<li>  Brian Kernighan，与丹尼斯·里奇合著第一本C程序设计语言的书籍，同时也是AWK与AMPL程序设计语言的共同作者。</li>
+<li>  约翰·麦卡锡，发明了LISP。</li>
+<li>  约翰·冯·诺伊曼，操作系统概念的发起者。</li>
+<li>  丹尼斯·里奇，发明了C。</li>
+<li>  比雅尼·斯特劳斯特鲁普，开发了C++。</li>
+<li>  肯·汤普逊，发明了Unix。</li>
+<li>  尼克劳斯·维尔特，发明了Pascal与Modula。</li>
+<li>  拉里·沃尔，创造了Perl与Perl 6。</li>
+<li>  吉多·范罗苏姆，创造了Python。</li>
+</ul>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E6%AD%B7%E5%8F%B2">https://zh.wikipedia.org/zh-cn/程式語言歷史</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy - <strong>giving up is<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/hexo-theme-Chic/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"># 面向对象</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/hexo-theme-Chic/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
