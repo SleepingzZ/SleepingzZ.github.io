@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>类与对象 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">类与对象</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2018-September-23&nbsp;&nbsp;14:53:17</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Python/">Python</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、类和对象"><a href="#一、类和对象" class="headerlink" title="一、类和对象"></a>一、类和对象</h1><ul>
+<li>  类的意思：种类、分类、类别</li>
+</ul>
+<p>对象是特征与技能的结合体，我可能有身高体重、而你也有身高体重，所以你会说你像我，但是你一定不会说你像阿猫阿狗。并且我和你其实就可以说成是一类，而你和选课系统不能说是一类，因此给出类的定义：类就是一系列对象相似的特征与技能的结合体。</p>
+<p>在现实世界中：先有一个个具体存在的对象，然后随着人类文明的发展才了分类的概念，既然现实世界中有类这个概念，Python程序中也一定有类这个概念，但是在Python程序中：必须先定义类，然后调用类来产生对象。</p>
+<h1 id="二、现实世界中定义类和对象"><a href="#二、现实世界中定义类和对象" class="headerlink" title="二、现实世界中定义类和对象"></a>二、现实世界中定义类和对象</h1><h2 id="2-1-定义对象"><a href="#2-1-定义对象" class="headerlink" title="2.1 定义对象"></a>2.1 定义对象</h2><p>就拿未来我们的选课系统来讲，我们先总结一套现实世界中的学生对象：</p>
+<ul>
+<li>对象1：<ul>
+<li>特征：<ul>
+<li>  学校=’oldboy’</li>
+<li>  姓名=’耗哥’</li>
+<li>  年龄=18</li>
+<li>  性别=’male’</li>
+</ul>
+</li>
+<li>技能：<ul>
+<li>  选课</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对象2：<ul>
+<li>特征：<ul>
+<li>  学校=’oldboy’</li>
+<li>  姓名=’猪哥’</li>
+<li>  年龄=17</li>
+<li>  性别=’male’</li>
+</ul>
+</li>
+<li>技能：<ul>
+<li>  选课</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对象3：<ul>
+<li>特征：<ul>
+<li>  学校=’oldboy’</li>
+<li>  姓名=’帅翔’</li>
+<li>  年龄=19</li>
+<li>  性别=’female’</li>
+</ul>
+</li>
+<li>技能：<ul>
+<li>  选课</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-定义对象"><a href="#2-2-定义对象" class="headerlink" title="2.2 定义对象"></a>2.2 定义对象</h2><p>站在未来选课系统的角度，我们还可以总结现实世界中的学生类：</p>
+<ul>
+<li>老男孩学生类：<ul>
+<li>相似的特征：<ul>
+<li>  学校=’oldboy’</li>
+</ul>
+</li>
+<li>相似的技能<ul>
+<li>  选课</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="三、程序中定义类和对象"><a href="#三、程序中定义类和对象" class="headerlink" title="三、程序中定义类和对象"></a>三、程序中定义类和对象</h1><h2 id="3-1-定义类"><a href="#3-1-定义类" class="headerlink" title="3.1 定义类"></a>3.1 定义类</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意类中定义变量使用驼峰体</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OldboyStudent</span>():</span></span><br><span class="line">    school = <span class="string">&#x27;oldboy&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">choose_course</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;is choosing course&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  曾经定义函数，函数只检测语法，不执行代码，但是定义类的时候，类体代码会在类定义阶段就立刻执行，并且会产生一个类的名称空间，也就是说类的本身其实就是一个容器/名称空间，是用来存放名字的，这是类的用途之一</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glusj3c4evj30du0b8glx.jpg" alt="83-类与对象-名称空间.jpg"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(OldboyStudent.__dict__)</span><br><span class="line">&#123;<span class="string">&#x27;__module__&#x27;</span>: <span class="string">&#x27;__main__&#x27;</span>, <span class="string">&#x27;school&#x27;</span>: <span class="string">&#x27;oldboy&#x27;</span>, <span class="string">&#x27;choose_course&#x27;</span>: &lt;function OldboyStudent.choose_course at <span class="number">0x10d653ae8</span>&gt;, <span class="string">&#x27;__dict__&#x27;</span>: &lt;attribute <span class="string">&#x27;__dict__&#x27;</span> of <span class="string">&#x27;OldboyStudent&#x27;</span> objects&gt;, <span class="string">&#x27;__weakref__&#x27;</span>: &lt;attribute <span class="string">&#x27;__weakref__&#x27;</span> of <span class="string">&#x27;OldboyStudent&#x27;</span> objects&gt;, <span class="string">&#x27;__doc__&#x27;</span>: <span class="literal">None</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(OldboyStudent.__dict__[<span class="string">&#x27;school&#x27;</span>])</span><br><span class="line">oldboy</span><br><span class="line"><span class="built_in">print</span>(OldboyStudent.__dict__[<span class="string">&#x27;choose_course&#x27;</span>])</span><br><span class="line">&lt;function OldboyStudent.choose_course at <span class="number">0x10d653ae8</span>&gt;</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    OldboyStudent.__dict__[<span class="string">&#x27;choose_course&#x27;</span>]()</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;error:&#x27;</span>, e)</span><br><span class="line">error: choose_course() missing <span class="number">1</span> required positional argument: <span class="string">&#x27;self&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(OldboyStudent.school)</span><br><span class="line">oldboy</span><br><span class="line">OldboyStudent.choose_course(<span class="number">111</span>)</span><br><span class="line"><span class="keyword">is</span> choosing course</span><br><span class="line"><span class="built_in">print</span>(OldboyStudent.choose_course)</span><br><span class="line">&lt;function OldboyStudent.choose_course at <span class="number">0x10d653ae8</span>&gt;</span><br><span class="line">OldboyStudent.__dict__[<span class="string">&#x27;choose_course&#x27;</span>]</span><br><span class="line">&lt;function __main__.OldboyStudent.choose_course(self)&gt;</span><br><span class="line">OldboyStudent.country=<span class="string">&#x27;China&#x27;</span></span><br><span class="line">OldboyStudent.__dict__[<span class="string">&#x27;country&#x27;</span>]</span><br><span class="line"><span class="string">&#x27;China&#x27;</span></span><br><span class="line">OldboyStudent.country=<span class="string">&#x27;CHINA&#x27;</span></span><br><span class="line">OldboyStudent.__dict__[<span class="string">&#x27;country&#x27;</span>]</span><br><span class="line"><span class="string">&#x27;CHINA&#x27;</span></span><br><span class="line"><span class="keyword">del</span> OldboyStudent.school</span><br><span class="line"><span class="built_in">print</span>(OldboyStudent.__dict__)</span><br><span class="line">&#123;<span class="string">&#x27;__module__&#x27;</span>: <span class="string">&#x27;__main__&#x27;</span>, <span class="string">&#x27;school&#x27;</span>: <span class="string">&#x27;oldboy&#x27;</span>, <span class="string">&#x27;choose_course&#x27;</span>: &lt;function OldboyStudent.choose_course at <span class="number">0x10d653ae8</span>&gt;, <span class="string">&#x27;__dict__&#x27;</span>: &lt;attribute <span class="string">&#x27;__dict__&#x27;</span> of <span class="string">&#x27;OldboyStudent&#x27;</span> objects&gt;, <span class="string">&#x27;__weakref__&#x27;</span>: &lt;attribute <span class="string">&#x27;__weakref__&#x27;</span> of <span class="string">&#x27;OldboyStudent&#x27;</span> objects&gt;, <span class="string">&#x27;__doc__&#x27;</span>: <span class="literal">None</span>, <span class="string">&#x27;country&#x27;</span>: <span class="string">&#x27;CHINA&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-定义对象"><a href="#3-2-定义对象" class="headerlink" title="3.2 定义对象"></a>3.2 定义对象</h2><ul>
+<li>  调用类即可产生对象，调用类的过程，又称为类的实例化，实例化的结果称为类的对象/实例</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glusizejbgj31cw0riq5v.jpg" alt="83-类与对象-实例化.jpg"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">stu1=OldboyStudent() <span class="comment"># 调用类会得到一个返回值，该返回值就是类的一个具体存在的对象/实例</span></span><br><span class="line"><span class="built_in">print</span>(stu1.school)</span><br><span class="line">oldboy</span><br><span class="line">stu2=OldboyStudent() <span class="comment"># 调用类会得到一个返回值，该返回值就是类的一个具体存在的对象/实例</span></span><br><span class="line"><span class="built_in">print</span>(stu2.school)</span><br><span class="line">oldboy</span><br><span class="line">stu3=OldboyStudent() <span class="comment"># 调用类会得到一个返回值，该返回值就是类的一个具体存在的对象/实例</span></span><br><span class="line">stu3.choose_course()</span><br><span class="line"><span class="keyword">is</span> choosing course</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/"># 面向对象基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2018/09/24/%E5%AE%9A%E5%88%B6%E5%AF%B9%E8%B1%A1%E7%8B%AC%E6%9C%89%E7%89%B9%E5%BE%81/">定制对象独有特征</a>
+            
+            
+            <a class="next" rel="next" href="/2018/09/22/%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%BC%96%E7%A8%8B/">面向过程编程</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

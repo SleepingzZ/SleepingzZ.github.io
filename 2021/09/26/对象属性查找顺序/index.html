@@ -13,7 +13,7 @@
 
 
 
-<title>面向过程编程 | 淡而无味也是一种味道</title>
+<title>对象属性查找顺序 | 淡而无味也是一种味道</title>
 
 
 
@@ -193,7 +193,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">面向过程编程</h1>
+            <h1 class="post-title">对象属性查找顺序</h1>
             
                 <div class="post-meta">
                     
@@ -202,7 +202,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">2018-September-22&nbsp;&nbsp;13:25:23</a>
+                        Date: <a href="#">2021-September-26&nbsp;&nbsp;14:59:09</a>
                         </span>
                     
                     
@@ -218,28 +218,20 @@
         </header>
 
         <div class="post-content">
-            <h1 id="一、面向过程编程"><a href="#一、面向过程编程" class="headerlink" title="一、面向过程编程"></a>一、面向过程编程</h1><p>面向过程的程序设计：核心是过程二字，过程指的是解决问题的步骤，即先干什么再干什么……面向过程的设计就好比精心设计好一条流水线，是一种机械式的思维方式。</p>
-<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
-<li>  复杂度的问题流程化，进而简单化（一个复杂的问题，分成一个个小的步骤去实现，实现小的步骤将会非常简单）</li>
+            <h1 id="属性查找"><a href="#属性查找" class="headerlink" title="属性查找"></a>属性查找</h1><ul>
+<li>  先从对象自己的名称空间找，没有则去类中找，如果类也没有则报错</li>
 </ul>
-<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
-<li>  一套流水线或者流程就是用来解决一个问题，生产汽水的流水线无法生产汽车，即便是能，也得是大改，改一个组件，牵一发而动全身。</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OldboyStudent</span>:</span></span><br><span class="line">    school = <span class="string">&#x27;oldboy&#x27;</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    aa = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x, y, z</span>):</span>  <span class="comment">#会在调用类时自动触发</span></span><br><span class="line">        self.name = x  <span class="comment"># stu1.name=&#x27;耗哥&#x27;</span></span><br><span class="line">        self.age = y  <span class="comment"># stu1.age=18</span></span><br><span class="line">        self.sex = z  <span class="comment"># stu1.sex=&#x27;male&#x27;</span></span><br><span class="line">        OldboyStudent.count += <span class="number">1</span></span><br><span class="line">        <span class="comment">#         self.count += 5</span></span><br><span class="line">        self.aa = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">choose_course</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;is choosing course&#x27;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="built_in">print</span>(OldboyStudent.count)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"></span><br><span class="line">stu1 = OldboyStudent(<span class="string">&#x27;nick&#x27;</span>, <span class="number">18</span>, <span class="string">&#x27;male&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(stu1.count)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line">stu2 = OldboyStudent(<span class="string">&#x27;sean&#x27;</span>, <span class="number">17</span>, <span class="string">&#x27;male&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(stu2.count)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"></span><br><span class="line">stu3 = OldboyStudent(<span class="string">&#x27;tank&#x27;</span>, <span class="number">19</span>, <span class="string">&#x27;female&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(stu3.count)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(OldboyStudent.count)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(stu1.name)</span><br><span class="line">nick</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  由于上述修改的是类属性，类属性的count已经被修改为3，所以其他实例的count都为3</li>
 </ul>
-<p>应用场景：一旦完成基本很少改变的场景，著名的例子有Linux內核，git，以及Apache HTTP Server等。</p>
-<h1 id="二、面向对象编程"><a href="#二、面向对象编程" class="headerlink" title="二、面向对象编程"></a>二、面向对象编程</h1><p>面向对象的程序设计：核心是对象二字，（要理解对象为何物，必须把自己当成上帝，上帝眼里世间存在的万物皆为对象，不存在的也可以创造出来。面向对象的程序设计好比如来设计西游记，如来要解决的问题是把经书传给东土大唐，如来想了想解决这个问题需要四个人：唐僧，沙和尚，猪八戒，孙悟空，每个人都有各自的特征和技能（这就是对象的概念，特征和技能分别对应对象的数据属性和方法属性），然而这并不好玩，于是如来又安排了一群妖魔鬼怪，为了防止师徒四人在取经路上被搞死，又安排了一群神仙保驾护航，这些都是对象。然后取经开始，师徒四人与妖魔鬼怪神仙交互着直到最后取得真经。如来根本不会管师徒四人按照什么流程去取),对象是特征与技能的结合体，基于面向对象设计程序就好比在创造一个世界，你就是这个世界的上帝，存在的皆为对象，不存在的也可以创造出来，与面向过程机械式的思维方式形成鲜明对比，面向对象更加注重对现实世界的模拟，是一种“上帝式”的思维方式。</p>
-<h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><ul>
-<li>  解决了程序的扩展性。对某一个对象单独修改，会立刻反映到整个体系中，如对游戏中一个人物参数的特征和技能修改都很容易。</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(stu1.count)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(stu2.count)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(stu3.count)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  由于aa是私有属性，因此stu们都会用自己私有的aa，不会用类的aa</li>
 </ul>
-<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><ol>
-<li><p>  编程的复杂度远高于面向过程，不了解面向对象而立即上手基于它设计程序，极容易出现过度设计的问题。一些扩展性要求低的场景使用面向对象会徒增编程难度，比如管理linux系统的shell脚本就不适合用面向对象去设计，面向过程反而更加适合。</p>
-</li>
-<li><p>  无法向面向过程的程序设计流水线式的可以很精准的预测问题的处理流程与结果，面向对象的程序一旦开始就由对象之间的交互解决问题，即便是上帝也无法准确地预测最终结果。于是我们经常看到对战类游戏，新增一个游戏人物，在对战的过程中极容易出现阴霸的技能，一刀砍死3个人，这种情况是无法准确预知的，只有对象之间交互才能准确地知道最终的结果。</p>
-</li>
-</ol>
-<h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><ul>
-<li>  需求经常变化的软件，一般需求的变化都集中在用户层，互联网应用，企业内部软件，游戏等都是面向对象的程序设计大显身手的好地方</li>
-</ul>
-<p>面向对象的程序设计并不是全部。对于一个软件质量来说，面向对象的程序设计只是用来解决扩展性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(stu1.__dict__)</span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;nick&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">18</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;male&#x27;</span>, <span class="string">&#x27;aa&#x27;</span>: <span class="number">1</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(stu2.__dict__)</span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;sean&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">17</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;male&#x27;</span>, <span class="string">&#x27;aa&#x27;</span>: <span class="number">1</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(stu3.__dict__)</span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;tank&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">19</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;aa&#x27;</span>: <span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -286,10 +278,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2018/09/23/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
             
-            
-            <a class="next" rel="next" href="/2018/09/22/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%B1%E6%9D%A5/">面向对象的由来</a>
+            <a class="next" rel="next" href="/2019/01/21/Git/">Git</a>
             
         </section>
 
