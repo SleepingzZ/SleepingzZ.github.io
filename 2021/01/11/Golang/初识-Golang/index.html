@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>初识 Golang | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">初识 Golang</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-January-11&nbsp;&nbsp;20:02:16</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Golang/">Golang</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="应用领域"><a href="#应用领域" class="headerlink" title="应用领域"></a>应用领域</h2><h3 id="区块链应用-–-区块链开发工程师"><a href="#区块链应用-–-区块链开发工程师" class="headerlink" title="区块链应用 – 区块链开发工程师"></a>区块链应用 – 区块链开发工程师</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">区块链技术，简称 BT(Blockchain technology)，也被称为分布式账本技术，是一种互联网数据库技术，其特点是去中心化、公开透明，每个人均可参与数据库记录</span><br></pre></td></tr></table></figure>
+
+<h3 id="后端服务器应用"><a href="#后端服务器应用" class="headerlink" title="后端服务器应用"></a>后端服务器应用</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、美团后台流量支撑程序</span><br><span class="line">支撑主站后台流量(排序、推荐、搜索等)，提供负载均衡，cache，容错，按条件分流，统计运行指标(qps，latency 等功能)</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、游戏服务端</span><br><span class="line">通讯、逻辑、数据存储</span><br></pre></td></tr></table></figure>
+
+<h3 id="云计算与云服务"><a href="#云计算与云服务" class="headerlink" title="云计算与云服务"></a>云计算与云服务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、CDN(内容分发网络)</span><br><span class="line">CDN 的调度系统、分发系统、监控系统、短域名服务，CDN 内部开放平台、运营报表系统以及ITA 一些小工等</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、京东消息推送云服务/京东分布式文件系统</span><br><span class="line">		后台所有服务器均有 <span class="keyword">go</span>  实现，<span class="keyword">go</span> lang 计算能力强</span><br></pre></td></tr></table></figure>
+
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="什么是程序"><a href="#什么是程序" class="headerlink" title="什么是程序"></a>什么是程序</h3><ul>
+<li>  程序就是完成某个功能的指令的集合</li>
+</ul>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>  Go 语言保证了既能到达<strong>静态编译语言</strong>的安全和性能，又达到了<strong>动态语言开发维护的高效率</strong>，<strong>Go = C + Python</strong>，即说明 Go 语言既有  C 静态语言程序的运行速度，又能达到 Python 动态语言的快速开发</li>
+<li>  从 C 语言中继承了包括表达式语法、控制结构、基础数据类型、调用参数传值、指针等等理念，也保留了和 C 语言一样的执行方式及弱化指针</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mian</span><br><span class="line"></span><br><span class="line"><span class="comment">// go 语言的指针使用特点</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testPtr</span><span class="params">(num *<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    *num = <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  引入包的概念，用于组织程序结构，Go 的一个文件都要归属一个包，而不能单独存在</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  <span class="comment">// 一个 go 文件需要在一个包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sayOK</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 输出一句话</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;ok&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>  垃圾回收机制，内存自动回收，不需要开发人员管理</p>
+</li>
+<li><p>天然并发</p>
+<ul>
+<li>  从语言层面支持并发</li>
+<li>  goroutine - 轻量级线程，可实现大并发处理，高效利用多核</li>
+<li>  基于 CPS 并发模型（Communicating Sequential Processes）实现</li>
+<li>  吸收了管道通信机制，形成 Go 语言特有的管道 channel – 通过管道 channel，可以实现不同的 goroute 之间的相互通信</li>
+<li>  函数返回多个值</li>
+</ul>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写一个函数，实现同时返回 - 和，差</span></span><br><span class="line"><span class="comment">// go 函数支持返回多个值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getSumAndSub</span><span class="params">(n1 <span class="keyword">int</span>, n2 <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">  sum := n1 + n2  <span class="comment">// go语言后面不要带分号</span></span><br><span class="line">  sub := n1 - n2</span><br><span class="line">  <span class="keyword">return</span> sum, sub</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  新的创意，比如切片 slice、延时执行 defer 等</li>
+</ul>
+</li>
+</ul>
+<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><ul>
+<li>  Visual Studio Code – VS Code</li>
+<li>  Sublime Text</li>
+<li>  Vim</li>
+<li>  Emacs</li>
+<li>  Eclipse – IDE 工具</li>
+<li>  LiteIDE – 中国开发</li>
+<li>  JetBrains</li>
+</ul>
+<h3 id="Go-开发环境的安装和配置-SDK"><a href="#Go-开发环境的安装和配置-SDK" class="headerlink" title="Go 开发环境的安装和配置 SDK"></a>Go 开发环境的安装和配置 SDK</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、SDK 的全称（Software Development Kit 软件开发工具包）-- 相当于 Python 解释器</span><br><span class="line"><span class="number">2</span>、SDK 是提供给开发人员使用的，其中包含了对应开发语言的工具包</span><br><span class="line"></span><br><span class="line">更改环境配置 -- vim  ~/.zshrc</span><br><span class="line">export GOPATH=/Users/haodaibao/<span class="keyword">go</span></span><br><span class="line"></span><br><span class="line">export GOBIN=$GOPATH/bin</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$GOBIN</span><br></pre></td></tr></table></figure>
+
+<h2 id="Go-开发注意事项"><a href="#Go-开发注意事项" class="headerlink" title="Go 开发注意事项"></a>Go 开发注意事项</h2><ol>
+<li>  Go 源文件以 ‘go’ 为扩展名</li>
+<li>  Go 应用程序的执行入口是 main() 函数</li>
+<li>  Go 语言严格区分大小写</li>
+<li>  Go 方法有一条条语句构成，每个语句后不需要分号(Go 会在每行后自动添加分号)</li>
+<li>  Go 编译器是一行行进行编译的，因此我们一行就写一条语句，不能把多条语句写在同一个</li>
+<li>  Go 语言定义的变量或者 import 的包如果没有使用到，代码不能编译通过</li>
+<li>  大括号必须成对出现，缺一不可</li>
+</ol>
+<h2 id="Go-常用的转义字符-escape-char"><a href="#Go-常用的转义字符-escape-char" class="headerlink" title="Go 常用的转义字符(escape char)"></a>Go 常用的转义字符(escape char)</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、\t -- 制表符，实现排版对齐的功能</span><br><span class="line"><span class="number">2</span>、\n -- 换行符</span><br><span class="line"><span class="number">3</span>、\\ -- 一个 \  <span class="comment">// 相当于 Python 中路径前的 r，用以取消转义</span></span><br><span class="line"><span class="number">4</span>、\<span class="string">&quot; -- 一个 &quot;</span>  <span class="comment">// &quot;I said:\&quot;I love you\&quot;&quot; 等价于 &quot;I said:&#x27;I love you&#x27;&quot;</span></span><br><span class="line"><span class="number">5</span>、\r -- 一个回车，fmt.Println(<span class="string">&quot;一点寒芒先到\r 随后枪出如龙&quot;</span>)  <span class="comment">// 回车，从当前行最前面开始输出，并覆盖一个以前的内容</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Golang-开发常见问题和解决方法"><a href="#Golang-开发常见问题和解决方法" class="headerlink" title="Golang 开发常见问题和解决方法"></a>Golang 开发常见问题和解决方法</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、文件名或路径错误</span><br><span class="line"><span class="number">2</span>、语法错误</span><br></pre></td></tr></table></figure>
+
+<h2 id="Golang-格式化"><a href="#Golang-格式化" class="headerlink" title="Golang 格式化"></a>Golang 格式化</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gofmt main.<span class="keyword">go</span></span><br><span class="line"></span><br><span class="line">gofmt -w main.<span class="keyword">go</span></span><br><span class="line">	- 该指令可以将格式化后的内容重新写入文件，当程序员重新打开该文件时，就会看到新的格式化后的文件</span><br></pre></td></tr></table></figure>
+
+<h2 id="交叉编译"><a href="#交叉编译" class="headerlink" title="交叉编译"></a>交叉编译</h2><ul>
+<li>  Go 支持跨平台编译</li>
+</ul>
+<ol>
+<li>  Windows 平台交叉编译</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET CGO_ENABLES=<span class="number">0</span>  <span class="comment">// 禁用 CGO</span></span><br><span class="line">SET GOOS=linux  <span class="comment">// 目标平台是 linux</span></span><br><span class="line">SET GOARCH=amd64  <span class="comment">// 目标处理器架构是 amd64</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  执行 go bulid</li>
+</ul>
+<ol start="2">
+<li>  Mac 平台交叉编译</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=linux GOARCH=amd64 gobuild</span><br><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 gobuild</span><br></pre></td></tr></table></figure>
+
+<h1 id="Go语言文件的基本结构"><a href="#Go语言文件的基本结构" class="headerlink" title="Go语言文件的基本结构"></a>Go语言文件的基本结构</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入语句</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数外只能放置标识符（变量、常量、函数、类型）的声明</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">  </span><br><span class="line">	<span class="comment">// 程序的入口函数</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Golang-%E5%9F%BA%E7%A1%80/"># Golang 基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/11/Golang/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">命名规范</a>
+            
+            
+            <a class="next" rel="next" href="/2019/01/21/Git/">Git</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

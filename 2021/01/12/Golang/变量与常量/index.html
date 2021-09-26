@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>变量与常量 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">变量与常量</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-January-12&nbsp;&nbsp;14:02:34</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Golang/">Golang</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="变量和常量"><a href="#变量和常量" class="headerlink" title="变量和常量"></a>变量和常量</h2><h3 id="变量（Variable）"><a href="#变量（Variable）" class="headerlink" title="变量（Variable）"></a>变量（Variable）</h3><ul>
+<li>  Go 语言中变量必须先声明再使用，且同一作用域内不支持重复声明</li>
+<li>  Go 语言推荐使用小驼峰式声明变量</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">标准声明：</span><br><span class="line"><span class="keyword">var</span> 变量名 变量类型</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name <span class="keyword">string</span></span><br><span class="line"><span class="keyword">var</span> age <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> isOk <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line">批量声明</span><br><span class="line"><span class="keyword">var</span>(</span><br><span class="line">		name <span class="keyword">string</span>  <span class="comment">// &quot;&quot;</span></span><br><span class="line">  	age <span class="keyword">int</span>  <span class="comment">// 0</span></span><br><span class="line">  	isOk <span class="keyword">bool</span>  <span class="comment">// false</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="变量的使用"><a href="#变量的使用" class="headerlink" title="变量的使用"></a>变量的使用</h3><ul>
+<li>  Golang 中非全局变量在声明之后必须使用，不然无法编译</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	age <span class="keyword">int</span></span><br><span class="line">	isOk <span class="keyword">bool</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	name = <span class="string">&quot;Alone&quot;</span></span><br><span class="line">	age = <span class="number">18</span></span><br><span class="line">	isOk = <span class="literal">true</span></span><br><span class="line">	fmt.Printf(<span class="string">&quot;name: %s&quot;</span>, name)  <span class="comment">// 格式化打印</span></span><br><span class="line">	fmt.Println(age)  <span class="comment">// 打印之后换行</span></span><br><span class="line">	fmt.Print(isOk)  <span class="comment">// 在终端直接输出需要打印的内容，不添加其他操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、声明变量同时赋值</span><br><span class="line"><span class="keyword">var</span> s1 <span class="keyword">string</span> = <span class="string">&#x27;Alone&#x27;</span></span><br><span class="line">fmt.Println(s1)</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、类型推导</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="number">20</span></span><br><span class="line">fmt.Println(s2)</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、简短变量声明</span><br><span class="line">s3 := <span class="string">&#x27;哈哈哈&#x27;</span></span><br><span class="line">fmt.Println(s3)</span><br></pre></td></tr></table></figure>
+
+<h3 id="匿名变量（Anonymous-Variable"><a href="#匿名变量（Anonymous-Variable" class="headerlink" title="匿名变量（Anonymous Variable)"></a>匿名变量（Anonymous Variable)</h3><ul>
+<li>  在使用多重赋值时，如果想要忽略某个值，可以使用 匿名变量<code>anonymous variable</code>。匿名变量使用一个下划线<code>_</code>表示</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;<span class="keyword">int</span>, <span class="keyword">string</span>&#125; &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">808</span>, <span class="string">&quot;Alone&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	x, _ := foo()</span><br><span class="line">	_, y := foo()</span><br><span class="line">	fmt.Println(<span class="string">&quot;x=&quot;</span>, x)</span><br><span class="line">	fmt.Println(<span class="string">&quot;y=&quot;</span>, y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 匿名变量不占用空间，不会分配内存，所以匿名变量之间不存在重复声明 */</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、函数外的每个语句都必须以关键字开始（<span class="keyword">var</span>、<span class="keyword">const</span>、<span class="function"><span class="keyword">func</span> 等）</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、:= 简短变量声明，只能在函数内部使用</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、_ 多用于占位，表示忽略值</span><br></pre></td></tr></table></figure>
+
+<h3 id="常量（Const）"><a href="#常量（Const）" class="headerlink" title="常量（Const）"></a>常量（Const）</h3><ul>
+<li>  恒定不变的值</li>
+<li>  常量在定义的时候必须被赋值</li>
+<li>  定义常量之后不能修改，且程序运行期间不会改变</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 标准声明</span></span><br><span class="line"><span class="keyword">const</span> pi = <span class="number">3.14159</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 批量声明</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	statusOk = <span class="number">200</span></span><br><span class="line">	notFound = <span class="number">404</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明常量时，如果某一行没有赋值，默认和上一行相同</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	a = <span class="string">&quot;01&quot;</span></span><br><span class="line">	b</span><br><span class="line">	c</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(pi)</span><br><span class="line">	fmt.Println(statusOk)</span><br><span class="line">	fmt.Println(notFound)</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">	fmt.Println(b)</span><br><span class="line">	fmt.Println(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="iota-–-常量计数器"><a href="#iota-–-常量计数器" class="headerlink" title="iota – 常量计数器"></a>iota – 常量计数器</h3><ul>
+<li>  <code>iota</code> 是 go 语言的常量计数器，只能在常量表达式中使用</li>
+<li>  <code>iota</code> 在 const 关键字<code>出现时</code>将被<code>重置</code>为 0，const <code>每新增一行常量声明</code>将使 <code>iota</code> 计数一次 – <code>iota</code> 可以理解为 const 语句块中的索引，常用于定义、枚举</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类似枚举</span></span><br><span class="line"><span class="keyword">const</span>(</span><br><span class="line">	a0 = <span class="literal">iota</span>  <span class="comment">// 0</span></span><br><span class="line">	a1		     <span class="comment">// 1</span></span><br><span class="line">	a2		     <span class="comment">// 2</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span>(</span><br><span class="line">	b0 = <span class="literal">iota</span>  <span class="comment">// 0</span></span><br><span class="line">	b1 = <span class="literal">iota</span>  <span class="comment">// 1</span></span><br><span class="line">	_ = <span class="literal">iota</span>   <span class="comment">// 2</span></span><br><span class="line">	b2 = <span class="literal">iota</span>  <span class="comment">// 3</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插队</span></span><br><span class="line"><span class="keyword">const</span>(</span><br><span class="line">	c0 = <span class="literal">iota</span>  <span class="comment">// 0</span></span><br><span class="line">	c1 = <span class="number">1000</span>  </span><br><span class="line">	c2 = <span class="literal">iota</span>  <span class="comment">// 2</span></span><br><span class="line">	c3         <span class="comment">// 3</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个常量声明在一行</span></span><br><span class="line"><span class="keyword">const</span>(</span><br><span class="line">	d0, d1 = <span class="literal">iota</span>+<span class="number">1</span>, <span class="literal">iota</span>+<span class="number">2</span>  <span class="comment">// 1, 2</span></span><br><span class="line">	d2, d3 = <span class="literal">iota</span>+<span class="number">1</span>, <span class="literal">iota</span>+<span class="number">2</span>  <span class="comment">// 2, 3</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义数量级</span></span><br><span class="line"><span class="keyword">const</span>(</span><br><span class="line">	_ = <span class="literal">iota</span></span><br><span class="line">  KB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">  MB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">  GB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">  TB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">  PB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Golang-%E5%9F%BA%E7%A1%80/"># Golang 基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/12/Golang/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本数据类型</a>
+            
+            
+            <a class="next" rel="next" href="/2021/01/11/Golang/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">命名规范</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

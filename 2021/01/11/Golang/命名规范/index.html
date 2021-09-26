@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>命名规范 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">命名规范</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-January-11&nbsp;&nbsp;20:33:45</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Golang/">Golang</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一-变量定义规范"><a href="#一-变量定义规范" class="headerlink" title="一 变量定义规范"></a>一 变量定义规范</h2><p>Go语言中的函数名、变量名、常量名、类型名、语句标号和包名等所有的命名，都遵循一个简单的命名规则：</p>
+<p>1 一个名字必须以一个字母（Unicode字母）或下划线开头，后面可以跟任意数量的字母、数字或下划线</p>
+<p>2 大写字母和小写字母是不同的：Name和name是两个不同的变量</p>
+<p>3 关键字和保留字都不建议用作变量名</p>
+<h2 id="二-关键字"><a href="#二-关键字" class="headerlink" title="二 关键字"></a>二 关键字</h2><p>Go语言中关键字有25个；关键字不能用于自定义名字，只能在特定语法结构中使用。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">break</span>      <span class="keyword">default</span>       <span class="function"><span class="keyword">func</span>     <span class="title">interface</span>   <span class="title">select</span></span></span><br><span class="line"><span class="keyword">case</span>       <span class="keyword">defer</span>         <span class="keyword">go</span>       <span class="keyword">map</span>         <span class="keyword">struct</span></span><br><span class="line"><span class="keyword">chan</span>       <span class="keyword">else</span>          <span class="keyword">goto</span>     <span class="keyword">package</span>     <span class="keyword">switch</span></span><br><span class="line"><span class="keyword">const</span>      <span class="keyword">fallthrough</span>   <span class="keyword">if</span>       <span class="keyword">range</span>       <span class="keyword">type</span></span><br><span class="line"><span class="keyword">continue</span>   <span class="keyword">for</span>           <span class="keyword">import</span>   <span class="keyword">return</span>      <span class="keyword">var</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三-保留字"><a href="#三-保留字" class="headerlink" title="三 保留字"></a>三 保留字</h2><p>go语言中有37个保留字，主要对应内建的常量、类型和函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">内建常量: <span class="literal">true</span> <span class="literal">false</span> <span class="literal">iota</span> <span class="literal">nil</span></span><br><span class="line"></span><br><span class="line">内建类型:  <span class="keyword">int</span> <span class="keyword">int8</span> <span class="keyword">int16</span> <span class="keyword">int32</span> <span class="keyword">int64</span></span><br><span class="line">          <span class="keyword">uint</span> <span class="keyword">uint8</span> <span class="keyword">uint16</span> <span class="keyword">uint32</span> <span class="keyword">uint64</span> <span class="keyword">uintptr</span></span><br><span class="line">          <span class="keyword">float32</span> <span class="keyword">float64</span> <span class="keyword">complex128</span> <span class="keyword">complex64</span></span><br><span class="line">          <span class="keyword">bool</span> <span class="keyword">byte</span> <span class="keyword">rune</span> <span class="keyword">string</span> error</span><br><span class="line"></span><br><span class="line">内建函数: <span class="built_in">make</span> <span class="built_in">len</span> <span class="built_in">cap</span> <span class="built_in">new</span> <span class="built_in">append</span> <span class="built_in">copy</span> <span class="built_in">close</span> <span class="built_in">delete</span></span><br><span class="line">          <span class="built_in">complex</span> <span class="built_in">real</span> <span class="built_in">imag</span></span><br><span class="line">          <span class="built_in">panic</span> <span class="built_in">recover</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四-注意"><a href="#四-注意" class="headerlink" title="四 注意"></a>四 注意</h2><ol>
+<li> 这些保留字并不是关键字，可以在定义中重新使用它们。在一些特殊的场景中重新定义它们也是有意义的，但是也要注意避免过度而引起语义混乱</li>
+<li> 如果一个名字是在函数内部定义，那么它就只在函数内部有效。如果是在函数外部定义，那么将在当前包的所有文件中都可以访问。名字的开头字母的大小写决定了名字在包外的可见性。如果一个名字是大写字母开头的（必须是在函数外部定义的包级名字；包级函数名本身也是包级名字），那么它将是导出的，也就是说可以被外部的包访问，例如fmt包的Printf函数就是导出的，可以在fmt包外部访问。包本身的名字一般总是用小写字母</li>
+<li> 名字的长度没有逻辑限制，但是Go语言的风格是尽量使用短小的名字，对于局部变量尤其是这样；你会经常看到i之类的短名字，而不是冗长的theLoopIndex命名。通常来说，如果一个名字的作用域比较大，生命周期也比较长，那么用长的名字将会更有意义</li>
+<li> 在习惯上，Go语言程序员推荐使用 <strong>驼峰式</strong> 命名，当名字由几个单词组成时优先使用大小写分隔，而不是优先用下划线分隔。因此，在标准库有QuoteRuneToASCII和parseRequestLine这样的函数命名，但是一般不会用quote_rune_to_ASCII和parse_request_line这样的命名。而像ASCII和HTML这样的缩略词则避免使用大小写混合的写法，它们可能被称为htmlEscape、HTMLEscape或escapeHTML，但不会是escapeHtml</li>
+<li> go文件的名字，建议用下划线的方式命名（参见go源码）</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Golang-%E5%9F%BA%E7%A1%80/"># Golang 基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/12/Golang/%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F/">变量与常量</a>
+            
+            
+            <a class="next" rel="next" href="/2021/01/11/Golang/%E5%88%9D%E8%AF%86-Golang/">初识 Golang</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
