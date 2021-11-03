@@ -219,15 +219,15 @@
 <h2 id="4-1、什么是引用计数？"><a href="#4-1、什么是引用计数？" class="headerlink" title="4-1、什么是引用计数？"></a>4-1、什么是引用计数？</h2><p>引用计数就是：变量值被变量名关联的次数</p>
 <p>如：age=18</p>
 <p>变量值 18 被关联了一个变量名 age，称之为引用计数为 1</p>
-<p><img src="/Users/creambluea/Blog/source/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B01.jpg"></p>
+<p><img src="https://github.com/SleepingzZ/SleepingzZ.github.io/blob/master/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B01.jpg?raw=true"></p>
 <p>引用计数增加：</p>
 <p>age=18 （此时，变量值 18 的引用计数为 1）</p>
 <p>m=age （把 age 的内存地址给了 m，此时，m, age 都关联了 18，所以变量值 18 的引用计数为 2）</p>
-<p><img src="/Users/creambluea/Blog/source/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B02.jpg"></p>
+<p><img src="https://github.com/SleepingzZ/SleepingzZ.github.io/blob/master/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B02.jpg?raw=true"></p>
 <p>引用计数减少：</p>
 <p>age=10（名字 age 先与值 18 解除关联，再与 3 建立了关联，变量值 18 的引用计数为 1）</p>
 <p>del m（del 的意思是解除变量名 x 与变量值 18 的关联关系，此时，变量 18 的引用计数为 0）</p>
-<p><img src="/Users/creambluea/Blog/source/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B03.jpg"></p>
+<p><img src="https://github.com/SleepingzZ/SleepingzZ.github.io/blob/master/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B03.jpg?raw=true"></p>
 <p>值18的引用计数一旦变为0，其占用的内存地址就应该被解释器的垃圾回收机制回收</p>
 <h2 id="4-2、引用计数扩展阅读"><a href="#4-2、引用计数扩展阅读" class="headerlink" title="4-2、引用计数扩展阅读"></a>4-2、引用计数扩展阅读</h2><p>变量值被关联次数的增加或减少，都会引发引用计数机制的执行（增加或减少值的引用计数），这存在明显的效率问题。</p>
 <p>如果说执行效率还仅仅是引用计数机制的一个软肋的话，那么很不幸，引用计数机制还存在着一个致命的弱点，即循环引用（也称交叉引用）</p>
@@ -240,16 +240,16 @@
 <h3 id="4-2-1-标记-清除"><a href="#4-2-1-标记-清除" class="headerlink" title="4-2-1 标记-清除"></a>4-2-1 标记-清除</h3><p>容器对象（比如：list，set，dict，class，instance）都可以包含对其他对象的引用，所以都可能产生循环引用。而“标记-清除”计数就是为了解决循环引用的问题。</p>
 <p>在了解标记清除算法前，我们需要明确一点，关于变量的存储，内存中有两块区域：堆区与栈区，在定义变量时，变量名与值内存地址的关联关系存放于栈区，变量值存放于堆区，内存管理回收的则是堆区的内容，详解如下图,</p>
 <p>定义了两个变量 x = 10、y = 20</p>
-<p><img src="/Users/creambluea/Blog/source/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A41.jpg"></p>
+<p><img src="https://github.com/SleepingzZ/SleepingzZ.github.io/blob/master/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A41.jpg?raw=true"></p>
 <p>当我们执行 x=y 时，内存中的栈区与堆区变化如下</p>
-<p><img src="/Users/creambluea/Blog/source/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A42.jpg"></p>
+<p><img src="https://github.com/SleepingzZ/SleepingzZ.github.io/blob/master/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A42.jpg?raw=true"></p>
 <p>标记/清除算法的做法是当应用程序可用的内存空间被耗尽的时，就会停止整个程序，然后进行两项工作，第一项则是标记，第二项则是清除</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、标记</span><br><span class="line">标记的过程其实就是，遍历所有的GC Roots对象(栈区中的所有内容或者线程都可以作为GC Roots对象），然后将所有GC Roots的对象可以直接或间接访问到的对象标记为存活的对象，其余的均为非存活对象，应该被清除。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、清除</span><br><span class="line">清除的过程将遍历堆中所有的对象，将没有标记的对象全部清除掉。</span><br></pre></td></tr></table></figure>
 
 <p>直接引用指的是从栈区出发直接引用到的内存地址，间接引用指的是从栈区出发引用到堆区后再进一步引用到的内存地址，以我们之前的两个列表 l1 与 l2 为例画出如下图像</p>
-<p><img src="/Users/creambluea/Blog/source/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A43.jpg"></p>
+<p><img src="https://github.com/SleepingzZ/SleepingzZ.github.io/blob/master/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A43.jpg?raw=true"></p>
 <p>当我们同时删除 l1 与 l2 时，会清理到栈区中 l1 与 l2 的内容</p>
-<p><img src="/Users/creambluea/Blog/source/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A44.jpg"></p>
+<p><img src="https://github.com/SleepingzZ/SleepingzZ.github.io/blob/master/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A44.jpg?raw=true"></p>
 <p>这样在启用标记清除算法时，发现栈区内不再有l1与l2（只剩下堆区内二者的相互引用），于是列表1与列表2都没有被标记为存活，二者会被清理掉，这样就解决了循环引用带来的内存泄漏问题。</p>
 <h3 id="4-2-2-分代回收"><a href="#4-2-2-分代回收" class="headerlink" title="4-2-2 分代回收"></a>4-2-2 分代回收</h3><h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><ul>
 <li>  基于引用计数的回收机制，每次回收内存，都需要把所有对象的引用计数都遍历一遍，这是非常消耗时间的，于是引入了分代回收来提高回收效率，分代回收采用的是用“空间换时间”的策略。</li>
@@ -262,7 +262,7 @@
 <h4 id="回收"><a href="#回收" class="headerlink" title="回收"></a>回收</h4><ul>
 <li>  回收依然是使用引用计数作为回收的依据</li>
 </ul>
-<p><img src="/Users/creambluea/Blog/source/images/%E5%88%86%E4%BB%A3%E5%9B%9E%E6%94%B6.png"></p>
+<p><img src="https://github.com/SleepingzZ/SleepingzZ.github.io/blob/master/images/%E5%88%86%E4%BB%A3%E5%9B%9E%E6%94%B6.png?raw=true"></p>
 <p>虽然分代回收可以起到提升效率的效果，但也存在一定的缺点</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如一个变量刚刚从新生代移入青春代，该变量的绑定关系就解除了，该变量应该被回收，但青春代的扫描频率低于新生代，所以该变量的回收就会被延迟。</span><br></pre></td></tr></table></figure>
 
