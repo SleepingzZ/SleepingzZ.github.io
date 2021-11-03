@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>字符编码 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">字符编码</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2017-September-23&nbsp;&nbsp;20:41:05</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Python/">Python</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>字符串类型、文本文件的内容都是由字符组成的，但凡涉及到字符的存取，都需要考虑字符编码的问题。</p>
+<h1 id="二-、知识储备"><a href="#二-、知识储备" class="headerlink" title="二 、知识储备"></a>二 、知识储备</h1><h2 id="2-1-三大核心硬件"><a href="#2-1-三大核心硬件" class="headerlink" title="2-1 三大核心硬件"></a>2-1 三大核心硬件</h2><p>所有软件都是运行硬件之上的，与运行软件相关的三大核心硬件为cpu、内存、硬盘，我们需要明确三点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、软件运行前，软件的代码及其相关数据都是存放于硬盘中的</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、任何软件的启动都是将数据从硬盘中读入内存，然后cpu从内存中取出指令并执行</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、软件运行过程中产生的数据最先都是存放于内存中的，若想永久保存软件产生的数据，则需要将数据由内存写入硬盘</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222055052-418545065.jpg"></p>
+<h2 id="2-2-文本编辑器读取文件内容的流程"><a href="#2-2-文本编辑器读取文件内容的流程" class="headerlink" title="2-2 文本编辑器读取文件内容的流程"></a>2-2 文本编辑器读取文件内容的流程</h2><ol>
+<li>  启动一个文件编辑器（文本编辑器如nodepad++，pycharm，word）</li>
+<li>  文件编辑器会将文件内容从硬盘读入内存</li>
+<li>  文本编辑器会将刚刚读入内存中的内容显示到屏幕上</li>
+</ol>
+<h2 id="2-3-python解释器执行文件的流程"><a href="#2-3-python解释器执行文件的流程" class="headerlink" title="2-3 python解释器执行文件的流程"></a>2-3 python解释器执行文件的流程</h2><p>以 python test.py 为例，执行流程如下</p>
+<ol>
+<li>  启动python解释器，此时就相当于启动了一个文本编辑器</li>
+<li>  python解释器相当于文本编辑器，从硬盘上将test.py的内容读入到内存中</li>
+<li>  python解释器解释执行刚刚读入的内存的内容，开始识别python语法 </li>
+</ol>
+<h2 id="2-4-小结"><a href="#2-4-小结" class="headerlink" title="2-4 小结"></a>2-4 小结</h2><p>python 解释器与文件本编辑的异同</p>
+<ul>
+<li>相同点：前两个阶段二者完全一致，都是将硬盘中文件的内容读入内存<ul>
+<li>  python解释器是解释执行文件内容的，因而python解释器具备读py文件的功能，这一点与文本编辑器一样</li>
+</ul>
+</li>
+<li>不同点：在阶段3时，针对内存中读入的内容处理方式不同<ul>
+<li>  文本编辑器将文件内容读入内存后，是为了显示或者编辑，根本不去理会python的语法，而python解释器将文件内容读入内存后，可不是为了给你瞅一眼python代码写的啥，而是为了执行python代码、会识别python语法）</li>
+</ul>
+</li>
+</ul>
+<h1 id="三、字符编码介绍"><a href="#三、字符编码介绍" class="headerlink" title="三、字符编码介绍"></a>三、字符编码介绍</h1><h2 id="3-1-什么是字符编码？"><a href="#3-1-什么是字符编码？" class="headerlink" title="3-1 什么是字符编码？"></a>3-1 什么是字符编码？</h2><p>人类在与计算机交互时，用的都是人类能读懂的字符，如中文字符、英文字符、日文字符等</p>
+<p>而计算机只能识别二进制数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">二进制数即由 <span class="number">0</span> 和 <span class="number">1</span> 组成的数字，例如 010010101010。计算机是基于电工作的，电的特性即高低电平，人类从逻辑层面将高电平对应为数字 <span class="number">1</span>,低电平对应为数字 <span class="number">0</span>，这直接决定了计算机可以识别的是由 <span class="number">0</span> 和 <span class="number">1</span> 组成的数字</span><br></pre></td></tr></table></figure>
+
+<p>毫无疑问，由人类的字符到计算机中的数字，必须经历一个过程，如下</p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222149047-2131754315.jpg"></p>
+<p>翻译的过程必须参照一个特定的标准，该标准称之为字符编码表，该表上存放的就是字符与数字一一对应的关系。</p>
+<p>字符编码中的编码指的是翻译或者转换的意思，即将人能理解的字符翻译成计算机能识别的数字</p>
+<h2 id="3-2-字符编码表的发展史"><a href="#3-2-字符编码表的发展史" class="headerlink" title="3-2 字符编码表的发展史"></a>3-2 字符编码表的发展史</h2><p>字符编码的发展经历了三个重要的阶段</p>
+<h3 id="3-2-1-阶段一：一家独大"><a href="#3-2-1-阶段一：一家独大" class="headerlink" title="3-2-1 阶段一：一家独大"></a>3-2-1 阶段一：一家独大</h3><p>现代计算机起源于美国，所以最先考虑仅仅是让计算机识别英文字符，于是诞生了ASCII表</p>
+<h4 id="ASCII表的特点"><a href="#ASCII表的特点" class="headerlink" title="ASCII表的特点"></a>ASCII表的特点</h4><ol>
+<li>  只有英文字符与数字的一一对应关系</li>
+<li>  一个英文字符对应 1Bytes，1Bytes=8bit，8bit 最多包含 256 个数字，可以对应 256 个字符，足够表示所有英文字符</li>
+</ol>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222204993-1496149117.jpg"></p>
+<h3 id="3-2-2-阶段二：诸侯割据、天下大乱"><a href="#3-2-2-阶段二：诸侯割据、天下大乱" class="headerlink" title="3-2-2 阶段二：诸侯割据、天下大乱"></a>3-2-2 阶段二：诸侯割据、天下大乱</h3><p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222216784-1680223704.jpg"></p>
+<p>为了让计算机能够识别中文和英文，中国人定制了GBK</p>
+<h4 id="GBK表的特点"><a href="#GBK表的特点" class="headerlink" title="GBK表的特点"></a>GBK表的特点</h4><ol>
+<li>  只有中文字符、英文字符与数字的一一对应关系</li>
+<li>  一个英文字符对应1Bytes、一个中文字符对应2Bytes</li>
+</ol>
+<h5 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1Bytes=8bit，8bit 最多包含 <span class="number">256</span> 个数字，可以对应 <span class="number">256</span> 个字符，足够表示所有英文字符</span><br><span class="line">2Bytes=16bit，16bit 最多包含 <span class="number">65536</span> 个数字，可以对应 <span class="number">65536</span> 个字符，足够表示所有中文字符</span><br></pre></td></tr></table></figure>
+
+<p>每个国家都各自的字符，为让计算机能够识别自己国家的字符外加英文字符，各个国家都制定了自己的字符编码表</p>
+<h4 id="Shift-JIS表的特点"><a href="#Shift-JIS表的特点" class="headerlink" title="Shift_JIS表的特点"></a>Shift_JIS表的特点</h4><ul>
+<li>  只有日文字符、英文字符与数字的一一对应关系</li>
+</ul>
+<h4 id="Euc-kr表的特点"><a href="#Euc-kr表的特点" class="headerlink" title="Euc-kr表的特点"></a>Euc-kr表的特点</h4><ul>
+<li>  只有韩文字符、英文字符与数字的一一对应关系</li>
+</ul>
+<p>此时,美国人用的计算机里使用字符编码标准是 ASCII、中国人用的计算机里使用字符编码标准是 GBK、日本人用的计算机里使用字符编码标准是 Shift_JIS</p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222231337-988216061.jpg"></p>
+<p>字符编码发展到了这个阶段，可以用一句话概括：诸侯割据、天下大乱，详解如下</p>
+<p>图1中，文本编辑存取文件的原理如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">文本文件内容全都为字符，无论存取都是涉及到字符编码问题</span><br><span class="line"><span class="comment">#1、存文本文件</span></span><br><span class="line">人类通过文本编辑器输入的字符会被转化成ASCII格式的二进制存放于内存中，如果需要永久保存，则直接将内存中的ASCII格式的二进制写入硬盘</span><br><span class="line"></span><br><span class="line"><span class="comment">#2、读文本文件</span></span><br><span class="line">直接将硬盘中的ASCII格式的二进制读入内存，然后通过ASCII表反解成英文字符</span><br></pre></td></tr></table></figure>
+
+<p>图 2 图 3 都是相同的过程，此时无论是存还是取由于采用的字符编码表一样，所以肯定不会出现乱码问题，但问题是在美国人用的计算机里只能输入英文字符，而在中国人用的计算机里只能输入中文字符和英文字符….,毫无疑问我们希望计算机允许我们输入万国字符均可识别、不乱码，而现阶段计算机采用的字符编码ASCII、GBK、Shift_JIS都无法识别万国字符，所以我们必须定制一个兼容万国字符的编码表，请看阶段三</p>
+<h3 id="3-2-3-阶段三：分久必合"><a href="#3-2-3-阶段三：分久必合" class="headerlink" title="3-2-3 阶段三：分久必合"></a>3-2-3 阶段三：分久必合</h3><p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222420807-206904855.jpg"></p>
+<p>unicode于1990年开始研发，1994年正式公布，具备两大特点：</p>
+<ol>
+<li><p>  存在所有语言中的所有字符与数字的一一对应关系,即兼容万国字符</p>
+</li>
+<li><p>  与传统的字符编码的二进制数都有对应关系</p>
+</li>
+</ol>
+<p>很多地方或老的系统、应用软件仍会采用各种各样传统的编码，这是历史遗留问题。此处需要强调：软件是存放于硬盘的，而运行软件是要将软件加载到内存的，面对硬盘中存放的各种传统编码的软件，想让我们的计算机能够将它们全都正常运行而不出现乱码，内存中必须有一种兼容万国的编码，并且该编码需要与其他编码有相对应的映射/转换关系，这就是unicode的第二大特点产生的缘由</p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222437586-1811406226.jpg"></p>
+<p>文本编辑器输入任何字符都是最新存在于内存中，是unicode编码的，存放于硬盘中，则可以转换成任意其他编码，只要该编码可以支持相应的字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">英文字符可以被ASCII识别</span><br><span class="line">英文字符---&gt;unciode格式的数字---&gt;ASCII格式的数字</span><br><span class="line"></span><br><span class="line">中文字符、英文字符可以被GBK识别</span><br><span class="line">中文字符、英文字符---&gt;unicode格式的数字---&gt;gbk格式的数字</span><br><span class="line"></span><br><span class="line">日文字符、英文字符可以被shift-JIS识别</span><br><span class="line">日文字符、英文字符---&gt;unicode格式的数字---&gt;shift-JIS格式的数字</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-编码与解码"><a href="#3-3-编码与解码" class="headerlink" title="3-3 编码与解码"></a>3-3 编码与解码</h2><p>由字符转换成内存中的 unicode，以及由 unicode 转换成其他编码的过程，都称为编码 encode</p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222624101-836973470.jpg"></p>
+<p>由内存中的 unicode 转换成字符，以及由其他编码转换成 unicode 的过程，都称为解码 decode</p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222645169-200576606.jpg"></p>
+<p>在诸多文件类型中，只有文本文件的内存是由字符组成的，因而文本文件的存取也涉及到字符编码的问题</p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191012121119664-283084630.png"></p>
+<h2 id="3-4-utf-8的由来"><a href="#3-4-utf-8的由来" class="headerlink" title="3-4 utf-8的由来"></a>3-4 utf-8的由来</h2><p>注意：如果保存到硬盘的是GBK格式二进制，当初用户输入的字符只能是中文或英文，同理如果保存到硬盘的是Shift_JIS格式二进制，当初用户输入的字符只能是日文或英文……如果我们输入的字符中包含多国字符，那么该如何处理？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">多国字符—√—》内存（unicode格式的二进制）——X—》硬盘（GBK格式的二进制）</span><br><span class="line"></span><br><span class="line">多国字符—√—》内存（unicode格式的二进制）——X—》硬盘（Shift_JIS格式的二进制）</span><br><span class="line"></span><br><span class="line">多国字符—√—》内存（unicode格式的二进制）——√—》硬盘（???格式的二进制）</span><br></pre></td></tr></table></figure>
+
+<p>理论上是可以将内存中 unicode 格式的二进制直接存放于硬盘中的，但由于 unicode 固定使用两个字节来存储一个字符，如果多国字符中包含大量的英文字符时，使用 unicode 格式存放会额外占用一倍空间（英文字符其实只需要用一个字节存放即可），然而空间占用并不是最致命的问题，最致命地是当我们由内存写入硬盘时会额外耗费一倍的时间，所以将内存中的unicode二进制写入硬盘或者基于网络传输时必须将其转换成一种精简的格式，这种格式即utf-8（全称Unicode Transformation Format，即unicode的转换格式）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">多国字符—√—》内存（unicode格式的二进制）——√—》硬盘（utf-<span class="number">8</span>格式的二进制）</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222752344-1754583023.jpg"></p>
+<p>那为何在内存中不直接使用utf-8呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Copyutf-<span class="number">8</span>是不定长的：一个英文字符占1Bytes，一个中文字符占3Bytes，生僻字用更多的Bytes存储</span><br><span class="line"></span><br><span class="line">也就意味着如果用户输入的字符是：你y好，在内存中需要先经历计算的过程：“你”应该用3Bytes，“y”应该用1Bytes，“好”应该用3Bytes，然后才能存储，所以内存中如果直接使用utf-<span class="number">8</span>格式去存储字符，耗费的总时间=计算时间+存储时间，而内存中使用定长的unicode格式存储字符，就省去了计算时间，所以内存中使用unicode来存储字符会浪费空间，但是会提升速度，这是一种用空间换时间的方法</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、字符编码的应用"><a href="#四、字符编码的应用" class="headerlink" title="四、字符编码的应用"></a>四、字符编码的应用</h1><p>我们学习字符编码就是为了存取字符时不发生乱码问题</p>
+<ol>
+<li>  内存中固定使用 unicode 无论输入任何字符都不会发生乱码</li>
+<li>我们能够修改的是存/取硬盘的编码方式，如果编码设置不正确将会出现乱码问题。乱码问题分为两种：存乱了，读乱了<ol>
+<li>  存乱了：如果用户输入的内容中包含中文和日文字符，如果单纯以shift_JIS存，日文可以正常写入硬盘，而由于中文字符在shift_jis中没有找到对应关系而导致存乱了</li>
+<li>  读乱了：如果硬盘中的数据是shift_JIS格式存储的，采GBK格式读入内存就读乱了</li>
+</ol>
+</li>
+</ol>
+<h5 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h5><ol>
+<li>保证存的时候不乱：在由内存写入硬盘时，必须将编码格式设置为支持所输入字符的编码格式</li>
+<li>保证存的时候不乱：在由硬盘读入内存时，必须采用与写入硬盘时相同的编码格式</li>
+</ol>
+<h2 id="4-1-文本编辑器nodpad-存取文本文件"><a href="#4-1-文本编辑器nodpad-存取文本文件" class="headerlink" title="4-1 文本编辑器nodpad++存取文本文件"></a>4-1 文本编辑器nodpad++存取文本文件</h2><p>文本编辑器存取的都是文本文件，而文本文件中包含的内容全为字符，所以存取文本文件都涉及到字符编码的问题。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222835197-1302065297.png"></p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222854232-665144298.png"></p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222918086-482368213.png"></p>
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222923152-1998608971.png"></p>
+<h2 id="4-2-python解释器执行文件的前两个阶段"><a href="#4-2-python解释器执行文件的前两个阶段" class="headerlink" title="4-2 python解释器执行文件的前两个阶段"></a>4-2 python解释器执行文件的前两个阶段</h2><p>执行py文件的前两个阶段就是python解释器读文本文件的过程，与文本编辑读文本文件的前两个阶段没人任何区别，要保证读不乱码，则必须将python解释器读文件时采用的编码方式设置为文件当初写入硬盘时的编码格式，如果没有设置，python解释器则才用默认的编码方式，在python3中默认为utf-8，在python2中默认为ASCII，我们可以通过指定文件头来修改默认的编码</p>
+<ul>
+<li>  在文件首行写入包含#号在内的以下内容</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">coding: 当初文件写入硬盘时采用的编码格式</span><br></pre></td></tr></table></figure>
+
+<p>解释器会先用默认的编码方式读取文件的首行内容，由于首行是纯英文组成，而任何编码方式都可以识别英文字符。</p>
+<h2 id="4-3-python解释器执行文件的第三个阶段"><a href="#4-3-python解释器执行文件的第三个阶段" class="headerlink" title="4-3 python解释器执行文件的第三个阶段"></a>4-3 python解释器执行文件的第三个阶段</h2><p>设置文件头的作用是保证运行 python 程序的前两个阶段不乱码，经过前两个阶段后 py 文件的内容都会以 unicode 格式存放于内存中。</p>
+<p>在经历第三个阶段时开始识别 python 语法，当遇到特定的语法 name =  ‘上’（代码本身也都全都是 unicode 格式存的）时，需要申请内存空间来存储字符串’上’，这就又涉及到应该以什么编码存储‘上’的问题了。</p>
+<p>在 Python3 中，字符串类的值都是使用 unicode 格式来存储</p>
+<p>由于 Python2 的盛行是早于 unicode 的，因此在 Python2 中是按照文件头指定的编码来存储字符串类型的值的（如果文件头中没有指定编码，那么解释器会按照它自己默认的编码方式来存储‘上’），所以，这就有可能导致乱码问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">coding:utf-<span class="number">8</span></span><br><span class="line">x = <span class="string">&#x27;上&#x27;</span> <span class="comment"># x的值为untf-8格式的二进制</span></span><br><span class="line"><span class="built_in">print</span>(x) <span class="comment"># 打印操作是将x的值，即utf-8格式的二进制交给终端，当终端收到后发现并不是unicode（只有unicode才与字符有对应关系），所以终端会执行操作：utf-8二进制---解码--&gt;unicode格式的二进制，解码的过程终端会采用自己默认的编码，而在pycharm的终端默认编码为utf-8、windows下的cmd终端的默认编码为gbk，所以该打印操作在pycharm中显示正常，而在windows下的cmd中则乱码</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在windows下的cmd中运行效果如下</span></span><br><span class="line">C:\Users\Administrator&gt;python2 E:\aaa.py</span><br><span class="line">涓</span><br></pre></td></tr></table></figure>
+
+<p> Python2 后推出了一种补救措施，就是在字符串类型前加 u，则会将字符串类型强制存储 unicode，这就与 Python3 保持一致了，对于 unicode 格式无论丢给任何终端进行打印，都可以直接对应字符不会出现乱码问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">coding:utf-<span class="number">8</span></span><br><span class="line">x = <span class="string">u&#x27;上&#x27;</span> <span class="comment"># 即便文件头为 utf-8，x的值依然存成 unicode </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-4-字符串-encode-编码与-decode-解码的使用"><a href="#4-4-字符串-encode-编码与-decode-解码的使用" class="headerlink" title="4-4 字符串 encode 编码与 decode 解码的使用"></a>4-4 字符串 encode 编码与 decode 解码的使用</h2><ol>
+<li>  unicode格式 —— 编码 encode ——–&gt; 其它编码格式</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="string">&#x27;上&#x27;</span> <span class="comment"># 在 python3 在&#x27;上&#x27;被存成 unicode</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>res = x.encode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>res,<span class="built_in">type</span>(res) <span class="comment"># unicode 编码成了 utf-8格式，而编码的结果为 bytes 类型，可以当作直接当作二进制去使用</span></span><br><span class="line">(<span class="string">b&#x27;\xe4\xb8\x8a&#x27;</span>, &lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">bytes</span>&#x27;&gt;)</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>  其它编码格式 —— 解码decode ——–&gt; unicode格式</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>res.decode(<span class="string">&#x27;utf-8&#x27;</span>) </span><br><span class="line"><span class="string">&#x27;上&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Python-%E5%9F%BA%E7%A1%80/"># Python 基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2018/09/22/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%B1%E6%9D%A5/">面向对象的由来</a>
+            
+            
+            <a class="next" rel="next" href="/2017/09/20/Python%20%E5%9F%BA%E7%A1%80/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3/">基本数据类型详解</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
