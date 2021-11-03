@@ -250,7 +250,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">二进制数即由 <span class="number">0</span> 和 <span class="number">1</span> 组成的数字，例如 010010101010。计算机是基于电工作的，电的特性即高低电平，人类从逻辑层面将高电平对应为数字 <span class="number">1</span>,低电平对应为数字 <span class="number">0</span>，这直接决定了计算机可以识别的是由 <span class="number">0</span> 和 <span class="number">1</span> 组成的数字</span><br></pre></td></tr></table></figure>
 
 <p>毫无疑问，由人类的字符到计算机中的数字，必须经历一个过程，如下</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222149047-2131754315.jpg"></p>
+<p><img src="/Users/creambluea/Blog/source/images/1825659-20191009222149047-2131754315.jpg"></p>
 <p>翻译的过程必须参照一个特定的标准，该标准称之为字符编码表，该表上存放的就是字符与数字一一对应的关系。</p>
 <p>字符编码中的编码指的是翻译或者转换的意思，即将人能理解的字符翻译成计算机能识别的数字</p>
 <h2 id="3-2-字符编码表的发展史"><a href="#3-2-字符编码表的发展史" class="headerlink" title="3-2 字符编码表的发展史"></a>3-2 字符编码表的发展史</h2><p>字符编码的发展经历了三个重要的阶段</p>
@@ -259,8 +259,8 @@
 <li>  只有英文字符与数字的一一对应关系</li>
 <li>  一个英文字符对应 1Bytes，1Bytes=8bit，8bit 最多包含 256 个数字，可以对应 256 个字符，足够表示所有英文字符</li>
 </ol>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222204993-1496149117.jpg"></p>
-<h3 id="3-2-2-阶段二：诸侯割据、天下大乱"><a href="#3-2-2-阶段二：诸侯割据、天下大乱" class="headerlink" title="3-2-2 阶段二：诸侯割据、天下大乱"></a>3-2-2 阶段二：诸侯割据、天下大乱</h3><p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222216784-1680223704.jpg"></p>
+<p><img src="/Users/creambluea/Blog/source/images/ASCII%E7%A0%81%E8%A1%A8.jpg"></p>
+<h3 id="3-2-2-阶段二：诸侯割据、天下大乱"><a href="#3-2-2-阶段二：诸侯割据、天下大乱" class="headerlink" title="3-2-2 阶段二：诸侯割据、天下大乱"></a>3-2-2 阶段二：诸侯割据、天下大乱</h3><p><img src="/Users/creambluea/Blog/source/images/%E7%BE%A4%E9%9B%84%E5%89%B2%E6%8D%AE.jpg"></p>
 <p>为了让计算机能够识别中文和英文，中国人定制了GBK</p>
 <h4 id="GBK表的特点"><a href="#GBK表的特点" class="headerlink" title="GBK表的特点"></a>GBK表的特点</h4><ol>
 <li>  只有中文字符、英文字符与数字的一一对应关系</li>
@@ -276,36 +276,35 @@
 <li>  只有韩文字符、英文字符与数字的一一对应关系</li>
 </ul>
 <p>此时,美国人用的计算机里使用字符编码标准是 ASCII、中国人用的计算机里使用字符编码标准是 GBK、日本人用的计算机里使用字符编码标准是 Shift_JIS</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222231337-988216061.jpg"></p>
+<p><img src="/Users/creambluea/Blog/source/images/%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8E%9F%E7%90%86.jpg"></p>
 <p>字符编码发展到了这个阶段，可以用一句话概括：诸侯割据、天下大乱，详解如下</p>
-<p>图1中，文本编辑存取文件的原理如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">文本文件内容全都为字符，无论存取都是涉及到字符编码问题</span><br><span class="line"><span class="comment">#1、存文本文件</span></span><br><span class="line">人类通过文本编辑器输入的字符会被转化成ASCII格式的二进制存放于内存中，如果需要永久保存，则直接将内存中的ASCII格式的二进制写入硬盘</span><br><span class="line"></span><br><span class="line"><span class="comment">#2、读文本文件</span></span><br><span class="line">直接将硬盘中的ASCII格式的二进制读入内存，然后通过ASCII表反解成英文字符</span><br></pre></td></tr></table></figure>
+<p>图 1 中，文本编辑存取文件的原理如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">文本文件内容全都为字符，无论存取都是涉及到字符编码问题</span><br><span class="line"><span class="comment">#1、存文本文件</span></span><br><span class="line">人类通过文本编辑器输入的字符会被转化成 ASCII 格式的二进制存放于内存中，如果需要永久保存，则直接将内存中的 ASCII 格式的二进制写入硬盘</span><br><span class="line"></span><br><span class="line"><span class="comment">#2、读文本文件</span></span><br><span class="line">直接将硬盘中的ASCII格式的二进制读入内存，然后通过 ASCII 表反解成英文字符</span><br></pre></td></tr></table></figure>
 
-<p>图 2 图 3 都是相同的过程，此时无论是存还是取由于采用的字符编码表一样，所以肯定不会出现乱码问题，但问题是在美国人用的计算机里只能输入英文字符，而在中国人用的计算机里只能输入中文字符和英文字符….,毫无疑问我们希望计算机允许我们输入万国字符均可识别、不乱码，而现阶段计算机采用的字符编码ASCII、GBK、Shift_JIS都无法识别万国字符，所以我们必须定制一个兼容万国字符的编码表，请看阶段三</p>
-<h3 id="3-2-3-阶段三：分久必合"><a href="#3-2-3-阶段三：分久必合" class="headerlink" title="3-2-3 阶段三：分久必合"></a>3-2-3 阶段三：分久必合</h3><p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222420807-206904855.jpg"></p>
-<p>unicode于1990年开始研发，1994年正式公布，具备两大特点：</p>
+<p>图 2 图 3 都是相同的过程，此时无论是存还是取由于采用的字符编码表一样，所以肯定不会出现乱码问题，但问题是在美国人用的计算机里只能输入英文字符，而在中国人用的计算机里只能输入中文字符和英文字符….,毫无疑问我们希望计算机允许我们输入万国字符均可识别、不乱码，而现阶段计算机采用的字符编码 ASCII、GBK、Shift_JIS 都无法识别万国字符，所以我们必须定制一个兼容万国字符的编码表，请看阶段三</p>
+<h3 id="3-2-3-阶段三：分久必合"><a href="#3-2-3-阶段三：分久必合" class="headerlink" title="3-2-3 阶段三：分久必合"></a>3-2-3 阶段三：分久必合</h3><p>unicode 于 1990 年开始研发，1994 年正式公布，具备两大特点：</p>
 <ol>
 <li><p>  存在所有语言中的所有字符与数字的一一对应关系,即兼容万国字符</p>
 </li>
 <li><p>  与传统的字符编码的二进制数都有对应关系</p>
 </li>
 </ol>
-<p>很多地方或老的系统、应用软件仍会采用各种各样传统的编码，这是历史遗留问题。此处需要强调：软件是存放于硬盘的，而运行软件是要将软件加载到内存的，面对硬盘中存放的各种传统编码的软件，想让我们的计算机能够将它们全都正常运行而不出现乱码，内存中必须有一种兼容万国的编码，并且该编码需要与其他编码有相对应的映射/转换关系，这就是unicode的第二大特点产生的缘由</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222437586-1811406226.jpg"></p>
+<p>很多地方或老的系统、应用软件仍会采用各种各样传统的编码，这是历史遗留问题。此处需要强调：软件是存放于硬盘的，而运行软件是要将软件加载到内存的，面对硬盘中存放的各种传统编码的软件，想让我们的计算机能够将它们全都正常运行而不出现乱码，内存中必须有一种兼容万国的编码，并且该编码需要与其他编码有相对应的映射/转换关系，这就是unicode 的第二大特点产生的缘由</p>
+<p><img src="/Users/creambluea/Blog/source/images/unicode.jpg"></p>
 <p>文本编辑器输入任何字符都是最新存在于内存中，是unicode编码的，存放于硬盘中，则可以转换成任意其他编码，只要该编码可以支持相应的字符</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">英文字符可以被ASCII识别</span><br><span class="line">英文字符---&gt;unciode格式的数字---&gt;ASCII格式的数字</span><br><span class="line"></span><br><span class="line">中文字符、英文字符可以被GBK识别</span><br><span class="line">中文字符、英文字符---&gt;unicode格式的数字---&gt;gbk格式的数字</span><br><span class="line"></span><br><span class="line">日文字符、英文字符可以被shift-JIS识别</span><br><span class="line">日文字符、英文字符---&gt;unicode格式的数字---&gt;shift-JIS格式的数字</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-3-编码与解码"><a href="#3-3-编码与解码" class="headerlink" title="3-3 编码与解码"></a>3-3 编码与解码</h2><p>由字符转换成内存中的 unicode，以及由 unicode 转换成其他编码的过程，都称为编码 encode</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222624101-836973470.jpg"></p>
+<p><img src="/Users/creambluea/Blog/source/images/%E7%BC%96%E7%A0%81.jpg"></p>
 <p>由内存中的 unicode 转换成字符，以及由其他编码转换成 unicode 的过程，都称为解码 decode</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222645169-200576606.jpg"></p>
+<p><img src="/Users/creambluea/Blog/source/images/%E8%A7%A3%E7%A0%81.jpg"></p>
 <p>在诸多文件类型中，只有文本文件的内存是由字符组成的，因而文本文件的存取也涉及到字符编码的问题</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191012121119664-283084630.png"></p>
+<p><img src="/Users/creambluea/Blog/source/images/%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81.png"></p>
 <h2 id="3-4-utf-8的由来"><a href="#3-4-utf-8的由来" class="headerlink" title="3-4 utf-8的由来"></a>3-4 utf-8的由来</h2><p>注意：如果保存到硬盘的是GBK格式二进制，当初用户输入的字符只能是中文或英文，同理如果保存到硬盘的是Shift_JIS格式二进制，当初用户输入的字符只能是日文或英文……如果我们输入的字符中包含多国字符，那么该如何处理？</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">多国字符—√—》内存（unicode格式的二进制）——X—》硬盘（GBK格式的二进制）</span><br><span class="line"></span><br><span class="line">多国字符—√—》内存（unicode格式的二进制）——X—》硬盘（Shift_JIS格式的二进制）</span><br><span class="line"></span><br><span class="line">多国字符—√—》内存（unicode格式的二进制）——√—》硬盘（???格式的二进制）</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">多国字符 —√—》内存（unicode格式的二进制）——X—》硬盘（GBK格式的二进制）</span><br><span class="line"></span><br><span class="line">多国字符 —√—》内存（unicode格式的二进制）——X—》硬盘（Shift_JIS格式的二进制）</span><br><span class="line"></span><br><span class="line">多国字符 —√—》内存（unicode格式的二进制）——√—》硬盘（???格式的二进制）</span><br></pre></td></tr></table></figure>
 
 <p>理论上是可以将内存中 unicode 格式的二进制直接存放于硬盘中的，但由于 unicode 固定使用两个字节来存储一个字符，如果多国字符中包含大量的英文字符时，使用 unicode 格式存放会额外占用一倍空间（英文字符其实只需要用一个字节存放即可），然而空间占用并不是最致命的问题，最致命地是当我们由内存写入硬盘时会额外耗费一倍的时间，所以将内存中的unicode二进制写入硬盘或者基于网络传输时必须将其转换成一种精简的格式，这种格式即utf-8（全称Unicode Transformation Format，即unicode的转换格式）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">多国字符—√—》内存（unicode格式的二进制）——√—》硬盘（utf-<span class="number">8</span>格式的二进制）</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">多国字符 —√—》内存（ unicode 格式的二进制）——√—》硬盘（utf-<span class="number">8</span>格式的二进制）</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222752344-1754583023.jpg"></p>
 <p>那为何在内存中不直接使用utf-8呢？</p>
@@ -325,10 +324,10 @@
 <li>保证存的时候不乱：在由硬盘读入内存时，必须采用与写入硬盘时相同的编码格式</li>
 </ol>
 <h2 id="4-1-文本编辑器nodpad-存取文本文件"><a href="#4-1-文本编辑器nodpad-存取文本文件" class="headerlink" title="4-1 文本编辑器nodpad++存取文本文件"></a>4-1 文本编辑器nodpad++存取文本文件</h2><p>文本编辑器存取的都是文本文件，而文本文件中包含的内容全为字符，所以存取文本文件都涉及到字符编码的问题。</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222835197-1302065297.png"></p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222854232-665144298.png"></p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222918086-482368213.png"></p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009222923152-1998608971.png"></p>
+<p><img src="/Users/creambluea/Blog/source/images/nodpad++%E5%AD%98%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B61.png"></p>
+<p><img src="/Users/creambluea/Blog/source/images/nodpad++%E5%AD%98%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B62.png"></p>
+<p><img src="/Users/creambluea/Blog/source/images/nodpad++%E5%AD%98%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B63.png"></p>
+<p><img src="/Users/creambluea/Blog/source/images/nodpad++%E5%AD%98%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B64.png"></p>
 <h2 id="4-2-python解释器执行文件的前两个阶段"><a href="#4-2-python解释器执行文件的前两个阶段" class="headerlink" title="4-2 python解释器执行文件的前两个阶段"></a>4-2 python解释器执行文件的前两个阶段</h2><p>执行py文件的前两个阶段就是python解释器读文本文件的过程，与文本编辑读文本文件的前两个阶段没人任何区别，要保证读不乱码，则必须将python解释器读文件时采用的编码方式设置为文件当初写入硬盘时的编码格式，如果没有设置，python解释器则才用默认的编码方式，在python3中默认为utf-8，在python2中默认为ASCII，我们可以通过指定文件头来修改默认的编码</p>
 <ul>
 <li>  在文件首行写入包含#号在内的以下内容</li>

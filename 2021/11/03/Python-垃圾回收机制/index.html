@@ -212,58 +212,59 @@
 
         <div class="post-content">
             <h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p> 解释器在执行到定义变量的语法时，会申请内存空间来存放变量的值，而内存的容量是有限的，这就涉及到变量值所占用内存空间的回收问题，当一个变量值没有用了（简称垃圾）就应该将其占用的内存给回收掉，那什么样的变量值是没有用的呢？</p>
-<p> 由于变量名是访问到变量值的唯一方式，所以当一个变量值不再关联任何变量名时，我们就无法再访问到该变量值了，该变量值就是没有用的，就应该被当成一个垃圾回收。毫无疑问，内存空间的申请与回收是非常耗费精力的事情，而且存在很大的危险性，稍有不慎就有可能引发内存溢出问题，好在Cpython解释器提供了自动的垃圾回收机制来帮我们解决了这件事。</p>
-<h1 id="二、什么是垃圾回收机制？"><a href="#二、什么是垃圾回收机制？" class="headerlink" title="二、什么是垃圾回收机制？"></a>二、什么是垃圾回收机制？</h1><p>垃圾回收机制（简称GC）是Python解释器自带一种机，专门用来回收不可用的变量值所占用的内存空间</p>
-<h1 id="三、为什么要用垃圾回收机制？"><a href="#三、为什么要用垃圾回收机制？" class="headerlink" title="三、为什么要用垃圾回收机制？"></a>三、为什么要用垃圾回收机制？</h1><p>程序运行过程中会申请大量的内存空间，而对于一些无用的内存空间如果不及时清理的话会导致内存使用殆尽（内存溢出），导致程序崩溃，因此管理内存是一件重要且繁杂的事情，而python解释器自带的垃圾回收机制把程序员从繁杂的内存管理中解放出来。</p>
-<h1 id="四、垃圾回收机制原理分析"><a href="#四、垃圾回收机制原理分析" class="headerlink" title="四、垃圾回收机制原理分析"></a>四、垃圾回收机制原理分析</h1><p>Python的GC模块主要运用了“引用计数”（reference counting）来跟踪和回收垃圾。在引用计数的基础上，还可以通过“标记-清除”（mark and sweep）解决容器对象可能产生的循环引用的问题，并且通过“分代回收”（generation collection）以空间换取时间的方式来进一步提高垃圾回收的效率。</p>
+<p> 由于变量名是访问到变量值的唯一方式，所以当一个变量值不再关联任何变量名时，我们就无法再访问到该变量值了，该变量值就是没有用的，就应该被当成一个垃圾回收。毫无疑问，内存空间的申请与回收是非常耗费精力的事情，而且存在很大的危险性，稍有不慎就有可能引发内存溢出问题，好在 CPython 解释器提供了自动的垃圾回收机制来帮我们解决了这件事。</p>
+<h1 id="二、什么是垃圾回收机制？"><a href="#二、什么是垃圾回收机制？" class="headerlink" title="二、什么是垃圾回收机制？"></a>二、什么是垃圾回收机制？</h1><p>垃圾回收机制（简称 GC）是 Python 解释器自带一种机，专门用来回收不可用的变量值所占用的内存空间</p>
+<h1 id="三、为什么要用垃圾回收机制？"><a href="#三、为什么要用垃圾回收机制？" class="headerlink" title="三、为什么要用垃圾回收机制？"></a>三、为什么要用垃圾回收机制？</h1><p>程序运行过程中会申请大量的内存空间，而对于一些无用的内存空间如果不及时清理的话会导致内存使用殆尽（内存溢出），导致程序崩溃，因此管理内存是一件重要且繁杂的事情，而 Python 解释器自带的垃圾回收机制把程序员从繁杂的内存管理中解放出来。</p>
+<h1 id="四、垃圾回收机制原理分析"><a href="#四、垃圾回收机制原理分析" class="headerlink" title="四、垃圾回收机制原理分析"></a>四、垃圾回收机制原理分析</h1><p>Python的 GC 模块主要运用了<code>引用计数</code>（reference counting）来跟踪和回收垃圾。在引用计数的基础上，还可以通过<code>标记-清除</code>（mark and sweep）解决容器对象可能产生的循环引用的问题，并且通过<code>分代回收</code>（generation collection）以空间换取时间的方式来进一步提高垃圾回收的效率。</p>
 <h2 id="4-1、什么是引用计数？"><a href="#4-1、什么是引用计数？" class="headerlink" title="4-1、什么是引用计数？"></a>4-1、什么是引用计数？</h2><p>引用计数就是：变量值被变量名关联的次数</p>
 <p>如：age=18</p>
-<p>变量值18被关联了一个变量名age，称之为引用计数为1</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215734213-1226878465.jpg"></p>
+<p>变量值 18 被关联了一个变量名 age，称之为引用计数为 1</p>
+<p><img src="/Users/creambluea/Blog/source/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B01.jpg"></p>
 <p>引用计数增加：</p>
-<p>age=18 （此时，变量值18的引用计数为1）</p>
-<p>m=age （把age的内存地址给了m，此时，m,age都关联了18，所以变量值18的引用计数为2）</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215749448-87492713.jpg"></p>
+<p>age=18 （此时，变量值 18 的引用计数为 1）</p>
+<p>m=age （把 age 的内存地址给了 m，此时，m, age 都关联了 18，所以变量值 18 的引用计数为 2）</p>
+<p><img src="/Users/creambluea/Blog/source/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B02.jpg"></p>
 <p>引用计数减少：</p>
-<p>age=10（名字age先与值18解除关联，再与3建立了关联，变量值18的引用计数为1）</p>
-<p>del m（del的意思是解除变量名x与变量值18的关联关系，此时，变量18的引用计数为0）</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215802812-15370869.jpg"></p>
+<p>age=10（名字 age 先与值 18 解除关联，再与 3 建立了关联，变量值 18 的引用计数为 1）</p>
+<p>del m（del 的意思是解除变量名 x 与变量值 18 的关联关系，此时，变量 18 的引用计数为 0）</p>
+<p><img src="/Users/creambluea/Blog/source/images/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B03.jpg"></p>
 <p>值18的引用计数一旦变为0，其占用的内存地址就应该被解释器的垃圾回收机制回收</p>
 <h2 id="4-2、引用计数扩展阅读"><a href="#4-2、引用计数扩展阅读" class="headerlink" title="4-2、引用计数扩展阅读"></a>4-2、引用计数扩展阅读</h2><p>变量值被关联次数的增加或减少，都会引发引用计数机制的执行（增加或减少值的引用计数），这存在明显的效率问题。</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215822255-1654765340.jpg"></p>
 <p>如果说执行效率还仅仅是引用计数机制的一个软肋的话，那么很不幸，引用计数机制还存在着一个致命的弱点，即循环引用（也称交叉引用）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Copy<span class="comment"># 如下我们定义了两个列表，简称列表1与列表2，变量名l1指向列表1，变量名l2指向列表2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1=[<span class="string">&#x27;xxx&#x27;</span>]  <span class="comment"># 列表1被引用一次，列表1的引用计数变为1   </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l2=[<span class="string">&#x27;yyy&#x27;</span>]  <span class="comment"># 列表2被引用一次，列表2的引用计数变为1   </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1.append(l2)             <span class="comment"># 把列表2追加到l1中作为第二个元素，列表2的引用计数变为2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l2.append(l1)             <span class="comment"># 把列表1追加到l2中作为第二个元素，列表1的引用计数变为2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># l1与l2之间有相互引用</span></span><br><span class="line"><span class="comment"># l1 = [&#x27;xxx&#x27;的内存地址,列表2的内存地址]</span></span><br><span class="line"><span class="comment"># l2 = [&#x27;yyy&#x27;的内存地址,列表1的内存地址]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1</span><br><span class="line">[<span class="string">&#x27;xxx&#x27;</span>, [<span class="string">&#x27;yyy&#x27;</span>, [...]]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l2</span><br><span class="line">[<span class="string">&#x27;yyy&#x27;</span>, [<span class="string">&#x27;xxx&#x27;</span>, [...]]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1[<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line"><span class="string">&#x27;xxx&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">如下我们定义了两个列表，简称列表 <span class="number">1</span> 与列表 <span class="number">2</span>，变量名 l1 指向列表 <span class="number">1</span>，变量名 l2 指向列表 <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1=[<span class="string">&#x27;xxx&#x27;</span>]  <span class="comment"># 列表 1 被引用一次，列表 1 的引用计数变为 1   </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l2=[<span class="string">&#x27;yyy&#x27;</span>]  <span class="comment"># 列表 2 被引用一次，列表 2 的引用计数变为 1   </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1.append(l2)             <span class="comment"># 把列表 2 追加到 l1 中作为第二个元素，列表 2 的引用计数变为 2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l2.append(l1)             <span class="comment"># 把列表 1 追加到 l2 中作为第二个元素，列表 1 的引用计数变为 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># l1与l2之间有相互引用</span></span><br><span class="line"><span class="comment"># l1 = [&#x27;xxx&#x27; 的内存地址,列表 2 的内存地址]</span></span><br><span class="line"><span class="comment"># l2 = [&#x27;yyy&#x27; 的内存地址,列表 1 的内存地址]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1</span><br><span class="line">[<span class="string">&#x27;xxx&#x27;</span>, [<span class="string">&#x27;yyy&#x27;</span>, [...]]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l2</span><br><span class="line">[<span class="string">&#x27;yyy&#x27;</span>, [<span class="string">&#x27;xxx&#x27;</span>, [...]]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1[<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line"><span class="string">&#x27;xxx&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>循环引用会导致：值不再被任何名字关联，但是值的引用计数并不会为0，应该被回收但不能被回收，什么意思呢？试想一下，请看如下操作</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Copy&gt;&gt;&gt; <span class="keyword">del</span> l1 <span class="comment"># 列表1的引用计数减1，列表1的引用计数变为1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> l2 <span class="comment"># 列表2的引用计数减1，列表2的引用计数变为1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> l1 <span class="comment"># 列表 1 的引用计数减 1，列表 1 的引用计数变为 1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> l2 <span class="comment"># 列表 2 的引用计数减 1，列表 2 的引用计数变为 1</span></span><br></pre></td></tr></table></figure>
 
-<p>此时，只剩下列表1与列表2之间的相互引用，两个列表的引用计数均不为0，但两个列表不再被任何其他对象关联，没有任何人可以再引用到它们，所以它俩占用内存空间应该被回收，但由于相互引用的存在，每一个对象的引用计数都不为0，因此这些对象所占用的内存永远不会被释放，所以循环引用是致命的，这与手动进行内存管理所产生的内存泄露毫无区别。<br>所以Python引入了“标记-清除” 与“分代回收”来分别解决引用计数的循环引用与效率低的问题</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215837794-218273111.jpg"></p>
+<p>此时，只剩下列表 1 与列表 2 之间的相互引用，两个列表的引用计数均不为 0，但两个列表不再被任何其他对象关联，没有任何人可以再引用到它们，所以它俩占用内存空间应该被回收，但由于相互引用的存在，每一个对象的引用计数都不为 0，因此这些对象所占用的内存永远不会被释放，所以循环引用是致命的，这与手动进行内存管理所产生的内存泄露毫无区别。<br>所以 Python 引入了<code>标记-清除</code> 与<code>分代回收</code>来分别解决引用计数的循环引用与效率低的问题</p>
 <h3 id="4-2-1-标记-清除"><a href="#4-2-1-标记-清除" class="headerlink" title="4-2-1 标记-清除"></a>4-2-1 标记-清除</h3><p>容器对象（比如：list，set，dict，class，instance）都可以包含对其他对象的引用，所以都可能产生循环引用。而“标记-清除”计数就是为了解决循环引用的问题。</p>
 <p>在了解标记清除算法前，我们需要明确一点，关于变量的存储，内存中有两块区域：堆区与栈区，在定义变量时，变量名与值内存地址的关联关系存放于栈区，变量值存放于堆区，内存管理回收的则是堆区的内容，详解如下图,</p>
-<p>定义了两个变量x = 10、y = 20</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215856719-1826836842.jpg"></p>
-<p>当我们执行x=y时，内存中的栈区与堆区变化如下</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215912601-416250309.jpg"></p>
+<p>定义了两个变量 x = 10、y = 20</p>
+<p><img src="/Users/creambluea/Blog/source/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A41.jpg"></p>
+<p>当我们执行 x=y 时，内存中的栈区与堆区变化如下</p>
+<p><img src="/Users/creambluea/Blog/source/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A42.jpg"></p>
 <p>标记/清除算法的做法是当应用程序可用的内存空间被耗尽的时，就会停止整个程序，然后进行两项工作，第一项则是标记，第二项则是清除</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Copy<span class="comment">#1、标记</span></span><br><span class="line">标记的过程其实就是，遍历所有的GC Roots对象(栈区中的所有内容或者线程都可以作为GC Roots对象），然后将所有GC Roots的对象可以直接或间接访问到的对象标记为存活的对象，其余的均为非存活对象，应该被清除。</span><br><span class="line"></span><br><span class="line"><span class="comment">#2、清除</span></span><br><span class="line">清除的过程将遍历堆中所有的对象，将没有标记的对象全部清除掉。</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、标记</span><br><span class="line">标记的过程其实就是，遍历所有的GC Roots对象(栈区中的所有内容或者线程都可以作为GC Roots对象），然后将所有GC Roots的对象可以直接或间接访问到的对象标记为存活的对象，其余的均为非存活对象，应该被清除。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、清除</span><br><span class="line">清除的过程将遍历堆中所有的对象，将没有标记的对象全部清除掉。</span><br></pre></td></tr></table></figure>
 
-<p>直接引用指的是从栈区出发直接引用到的内存地址，间接引用指的是从栈区出发引用到堆区后再进一步引用到的内存地址，以我们之前的两个列表l1与l2为例画出如下图像</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215926373-866526388.jpg"></p>
-<p>当我们同时删除l1与l2时，会清理到栈区中l1与l2的内容</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009215957315-1927029520.jpg"></p>
+<p>直接引用指的是从栈区出发直接引用到的内存地址，间接引用指的是从栈区出发引用到堆区后再进一步引用到的内存地址，以我们之前的两个列表 l1 与 l2 为例画出如下图像</p>
+<p><img src="/Users/creambluea/Blog/source/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A43.jpg"></p>
+<p>当我们同时删除 l1 与 l2 时，会清理到栈区中 l1 与 l2 的内容</p>
+<p><img src="/Users/creambluea/Blog/source/images/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A44.jpg"></p>
 <p>这样在启用标记清除算法时，发现栈区内不再有l1与l2（只剩下堆区内二者的相互引用），于是列表1与列表2都没有被标记为存活，二者会被清理掉，这样就解决了循环引用带来的内存泄漏问题。</p>
-<h3 id="4-2-2-分代回收"><a href="#4-2-2-分代回收" class="headerlink" title="4.2.2 分代回收"></a>4.2.2 分代回收</h3><p>背景：</p>
-<p>基于引用计数的回收机制，每次回收内存，都需要把所有对象的引用计数都遍历一遍，这是非常消耗时间的，于是引入了分代回收来提高回收效率，分代回收采用的是用“空间换时间”的策略。</p>
-<p><strong>分代：</strong></p>
-<p>分代回收的核心思想是：在历经多次扫描的情况下，都没有被回收的变量，gc机制就会认为，该变量是常用变量，gc对其扫描的频率会降低，具体实现原理如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Copy分代指的是根据存活时间来为变量划分不同等级（也就是不同的代）</span><br><span class="line"></span><br><span class="line">新定义的变量，放到新生代这个等级中，假设每隔<span class="number">1</span>分钟扫描新生代一次，如果发现变量依然被引用，那么该对象的权重（权重本质就是个整数）加一，当变量的权重大于某个设定得值（假设为<span class="number">3</span>），会将它移动到更高一级的青春代，青春代的gc扫描的频率低于新生代（扫描时间间隔更长），假设<span class="number">5</span>分钟扫描青春代一次，这样每次gc需要扫描的变量的总个数就变少了，节省了扫描的总时间，接下来，青春代中的对象，也会以同样的方式被移动到老年代中。也就是等级（代）越高，被垃圾回收机制扫描的频率越低</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-2-分代回收"><a href="#4-2-2-分代回收" class="headerlink" title="4-2-2 分代回收"></a>4-2-2 分代回收</h3><h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><ul>
+<li>  基于引用计数的回收机制，每次回收内存，都需要把所有对象的引用计数都遍历一遍，这是非常消耗时间的，于是引入了分代回收来提高回收效率，分代回收采用的是用“空间换时间”的策略。</li>
+</ul>
+<h4 id="分代"><a href="#分代" class="headerlink" title="分代"></a>分代</h4><ul>
+<li>  分代回收的核心思想是：在历经多次扫描的情况下，都没有被回收的变量，gc 机制就会认为，该变量是常用变量，gc 对其扫描的频率会降低</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">分代指的是根据存活时间来为变量划分不同等级（也就是不同的代）</span><br><span class="line"></span><br><span class="line">新定义的变量，放到新生代这个等级中，假设每隔 <span class="number">1</span> 分钟扫描新生代一次，如果发现变量依然被引用，那么该对象的权重（权重本质就是个整数）加一，当变量的权重大于某个设定得值（假设为 <span class="number">3</span> ），会将它移动到更高一级的青春代，青春代的 gc 扫描的频率低于新生代（扫描时间间隔更长），假设 <span class="number">5</span> 分钟扫描青春代一次，这样每次 gc 需要扫描的变量的总个数就变少了，节省了扫描的总时间，接下来，青春代中的对象，也会以同样的方式被移动到老年代中。也就是等级（代）越高，被垃圾回收机制扫描的频率越低</span><br></pre></td></tr></table></figure>
 
-<p><strong>回收：</strong></p>
-<p>回收依然是使用引用计数作为回收的依据</p>
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009220013153-861260195.png"></p>
-<p>虽然分代回收可以起到提升效率的效果，但也存在一定的缺点：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Copy<span class="comment">#例如一个变量刚刚从新生代移入青春代，该变量的绑定关系就解除了，该变量应该被回收，但青春代的扫描频率低于新生代，所以该变量的回收就会被延迟。</span></span><br></pre></td></tr></table></figure>
+<h4 id="回收"><a href="#回收" class="headerlink" title="回收"></a>回收</h4><ul>
+<li>  回收依然是使用引用计数作为回收的依据</li>
+</ul>
+<p><img src="/Users/creambluea/Blog/source/images/%E5%88%86%E4%BB%A3%E5%9B%9E%E6%94%B6.png"></p>
+<p>虽然分代回收可以起到提升效率的效果，但也存在一定的缺点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如一个变量刚刚从新生代移入青春代，该变量的绑定关系就解除了，该变量应该被回收，但青春代的扫描频率低于新生代，所以该变量的回收就会被延迟。</span><br></pre></td></tr></table></figure>
 
         </div>
 
