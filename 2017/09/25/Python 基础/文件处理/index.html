@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>文件处理 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">文件处理</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2017-September-25&nbsp;&nbsp;20:41:05</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Python/">Python</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><ul>
+<li>  应用程序运行过程中产生的数据最先都是存放于内存中的，若想永久保存下来，必须要保存于硬盘中。应用程序若想操作硬件必须通过操作系统，而文件就是操作系统提供给应用程序来操作硬盘的虚拟概念，用户或应用程序对文件的操作，就是向操作系统发起调用，然后由操作系统完成对硬盘的具体操作。</li>
+</ul>
+<h2 id="二、文件操作的基本流程"><a href="#二、文件操作的基本流程" class="headerlink" title="二、文件操作的基本流程"></a>二、文件操作的基本流程</h2><h3 id="2-1-基本流程"><a href="#2-1-基本流程" class="headerlink" title="2-1 基本流程"></a>2-1 基本流程</h3><ul>
+<li>  有了文件的概念，我们无需再去考虑操作硬盘的细节，只需要关注操作文件的流程即可</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 打开文件，由应用程序向操作系统发起系统调用<span class="built_in">open</span>(...)，操作系统打开该文件，对应一块硬盘空间，并返回一个文件对象赋值给一个变量f</span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)  <span class="comment"># 默认打开模式就为r</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 调用文件对象下的读/写方法，会被操作系统转换为读/写硬盘的操作</span><br><span class="line">data=f.read()</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 向操作系统发起关闭文件的请求，回收系统资源</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009223211923-1659842006.jpg"></p>
+<h3 id="2-2-资源回收与-with-上下文管理"><a href="#2-2-资源回收与-with-上下文管理" class="headerlink" title="2-2 资源回收与 with 上下文管理"></a>2-2 资源回收与 with 上下文管理</h3><ul>
+<li>打开一个文件包含两部分资源<ol>
+<li>  应用程序的变量 <code>f</code> </li>
+<li>  操作系统打开的文件</li>
+</ol>
+</li>
+<li>  在操作完毕一个文件时，必须把与该文件的这两部分资源全部回收</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> f.close()  <span class="comment"># 回收操作系统打开的文件资源</span></span><br><span class="line"><span class="number">2.</span> <span class="keyword">del</span> f  <span class="comment"># 回收应用程序级的变量</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  其中 <code>del f</code> 一定要发生在 <code>f.close()</code> 之后，否则就会导致操作系统打开的文件无法关闭，白白占用资源，而python自动的垃圾回收机制决定了我们无需考虑 <code>del f</code>，这就要求我们，在操作完毕文件后，一定要记住 <code>f.close()</code>，虽然我们如此强调，但是大多数读者还是会不由自主地忘记 <code>f.close()</code>，考虑到这一点，Python 提供了 <code>with</code> 关键字来帮我们管理上下文</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、在执行完子代码块后，<span class="keyword">with</span> 会自动执行f.close()</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">		<span class="keyword">pass</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、可用用with同时打开多个文件，用逗号分隔开即可</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> read_f,<span class="built_in">open</span>(<span class="string">&#x27;b.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> write_f:  </span><br><span class="line">		data = read_f.read()</span><br><span class="line">		write_f.write(data)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-指定操作文本文件的字符编码"><a href="#2-3-指定操作文本文件的字符编码" class="headerlink" title="2-3 指定操作文本文件的字符编码"></a>2-3 指定操作文本文件的字符编码</h3><ul>
+<li><p>  <code>f = open(...)</code> 是由操作系统打开文件，如果打开的是文本文件，会涉及到字符编码问题，如果没有为 <code>open</code> 指定编码，那么打开文本文件的默认编码很明显是操作系统说了算了，操作系统会用自己的默认编码去打开文件，在 Windows 下是 <code>GBK</code>，在 Linux 下是 <code>UTF-8</code>。</p>
+</li>
+<li><p>  若要保证不乱码，文件以什么方式存的，就要以什么方式打开。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、文件的操作模式"><a href="#三、文件的操作模式" class="headerlink" title="三、文件的操作模式"></a>三、文件的操作模式</h2><h3 id="3-1-控制文件读写操作的模式"><a href="#3-1-控制文件读写操作的模式" class="headerlink" title="3-1 控制文件读写操作的模式"></a>3-1 控制文件读写操作的模式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(默认的)：只读</span><br><span class="line">w：只写</span><br><span class="line">a：只追加写</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-1-r-模式的使用"><a href="#3-1-1-r-模式的使用" class="headerlink" title="3-1-1 r 模式的使用"></a>3-1-1 r 模式的使用</h4><ul>
+<li>  r 只读模式: 在文件不存在时则报错,文件存在文件内指针直接跳到文件开头</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    res=f.read() <span class="comment"># 会将文件的内容由硬盘全部读入内存，赋值给res</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">用户认证功能</span><br><span class="line">inp_name=<span class="built_in">input</span>(<span class="string">&#x27;请输入你的名字: &#x27;</span>).strip()</span><br><span class="line">inp_pwd=<span class="built_in">input</span>(<span class="string">&#x27;请输入你的密码: &#x27;</span>).strip()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">r&#x27;db.txt&#x27;</span>,mode=<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">         <span class="comment"># 把用户输入的名字与密码与读出内容做比对</span></span><br><span class="line">            u,p=line.strip(<span class="string">&#x27;\n&#x27;</span>).split(<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> inp_name == u <span class="keyword">and</span> inp_pwd == p:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;登录成功&#x27;</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;账号名或者密码错误&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-2-w-模式的使用"><a href="#3-1-2-w-模式的使用" class="headerlink" title="3-1-2 w 模式的使用"></a>3-1-2 w 模式的使用</h4><ul>
+<li>  w 只写模式: 在文件不存在时会创建空文档,文件存在会清空文件,文件指针跑到文件开头</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;b.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&#x27;你好\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;我好\n&#x27;</span>) </span><br><span class="line">    f.write(<span class="string">&#x27;大家好\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;111\n222\n333\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">强调：</span><br><span class="line"><span class="number">1.</span> 在文件不关闭的情况下,连续的写入，后写的内容一定跟在前写内容的后面</span><br><span class="line"><span class="number">2.</span> 如果重新以 w 模式打开文件，则会清空文件内容</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-3-a-模式的使用"><a href="#3-1-3-a-模式的使用" class="headerlink" title="3-1-3 a 模式的使用"></a>3-1-3 a 模式的使用</h4><ul>
+<li>  a 只追加写模式: 在文件不存在时会创建空文档,文件存在会将文件指针直接移动到文件末尾</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;c.txt&#x27;</span>,mode=<span class="string">&#x27;a&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">     f.write(<span class="string">&#x27;44444\n&#x27;</span>)</span><br><span class="line">     f.write(<span class="string">&#x27;55555\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">强调 w 模式与 a 模式的异同：</span><br><span class="line"><span class="number">1.</span> 相同点：在打开的文件不关闭的情况下，连续的写入，新写的内容总会跟在前写的内容之后</span><br><span class="line"><span class="number">2.</span> 不同点：以 a 模式重新打开文件，不会清空原文件内容，会将文件指针直接移动到文件末尾，新写的内容永远写在最后</span><br><span class="line"></span><br><span class="line">注册功能:</span><br><span class="line">name=<span class="built_in">input</span>(<span class="string">&#x27;username&gt;&gt;&gt;: &#x27;</span>).strip()</span><br><span class="line">pwd=<span class="built_in">input</span>(<span class="string">&#x27;password&gt;&gt;&gt;: &#x27;</span>).strip()</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;db1.txt&#x27;</span>,mode=<span class="string">&#x27;a&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    info=<span class="string">&#x27;%s:%s\n&#x27;</span> %(name,pwd)</span><br><span class="line">    f.write(info)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-4-模式的使用"><a href="#3-1-4-模式的使用" class="headerlink" title="3-1-4 + 模式的使用"></a>3-1-4 + 模式的使用</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r+ w+ a+ :可读可写</span><br><span class="line">在平时工作中，我们只单纯使用 r/w/a，要么只读，要么只写，一般不用可读可写的模式</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-控制文件读写内容的模式"><a href="#3-2-控制文件读写内容的模式" class="headerlink" title="3-2 控制文件读写内容的模式"></a>3-2 控制文件读写内容的模式</h3><ul>
+<li>  t、b 模式均不能单独使用,必须与 r/w/a 之一结合使用</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">大前提: t、b 模式均不能单独使用,必须与 r/w/a 之一结合使用</span><br><span class="line">  t（默认的）：文本模式</span><br><span class="line">	<span class="number">1.</span> 读写文件都是以字符串为单位的</span><br><span class="line">	<span class="number">2.</span> 只能针对文本文件</span><br><span class="line">  <span class="number">3.</span> 必须指定 encoding 参数</span><br><span class="line">b：二进制模式:</span><br><span class="line">  <span class="number">1.</span>读写文件都是以 <span class="built_in">bytes</span> 二进制为单位的</span><br><span class="line">  <span class="number">2.</span> 可以针对所有文件</span><br><span class="line">  <span class="number">3.</span> 一定不能指定 encoding 参数</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-1-t-模式的使用"><a href="#3-2-1-t-模式的使用" class="headerlink" title="3-2-1 t 模式的使用"></a>3-2-1 t 模式的使用</h4><ul>
+<li>  t 模式：如果我们指定的文件打开模式为 r/w/a，其实默认就是 rt/wt/at</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;rt&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    res=f.read() </span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(res)) <span class="comment"># 输出结果为：&lt;class &#x27;str&#x27;&gt;</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;wt&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s=<span class="string">&#x27;abc&#x27;</span></span><br><span class="line">    f.write(s) <span class="comment"># 写入的也必须是字符串类型</span></span><br><span class="line">    </span><br><span class="line">强调：</span><br><span class="line">t 模式只能用于操作文本文件,无论读写，都应该以字符串为单位，而存取硬盘本质都是二进制的形式，当指定 t 模式时，内部帮我们做了编码与解码</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-b-模式的使用"><a href="#3-2-2-b-模式的使用" class="headerlink" title="3-2-2 b 模式的使用"></a>3-2-2 b 模式的使用</h4><ul>
+<li>  b: 读写都是以二进制位单位</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;1.mp4&#x27;</span>,mode=<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data=f.read()</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(data)) <span class="comment"># 输出结果为：&lt;class &#x27;bytes&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">	 	msg=<span class="string">&quot;你好&quot;</span></span><br><span class="line">    res=msg.encode(<span class="string">&#x27;utf-8&#x27;</span>) <span class="comment"># res为bytes类型</span></span><br><span class="line">    f.write(res) <span class="comment"># 在b模式下写入文件的只能是bytes类型</span></span><br><span class="line"></span><br><span class="line">强调：b 模式对比 t 模式</span><br><span class="line"><span class="number">1.</span> 在操作纯文本文件方面 t 模式帮我们省去了编码与解码的环节，b 模式则需要手动编码与解码，所以此时 t 模式更为方便</span><br><span class="line"><span class="number">2.</span> 针对非文本文件（如图片、视频、音频等）只能使用 b 模式</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、操作文件的方法"><a href="#四、操作文件的方法" class="headerlink" title="四、操作文件的方法"></a>四、操作文件的方法</h2><h3 id="4-1-重点"><a href="#4-1-重点" class="headerlink" title="4-1 重点"></a>4-1 重点</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">读操作</span><br><span class="line">f.read()  <span class="comment"># 读取所有内容,执行完该操作后，文件指针会移动到文件末尾</span></span><br><span class="line">f.readline()  <span class="comment"># 读取一行内容,光标移动到第二行首部</span></span><br><span class="line">f.readlines()  <span class="comment"># 读取每一行内容,存放于列表中</span></span><br><span class="line"></span><br><span class="line">强调：</span><br><span class="line">f.read()与f.readlines()都是将内容一次性读入内容，如果内容过大会导致内存溢出，若还想将内容全读入内存，则必须分多次读入，有两种实现方式：</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式一</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;rt&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="built_in">print</span>(line) <span class="comment"># 同一时刻只读入一行内容到内存中</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;1.mp4&#x27;</span>,mode=<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        data=f.read(<span class="number">1024</span>) <span class="comment"># 同一时刻只读入1024个Bytes到内存中</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(data) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="built_in">print</span>(data)</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 写操作</span></span><br><span class="line">f.write(<span class="string">&#x27;1111\n222\n&#x27;</span>)  <span class="comment"># 针对文本模式的写,需要自己写换行符</span></span><br><span class="line">f.write(<span class="string">&#x27;1111\n222\n&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))  <span class="comment"># 针对b模式的写,需要自己写换行符</span></span><br><span class="line">f.writelines([<span class="string">&#x27;333\n&#x27;</span>,<span class="string">&#x27;444\n&#x27;</span>])  <span class="comment"># 文件模式</span></span><br><span class="line">f.writelines([<span class="built_in">bytes</span>(<span class="string">&#x27;333\n&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>),<span class="string">&#x27;444\n&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>)]) <span class="comment">#b模式</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-了解"><a href="#4-2-了解" class="headerlink" title="4-2 了解"></a>4-2 了解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f.readable()  <span class="comment"># 文件是否可读</span></span><br><span class="line">f.writable()  <span class="comment"># 文件是否可读</span></span><br><span class="line">f.closed  <span class="comment"># 文件是否关闭</span></span><br><span class="line">f.encoding  <span class="comment"># 如果文件打开模式为b,则没有该属性</span></span><br><span class="line">f.flush()  <span class="comment"># 立刻将文件内容从内存刷到硬盘</span></span><br><span class="line">f.name</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、主动控制文件内指针移动"><a href="#五、主动控制文件内指针移动" class="headerlink" title="五、主动控制文件内指针移动"></a>五、主动控制文件内指针移动</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">大前提:文件内指针的移动都是Bytes为单位的,唯一例外的是t模式下的read(n),n以字符为单位</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;rt&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">     data=f.read(<span class="number">3</span>) <span class="comment"># 读取3个字符</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">     data=f.read(<span class="number">3</span>) <span class="comment"># 读取3个Bytes</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">之前文件内指针的移动都是由读/写操作而被动触发的，若想读取文件某一特定位置的数据，则则需要用 f.seek 方法主动控制文件内指针的移动，详细用法如下：</span><br><span class="line">f.seek(指针移动的字节数,模式控制): </span><br><span class="line">模式控制:</span><br><span class="line"><span class="number">0</span>: 默认的模式,该模式代表指针移动的字节数是以文件开头为参照的</span><br><span class="line"><span class="number">1</span>: 该模式代表指针移动的字节数是以当前所在的位置为参照的</span><br><span class="line"><span class="number">2</span>: 该模式代表指针移动的字节数是以文件末尾的位置为参照的</span><br><span class="line">  </span><br><span class="line">强调:</span><br><span class="line">其中 <span class="number">0</span> 模式可以在 t 或者 b 模式使用,而 <span class="number">1</span> 跟 <span class="number">2</span> 模式只能在 b 模式下用</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-1-0-模式详解"><a href="#5-1-0-模式详解" class="headerlink" title="5-1  0 模式详解"></a>5-1  0 模式详解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a.txt 用 utf-<span class="number">8</span> 编码，内容如下（abc 各占 <span class="number">1</span> 个字节，中文“你好”各占 <span class="number">3</span> 个字节）</span><br><span class="line">abc你好</span><br><span class="line"></span><br><span class="line"><span class="number">0</span> 模式的使用</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>, mode=<span class="string">&#x27;rt&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.seek(<span class="number">3</span>,<span class="number">0</span>)     <span class="comment"># 参照文件开头移动了3个字节</span></span><br><span class="line">    <span class="built_in">print</span>(f.tell()) <span class="comment"># 查看当前文件指针距离文件开头的位置，输出结果为3</span></span><br><span class="line">    <span class="built_in">print</span>(f.read()) <span class="comment"># 从第3个字节的位置读到文件末尾，输出结果为：你好</span></span><br><span class="line">    <span class="comment"># 注意：由于在t模式下，会将读取的内容自动解码，所以必须保证读取的内容是一个完整中文数据，否则解码失败</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.seek(<span class="number">6</span>,<span class="number">0</span>)</span><br><span class="line">    <span class="built_in">print</span>(f.read().decode(<span class="string">&#x27;utf-8&#x27;</span>)) <span class="comment">#输出结果为: 好</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-1-模式详解"><a href="#5-2-1-模式详解" class="headerlink" title="5-2  1 模式详解"></a>5-2  1 模式详解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 模式的使用</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.seek(<span class="number">3</span>,<span class="number">1</span>) <span class="comment"># 从当前位置往后移动3个字节，而此时的当前位置就是文件开头</span></span><br><span class="line">    <span class="built_in">print</span>(f.tell()) <span class="comment"># 输出结果为：3</span></span><br><span class="line">    f.seek(<span class="number">4</span>,<span class="number">1</span>)     <span class="comment"># 从当前位置往后移动4个字节，而此时的当前位置为3</span></span><br><span class="line">    <span class="built_in">print</span>(f.tell()) <span class="comment"># 输出结果为：7</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-2-模式详解"><a href="#5-3-2-模式详解" class="headerlink" title="5-3 2 模式详解"></a>5-3 2 模式详解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a.txt用utf-<span class="number">8</span>编码，内容如下（abc各占<span class="number">1</span>个字节，中文“你好”各占<span class="number">3</span>个字节）</span><br><span class="line">abc你好</span><br><span class="line"></span><br><span class="line"><span class="number">2</span> 模式的使用</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.seek(<span class="number">0</span>,<span class="number">2</span>)  <span class="comment"># 参照文件末尾移动0个字节， 即直接跳到文件末尾</span></span><br><span class="line">    <span class="built_in">print</span>(f.tell())  <span class="comment"># 输出结果为：9</span></span><br><span class="line">    f.seek(-<span class="number">3</span>,<span class="number">2</span>)     <span class="comment"># 参照文件末尾往前移动了3个字节</span></span><br><span class="line">    <span class="built_in">print</span>(f.read().decode(<span class="string">&#x27;utf-8&#x27;</span>))  <span class="comment"># 输出结果为：好</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="六、文件的修改"><a href="#六、文件的修改" class="headerlink" title="六、文件的修改"></a>六、文件的修改</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">文件a.txt内容如下</span><br><span class="line">张一蛋     山东    <span class="number">179</span>    <span class="number">49</span>    <span class="number">12344234523</span></span><br><span class="line">李二蛋     河北    <span class="number">163</span>    <span class="number">57</span>    <span class="number">13913453521</span></span><br><span class="line">王全蛋     山西    <span class="number">153</span>    <span class="number">62</span>    <span class="number">18651433422</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行操作</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;r+t&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.seek(<span class="number">9</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;&lt;妇女主任&gt;&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 文件修改后的内容如下</span></span><br><span class="line">张一蛋&lt;妇女主任&gt; <span class="number">179</span>    <span class="number">49</span>    <span class="number">12344234523</span></span><br><span class="line">李二蛋     河北    <span class="number">163</span>    <span class="number">57</span>    <span class="number">13913453521</span></span><br><span class="line">王全蛋     山西    <span class="number">153</span>    <span class="number">62</span>    <span class="number">18651433422</span></span><br><span class="line"></span><br><span class="line">强调：</span><br><span class="line"><span class="number">1.</span> 硬盘空间是无法修改的,硬盘中数据的更新都是用新内容覆盖旧内容</span><br><span class="line"><span class="number">2.</span> 内存中的数据是可以修改的</span><br></pre></td></tr></table></figure>
+
+<h5 id="文件对应的是硬盘空间-硬盘不能修改-对应着的文件本质也不能修改-那我们看到文件的内容可以修改-是如何实现的呢"><a href="#文件对应的是硬盘空间-硬盘不能修改-对应着的文件本质也不能修改-那我们看到文件的内容可以修改-是如何实现的呢" class="headerlink" title="文件对应的是硬盘空间,硬盘不能修改,对应着的文件本质也不能修改,那我们看到文件的内容可以修改,是如何实现的呢?"></a>文件对应的是硬盘空间,硬盘不能修改,对应着的文件本质也不能修改,那我们看到文件的内容可以修改,是如何实现的呢?</h5><ul>
+<li>大致的思路是将硬盘中文件内容读入内存,然后在内存中修改完毕后再覆盖回硬盘<br>  具体的实现方式分为两种:    </li>
+</ul>
+<h3 id="6-1-文件修改方式一"><a href="#6-1-文件修改方式一" class="headerlink" title="6-1 文件修改方式一"></a>6-1 文件修改方式一</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">实现思路：将文件内容发一次性全部读入内存,然后在内存中修改完毕后再覆盖写回原文件</span><br><span class="line"><span class="comment"># 优点: 在文件修改过程中同一份数据只有一份</span></span><br><span class="line"><span class="comment"># 缺点: 会过多地占用内存</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;db.txt&#x27;</span>, mode=<span class="string">&#x27;rt&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data=f.read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;db.txt&#x27;</span>, mode=<span class="string">&#x27;wt&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(data.replace(<span class="string">&#x27;kevin&#x27;</span>,<span class="string">&#x27;SB&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-文件修改方式二"><a href="#6-2-文件修改方式二" class="headerlink" title="6-2 文件修改方式二"></a>6-2 文件修改方式二</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">实现思路：以读的方式打开原文件,以写的方式打开一个临时文件,一行行读取原文件内容,修改完后写入临时文件...,删掉原文件,将临时文件重命名原文件名</span><br><span class="line"><span class="comment"># 优点: 不会占用过多的内存</span></span><br><span class="line"><span class="comment"># 缺点: 在文件修改过程中同一份数据存了两份</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;db.txt&#x27;</span>, mode=<span class="string">&#x27;rt&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> read_f,\</span><br><span class="line">        <span class="built_in">open</span>(<span class="string">&#x27;.db.txt.swap&#x27;</span>, mode=<span class="string">&#x27;wt&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> wrife_f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> read_f:</span><br><span class="line">        wrife_f.write(line.replace(<span class="string">&#x27;SB&#x27;</span>,<span class="string">&#x27;kevin&#x27;</span>))</span><br><span class="line"></span><br><span class="line">os.remove(<span class="string">&#x27;db.txt&#x27;</span>)</span><br><span class="line">os.rename(<span class="string">&#x27;.db.txt.swap&#x27;</span>,<span class="string">&#x27;db.txt&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Python-%E5%9F%BA%E7%A1%80/"># Python 基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017/09/27/Python%20%E5%9F%BA%E7%A1%80/%E5%87%BD%E6%95%B0/">函数</a>
+            
+            
+            <a class="next" rel="next" href="/2017/09/23/Python%20%E5%9F%BA%E7%A1%80/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/">字符编码</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

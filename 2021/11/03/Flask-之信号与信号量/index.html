@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>Flask 之信号与信号量 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Flask 之信号与信号量</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-November-3&nbsp;&nbsp;21:59:49</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>Flask 提供了信号(Signals)功能，是一种消息分发机制。类似于钩子(Hooks)。使用信号功能可以降低程序的耦合，分解复杂的业务模型。例如在更新了产品数据后，可以发送一个信号。当有需要对产品数据进行处理的功能时，就可以捕获信号进行处理。比如要建立产品缓存，或是更新搜索索引等。</p>
+<p><strong>定义信号</strong></p>
+<p>Flask 信号功能使用了 Blinker 模块，所以需要先安装 Blinker 模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip ``install` `blinker</span><br></pre></td></tr></table></figure>
+
+<p>定义一个信号:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from` `blinker ``import` `Namespace``product_saved ``=` `Namespace()</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用 Flask 包装的 singles 对象:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from` `flask.singles ``import` `Namespace</span><br></pre></td></tr></table></figure>
+
+<p><strong>发送信号</strong></p>
+<p>发送信号需要带上 app 实例方法，示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">product_saved.send(app, product``=``product)</span><br></pre></td></tr></table></figure>
+
+<p>app 后面可以添加要传递的参数，但必须以 name=value 的格式，不支持使用单个变量名的方式。</p>
+<p><strong>收接信号</strong></p>
+<p>接收信号可以使用 connect_via 装饰器函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@product_saved``.connect_via(app)``def` `updateCache(app, product):`` ``print``(product)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Flask 中有以下核心信号:</strong></p>
+<p><strong>1.flask.template_rendered</strong></p>
+<p>这个信号发送于一个模板被渲染成功后。信号传递的template是模板的实例，context是环境对象是一个字典。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `log_template_renders(sender, template, context, ``*``*``extra):`` ``sender.logger.debug(``&#x27;Rendering template &quot;%s&quot; with context %s&#x27;``,``      ``template.name ``or` `&#x27;string template&#x27;``,``      ``context)``from` `flask ``import` `template_rendered``template_rendered.connect(log_template_renders, app)</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.flask.request_started</strong></p>
+<p>这个信号发送于请求开始之前，且请求环境设置完成之后。因为请求环境已经绑定， 所以订阅者可以用标准的全局代理，如 request 来操作请求。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `log_request(sender, ``*``*``extra):`` ``sender.logger.debug(``&#x27;Request context is set up&#x27;``)``from` `flask ``import` `request_started``request_started.connect(log_request, app)``flask.request_finished</span><br></pre></td></tr></table></figure>
+
+<p>这个信号发送于向客户端发送响应之前。信号传递的response为将要发送的响应。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `log_response(sender, response, ``*``*``extra):`` ``sender.logger.debug(``&#x27;Request context is about to close down. &#x27;``      ``&#x27;Response: %s&#x27;``, response)``from` `flask ``import` `request_finished``request_finished.connect(log_response, app)``flask.got_request_exception</span><br></pre></td></tr></table></figure>
+
+<p>这个信号发送于请求进行中发生异常的时候。它的发送 早于 标准异常处理介于。 在调试模式下，虽然没有异常处理，但发生异常时也发送这个信号。信号传递的exception是异常对象。</p>
+<p>订阅示例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `log_exception(sender, exception, ``*``*``extra):`` ``sender.logger.debug(``&#x27;Got exception during processing: %s&#x27;``, exception)``from` `flask ``import` `got_request_exception``got_request_exception.connect(log_exception, app)``flask.request_tearing_down</span><br></pre></td></tr></table></figure>
+
+<p>这个信号发送于请求崩溃的时候，不管是否引发异常。目前，侦听此信号的函数在一般 崩溃处理器后调用，但是没有什么东西可用。</p>
+<p>订阅示例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `close_db_connection(sender, ``*``*``extra):`` ``session.close()``from` `flask ``import` `appcontext_tearing_down``request_tearing_down.connect(close_db_connection, app)</span><br></pre></td></tr></table></figure>
+
+<p>在 Flask 版本 0.9 中，这还会传递一个exc关键字参数，如果这个参数存在的话。 这个参数是引发崩溃的异常的引用。</p>
+<p><strong>3.flask.appcontext_tearing_down</strong></p>
+<p>当应用环境崩溃时发送这个信号。这个信号总是会发送，甚至是因为一个异常引发的 崩溃。侦听这个信号的函数会在常规崩溃处理器后被调用，但是你无法回馈这个信号。</p>
+<p>订阅示例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `close_db_connection(sender, ``*``*``extra):`` ``session.close()``from` `flask ``import` `request_tearing_down``appcontext_tearing_down.connect(close_db_connection, app)</span><br></pre></td></tr></table></figure>
+
+<p>这还会传递一个exc关键字参数，如果这个参数存在的话。这个参数是引发崩溃的 异常的引用。</p>
+<p><strong>4.flask.appcontext_pushed</strong></p>
+<p>当一个应用的环境被压入时，应用会发送这个信号。这个信号通常用于在单元测试中 临时钩接信息。例如可以用于改变g对象中现存的资源。</p>
+<p>用法示例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from` `contextlib ``import` `contextmanagerfrom``flask ``import` `appcontext_pushed``@contextmanagerdef` `user_set(app, user):`` ``def` `handler(sender, ``*``*``kwargs):``  ``g.user ``=` `user`` ``with appcontext_pushed.connected_to(handler, app):``  ``yield</span><br></pre></td></tr></table></figure>
+
+<p>在测试代码中这样写:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `test_user_me(``self``):`` ``with user_set(app, ``&#x27;john&#x27;``):``  ``c ``=` `app.test_client()``  ``resp ``=` `c.get(``&#x27;/users/me&#x27;``)``  ``assert` `resp.data ``=``=` `&#x27;username=john&#x27;``New ``in` `version ``0.10``.</span><br></pre></td></tr></table></figure>
+
+<p><strong>5.appcontext_popped</strong></p>
+<p>当一个应用的环境被弹出时，应用会发送这个信号。这个信号通常写成appcontext_tearing_down 信号。</p>
+<p><strong>6.flask.message_flashed</strong></p>
+<p>当应用闪现一个消息时会发出这个信号。message<code>参数是消息内容， </code>category参数是消息类别。</p>
+<p>订阅示例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recorded ``=` `[]``def` `record(sender, message, category, ``*``*``extra):`` ``recorded.append((message, category))``from` `flask ``import` `message_flashed``message_flashed.connect(record, app)</span><br></pre></td></tr></table></figure>
+
+<p>**小结<br>**信号可以让你在一瞬间安全地订阅它们。例如，这些临时的订阅对测试很有帮助。使用信号时，不要让信号订阅者（接收者）发生异常，因为异常会造成程序中断。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/01/12/Golang/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本数据类型</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
