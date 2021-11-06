@@ -226,7 +226,7 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 打开文件，由应用程序向操作系统发起系统调用<span class="built_in">open</span>(...)，操作系统打开该文件，对应一块硬盘空间，并返回一个文件对象赋值给一个变量f</span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)  <span class="comment"># 默认打开模式就为r</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 调用文件对象下的读/写方法，会被操作系统转换为读/写硬盘的操作</span><br><span class="line">data=f.read()</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 向操作系统发起关闭文件的请求，回收系统资源</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img2018.cnblogs.com/blog/1825659/201910/1825659-20191009223211923-1659842006.jpg"></p>
+<p><img src="/Users/creambluea/Blog/source/images/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86.jpg"></p>
 <h3 id="2-2-资源回收与-with-上下文管理"><a href="#2-2-资源回收与-with-上下文管理" class="headerlink" title="2-2 资源回收与 with 上下文管理"></a>2-2 资源回收与 with 上下文管理</h3><ul>
 <li>打开一个文件包含两部分资源<ol>
 <li>  应用程序的变量 <code>f</code> </li>
