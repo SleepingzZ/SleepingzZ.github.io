@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>名称空间与作用域 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">名称空间与作用域</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2017-September-29&nbsp;&nbsp;14:22:05</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Python/">Python</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、名称空间"><a href="#一、名称空间" class="headerlink" title="一、名称空间"></a>一、名称空间</h2><ul>
+<li><p>  名称空间即存放名字与对象映射/绑定关系的地方。对于 <code>x=3</code>，<code>Python</code> 会申请内存空间存放对象 <code>3</code>，然后将名字 <code>x</code> 与 <code>3</code> 的绑定关系存放于名称空间中，<code>del x</code> 表示清除该绑定关系。</p>
+</li>
+<li><p>   在程序执行期间最多会存在三种名称空间</p>
+</li>
+</ul>
+<h3 id="1-1-内建名称空间"><a href="#1-1-内建名称空间" class="headerlink" title="1-1 内建名称空间"></a>1-1 内建名称空间</h3><ul>
+<li>  伴随 <code>Python</code> 解释器的启动/关闭而产生/回收，因而是第一个被加载的名称空间，用来存放一些内置的名字，比如内建函数名</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">max</span></span><br><span class="line">&lt;built-<span class="keyword">in</span> function <span class="built_in">max</span>&gt;  <span class="comment"># built-in 内建</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-全局名称空间"><a href="#1-2-全局名称空间" class="headerlink" title="1-2 全局名称空间"></a>1-2 全局名称空间</h3><p>伴随 <code>Python</code> 文件的开始执行/执行完毕而产生/回收，是第二个被加载的名称空间，文件执行过程中产生的名字都会存放于该名称空间中，如下名字</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys  <span class="comment"># 模块名 sys</span></span><br><span class="line"></span><br><span class="line">x=<span class="number">1</span>  <span class="comment"># 变量名 x</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x == <span class="number">1</span>:</span><br><span class="line">    y=<span class="number">2</span>  <span class="comment"># 变量名 y</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">x</span>):</span>  <span class="comment"># 函数名 foo</span></span><br><span class="line">    y=<span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span>():</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">Class Bar:  <span class="comment"># 类名Bar</span></span><br><span class="line">	<span class="keyword">pass</span>	</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-局部名称空间"><a href="#1-3-局部名称空间" class="headerlink" title="1-3 局部名称空间"></a>1-3 局部名称空间</h3><ul>
+<li>  伴随函数的调用/结束而临时产生/回收，函数的形参、函数内定义的名字都会被存放于该名称空间中</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">x</span>):</span></span><br><span class="line">    y=<span class="number">3</span>  <span class="comment"># 调用函数时，才会执行函数代码，名字 x 和 y 都存放于该函数的局部名称空间中</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  名称空间的加载顺序是：内置名称空间 -&gt; 全局名称空间 -&gt; 局部名称空间，而查找一个名字，必须从三个名称空间之一找到，查找顺序为：局部名称空间 -&gt; 全局名称空间 -&gt; 内置名称空间。</li>
+</ul>
+<h2 id="二、作用域"><a href="#二、作用域" class="headerlink" title="二、作用域"></a>二、作用域</h2><h3 id="2-1-全局作用域与局部作用域"><a href="#2-1-全局作用域与局部作用域" class="headerlink" title="2-1 全局作用域与局部作用域"></a>2-1 全局作用域与局部作用域</h3><ul>
+<li>按照名字作用范围的不同可以将三个名称空间划分为两个区域：<ol>
+<li>  全局作用域: 位于全局名称空间、内建名称空间中的名字属于全局范围，该范围内的名字全局存活（除非被删除，否则在整个文件执行过程中存活）、全局有效（在任意位置都可以使用）</li>
+<li>  局部作用域: 位于局部名称空间中的名字属于局部范围。该范围内的名字临时存活（即在函数调用时临时生成，函数调用结束后就释放）、局部有效（只能在函数内使用）</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-2-作用域与名字查找的优先级"><a href="#2-2-作用域与名字查找的优先级" class="headerlink" title="2-2 作用域与名字查找的优先级"></a>2-2 作用域与名字查找的优先级</h3><ul>
+<li>  在局部作用域查找名字时，起始位置是局部作用域，所以先查找局部名称空间，没有找到，再去全局作用域查找：先查找全局名称空间，没有找到，再查找内置名称空间，最后都没有找到就会抛出异常</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">100</span>  <span class="comment"># 全局作用域的名字 x</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>():</span></span><br><span class="line">    x=<span class="number">300</span>  <span class="comment"># 局部作用域的名字 x</span></span><br><span class="line">    <span class="built_in">print</span>(x)  <span class="comment"># 在局部找 x</span></span><br><span class="line">foo()  <span class="comment"># 结果为 300</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  在全局作用域查找名字时，起始位置便是全局作用域，所以先查找全局名称空间，没有找到，再查找内置名称空间，最后都没有找到就会抛出异常</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">100</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>():</span></span><br><span class="line">    x=<span class="number">300</span>  <span class="comment"># 在函数调用时产生局部作用域的名字 x</span></span><br><span class="line">foo()</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># 在全局找 x,结果为 100</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="提示：可以调用内建函数-locals-和-globals-来分别查看局部作用域和全局作用域的名字，查看的结果都是字典格式。在全局作用域查看到的-locals-的结果等于-globals"><a href="#提示：可以调用内建函数-locals-和-globals-来分别查看局部作用域和全局作用域的名字，查看的结果都是字典格式。在全局作用域查看到的-locals-的结果等于-globals" class="headerlink" title="提示：可以调用内建函数 locals() 和 globals() 来分别查看局部作用域和全局作用域的名字，查看的结果都是字典格式。在全局作用域查看到的 locals() 的结果等于 globals()"></a>提示：可以调用内建函数 <code>locals()</code> 和 <code>globals()</code> 来分别查看局部作用域和全局作用域的名字，查看的结果都是字典格式。在全局作用域查看到的 <code>locals()</code> 的结果等于 <code>globals()</code></h5><ul>
+<li>  <code>Python</code> 支持函数的嵌套定义，在内嵌的函数内查找名字时，会优先查找自己局部作用域的名字，然后由内而外一层层查找外部嵌套函数定义的作用域，没有找到，则查找全局作用域</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span>():</span></span><br><span class="line">    x=<span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>():</span>  <span class="comment"># 函数名 inner 属于 outer 这一层作用域的名字</span></span><br><span class="line">        x=<span class="number">3</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;inner x: %s&#x27;</span> % x)</span><br><span class="line"></span><br><span class="line">    inner()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;outer x: %s&#x27;</span> % x)</span><br><span class="line"></span><br><span class="line">outer() </span><br><span class="line"><span class="comment"># 结果为</span></span><br><span class="line">inner x: <span class="number">3</span></span><br><span class="line">outer x: <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  在函数内，无论嵌套多少层，都可以查看到全局作用域的名字，若要在函数内修改全局名称空间中名字的值，当值为不可变类型时，则需要用到 <code>global</code> 关键字</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>():</span></span><br><span class="line">    <span class="keyword">global</span> x  <span class="comment"># 声明 x 为全局名称空间的名字</span></span><br><span class="line">    x=<span class="number">2</span></span><br><span class="line">foo()</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># 结果为 2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  当实参的值为可变类型时，函数体内对该值的修改将直接反应到原值，</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">num_list=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">nums</span>):</span></span><br><span class="line">    nums.append(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">foo(num_list)</span><br><span class="line"><span class="built_in">print</span>(num_list)</span><br><span class="line"><span class="comment"># 结果为</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  对于嵌套多层的函数，使用 <code>nonlocal</code> 关键字可以将名字声明为来自外部嵌套函数定义的作用域（非全局）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span>  <span class="title">f1</span>():</span></span><br><span class="line">    x=<span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f2</span>():</span></span><br><span class="line">        <span class="keyword">nonlocal</span> x</span><br><span class="line">        x=<span class="number">3</span></span><br><span class="line">    f2()  <span class="comment"># 调用 f2(),修改 f1 作用域中名字 x 的值</span></span><br><span class="line">    <span class="built_in">print</span>(x)  <span class="comment"># 在 f1 作用域查看 x</span></span><br><span class="line"></span><br><span class="line">f1()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p><code>nonlocal x</code> 会从当前函数的外层函数开始一层层去查找名字 <code>x</code>，若是一直到最外层函数都找不到，则会抛出异常。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Python-%E5%9F%BA%E7%A1%80/"># Python 基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017/10/01/Python%20%E5%9F%BA%E7%A1%80/%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0/">函数对象与闭包函数</a>
+            
+            
+            <a class="next" rel="next" href="/2017/09/27/Python%20%E5%9F%BA%E7%A1%80/%E5%87%BD%E6%95%B0/">函数</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
