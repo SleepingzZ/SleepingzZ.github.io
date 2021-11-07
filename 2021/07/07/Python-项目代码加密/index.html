@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>Python 项目代码加密 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Python 项目代码加密</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-July-7&nbsp;&nbsp;19:59:06</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Python/">Python</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、前提"><a href="#一、前提" class="headerlink" title="一、前提"></a>一、前提</h2><ul>
+<li>  <code>Python</code> 是解释型语言，我们写的 <code>Flask</code> 或 <code>Django</code> 项目如果部署，源码可能会泄露，因此我们可以把项目进行打包，来保护源码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">需要用到工具：</span><br><span class="line">		-pyinstaller：把python项目打包成不同平台的可执行文件</span><br><span class="line">  	-nsis：NSIS（Nullsoft Scriptable Install System）是一个开源的 Windows 系统下安装程序制作程序，它提供了安装、卸载、系统设置、文件解压缩等功能。这如其名字所指出的那样，NSIS 是通过它的脚本语言来描述安装程序的行为和逻辑的</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、打包-Flask-项目"><a href="#二、打包-Flask-项目" class="headerlink" title="二、打包 Flask 项目"></a>二、打包 <code>Flask</code> 项目</h2><h3 id="2-1-项目源码"><a href="#2-1-项目源码" class="headerlink" title="2-1 项目源码"></a>2-1 项目源码</h3><ul>
+<li>  目录结构</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/80/v2-cb2e7dc59027dcc505bf21feef199dbf_1440w.jpg" alt="img"></p>
+<h3 id="2-2-下载-pyinstaller"><a href="#2-2-下载-pyinstaller" class="headerlink" title="2-2 下载 pyinstaller"></a>2-2 下载 <code>pyinstaller</code></h3><ul>
+<li>  <code>pip3 install pyinstaller</code></li>
+<li>  参数介绍</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">可选参数</th>
+<th align="center">示例</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>-F</code></td>
+<td align="center"><code>pyinstaller -F demo.py</code></td>
+<td align="center">只在 dist 文件夹中生成一个程序 <code>demo.exe</code> 文件，适用于一个模块没有多依赖 <code>.py</code> 文件</td>
+</tr>
+<tr>
+<td align="center"><code>-D</code></td>
+<td align="center"><code>pyinstaller -D demo.py</code></td>
+<td align="center">默认选项，除了主程序 <code>demo.exe</code> 外，还会在在dist文件夹中生成很多依赖文件，推荐使用这个</td>
+</tr>
+<tr>
+<td align="center"><code>-c</code></td>
+<td align="center"><code>pyinstaller -c demo.py</code></td>
+<td align="center">默认选项，只对 <code>Windows</code> 有效，使用控制台</td>
+</tr>
+<tr>
+<td align="center"><code>-w</code></td>
+<td align="center"><code>pyinstaller -w demo.py</code></td>
+<td align="center">只对 <code>Windows</code> 有效，不使用控制台</td>
+</tr>
+<tr>
+<td align="center"><code>-p</code></td>
+<td align="center"><code>pyinstaller -p D:\project\demo.py</code></td>
+<td align="center">设置导入路径</td>
+</tr>
+<tr>
+<td align="center"><code>-i</code></td>
+<td align="center"><code>pyinstaller -i D:\demo.ico demo.py</code></td>
+<td align="center">给生成的 <code>demo.exe</code> 文件设置一个自定义的图标</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-进入到项目路径下、执行"><a href="#2-3-进入到项目路径下、执行" class="headerlink" title="2-3 进入到项目路径下、执行"></a>2-3 进入到项目路径下、执行</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># run.py 是 flask 项目的执行文件，app.run 所在 py 文件</span></span><br><span class="line"></span><br><span class="line">pyinstaller -D run.py    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以看到项目路径下有</span></span><br><span class="line">  - build 文件夹</span><br><span class="line">  - dist 文件夹：重要，下有 run 文件夹(py 文件名字)，有个 run.exe(py 文件的名字)</span><br><span class="line">  - run.spec</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把 pro_flask 这个文件夹，拷贝到 dist 下的 run 文件夹</span></span><br><span class="line">  -因为 flask 项目有静态文件和 html 文件，如果不拷贝过去，静态文件和 html 文件会找不到</span><br><span class="line">  -我们为了隐藏代码，可以把所有 python 的代码都删除，只留 static 和 templates 文件夹</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://pic1.zhimg.com/80/v2-da762718f158c8502b00b1b8104063d4_1440w.jpg" alt="img"></p>
+<h3 id="2-4-运行-exe测试"><a href="#2-4-运行-exe测试" class="headerlink" title="2-4 运行.exe测试"></a>2-4 运行.exe测试</h3><ul>
+<li>  进入到 <code>dist/run</code> 文件夹下，双击 <code>run.exe</code>,启动</li>
+</ul>
+<p><img src="https://pic3.zhimg.com/80/v2-b978636b369b94b0bbcecf910e136a5e_1440w.jpg" alt="img"></p>
+<ul>
+<li>  浏览器访问</li>
+</ul>
+<p><img src="https://pic1.zhimg.com/80/v2-613271b71455443c414062bf33dc9f10_1440w.jpg" alt="img"></p>
+<h3 id="2-5-使用-nsis-把文件夹打包成-Windows-的安装包"><a href="#2-5-使用-nsis-把文件夹打包成-Windows-的安装包" class="headerlink" title="2-5 使用 nsis 把文件夹打包成 Windows 的安装包"></a>2-5 使用 <code>nsis</code> 把文件夹打包成 <code>Windows</code> 的安装包</h3><h3 id="2-5-1-下载安装-nsis"><a href="#2-5-1-下载安装-nsis" class="headerlink" title="2-5-1 下载安装 nsis"></a>2-5-1 下载安装 <code>nsis</code></h3><ul>
+<li>  <code>NSIS</code>（Nullsoft Scriptable Install System）是一个开源的 Windows 系统下安装程序制作程序，它提供了安装、卸载、系统设置、文件解压缩等功能。这如其名字所指出的那样，<code>NSIS</code> 是通过它的脚本语言来描述安装程序的行为和逻辑的</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">利用 nsis 把刚刚的 dist 的 run 文件夹打包成 Windows 的安装包</span><br><span class="line"></span><br><span class="line"><span class="comment"># nsis 下载地址</span></span><br><span class="line">https://nsis.sourceforge.io/Download</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  一路下一步安装，打开</li>
+</ul>
+<p><img src="https://pic2.zhimg.com/80/v2-312e579062b9fc2cf719c639374f262d_1440w.jpg" alt="img"></p>
+<h4 id="2-5-2-把-dist-文件夹下的-run-文件夹压缩成-zip"><a href="#2-5-2-把-dist-文件夹下的-run-文件夹压缩成-zip" class="headerlink" title="2-5-2 把 dist 文件夹下的 run 文件夹压缩成 zip"></a>2-5-2 把 <code>dist</code> 文件夹下的 <code>run</code> 文件夹压缩成 <code>zip</code></h4><p><img src="https://pic4.zhimg.com/80/v2-7e152c14c8423158a6f99621fe1d5163_1440w.jpg" alt="img"></p>
+<h4 id="2-5-3-使用-nsis-把压缩包，做成-Windows-安装文件"><a href="#2-5-3-使用-nsis-把压缩包，做成-Windows-安装文件" class="headerlink" title="2-5-3 使用 nsis 把压缩包，做成 Windows 安装文件"></a>2-5-3 使用 <code>nsis</code> 把压缩包，做成 <code>Windows</code> 安装文件</h4><p><img src="https://pic3.zhimg.com/80/v2-4bd752480ec958ef7ae87817c7ba9a06_1440w.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/80/v2-5e6d0108dc971176b472b9093c952390_1440w.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/80/v2-54b22c0e07cae7d29340fb06b9f38d53_1440w.jpg" alt="img"></p>
+<h3 id="2-6-安装刚刚打包的安装包测试"><a href="#2-6-安装刚刚打包的安装包测试" class="headerlink" title="2-6 安装刚刚打包的安装包测试"></a>2-6 安装刚刚打包的安装包测试</h3><ul>
+<li>  双击 <code>run</code> ,打开，一路下一步</li>
+</ul>
+<p><img src="https://pic3.zhimg.com/80/v2-d2d749d5cb6a90feec31412eb71df91a_1440w.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/80/v2-aaa241bafd95c90756bd97cac41ec0ac_1440w.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/80/v2-a7f02ca068ae6e09833a64cd98e50ac4_1440w.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/80/v2-4e6accc2f9c05ad36008ff21ed483663_1440w.jpg" alt="img"></p>
+<h2 id="三、打包-Django-项目"><a href="#三、打包-Django-项目" class="headerlink" title="三、打包 Django 项目"></a>三、打包 <code>Django</code> 项目</h2><h3 id="3-1-准备-Django-项目"><a href="#3-1-准备-Django-项目" class="headerlink" title="3-1 准备 Django 项目"></a>3-1 准备 <code>Django</code> 项目</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在django项目的配置文件中修改settings.py</span></span><br><span class="line">STATIC_ROOT = os.path.join(BASE_DIR, <span class="string">&#x27;static&#x27;</span>, <span class="string">&#x27;static_root&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> static</span><br><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, views.index),</span><br><span class="line">]</span><br><span class="line">urlpatterns += static.static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行 静态文件收集</span></span><br><span class="line">python manage.py collectstatic  <span class="comment"># 会把所有静态文件收集到项目的 static 路径下的 static_root 文件夹下</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-使用-pyinstaller-打包"><a href="#3-2-使用-pyinstaller-打包" class="headerlink" title="3-2 使用 pyinstaller 打包"></a>3-2 使用 <code>pyinstaller</code> 打包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入到项目路径下</span></span><br><span class="line">pyinstaller -D manage.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 dist 文件夹，build 文件夹和 manage.spec 文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-执行打包成的-exe"><a href="#3-3-执行打包成的-exe" class="headerlink" title="3-3 执行打包成的 exe"></a>3-3 执行打包成的 <code>exe</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此时在项目路径下会生成 dist 文件夹，内部 manage 文件夹下有manage.exe</span></span><br><span class="line"></span><br><span class="line">manage.exe runserver </span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行服务是会提示 No module named XXX</span></span><br><span class="line">执行会报错，提升缺少模块，我的提示少 app01.apps</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">这是因为 Django 有些 module 不会自动收集，需要手动添加</span></span><br><span class="line"><span class="string">解决方法：在 manage.spec 文件中修改 hiddenimports=[] 为 hiddenimports=[&#x27;app01.apps&#x27;,&#x27;users.apps&#x27;,]，提示缺少什么 module 就在此处添加什么。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">修改 manage.spec，hiddenimports=[<span class="string">&#x27;app01.apps&#x27;</span>,]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再重新编译一下，运行</span></span><br><span class="line">pyinstaller manage.spec</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-把-templates-和-static-文件夹-copy-到-dist-manage-文件夹下"><a href="#3-4-把-templates-和-static-文件夹-copy-到-dist-manage-文件夹下" class="headerlink" title="3-4 把 templates 和 static 文件夹 copy 到 dist/manage 文件夹下"></a>3-4 把 <code>templates</code> 和 <code>static</code> 文件夹 <code>copy</code> 到 <code>dist/manage</code> 文件夹下</h3><p><img src="https://pic1.zhimg.com/80/v2-6ace04a41cf42932ba8b2aeb170a1efc_1440w.jpg" alt="img"></p>
+<h3 id="3-5-运行项目"><a href="#3-5-运行项目" class="headerlink" title="3-5 运行项目"></a>3-5 运行项目</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">manage.exe runserver <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic3.zhimg.com/80/v2-057fba1f53dfe4362617736b867ffc26_1440w.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/80/v2-1d431df4659b8b591d44a639dd05b77a_1440w.jpg" alt="img"></p>
+<h3 id="3-6-注意一些坑"><a href="#3-6-注意一些坑" class="headerlink" title="3-6 注意一些坑"></a>3-6 注意一些坑</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">问题<span class="number">1</span>：运行服务提示 No module named XXX</span><br><span class="line"></span><br><span class="line">这是因为 Django 有些 module 不会自动收集，需要手动添加</span><br><span class="line">解决方法：在 manage.spec文件中修改hiddenimports=[] 为hiddenimports=[<span class="string">&#x27;users&#x27;</span>,<span class="string">&#x27;users.apps&#x27;</span>,]，提示缺少什么module就在此处添加什么。</span><br><span class="line"></span><br><span class="line">问题<span class="number">2</span>：打开网页出现 TemplateDoesNotExist 错误</span><br><span class="line"></span><br><span class="line">解决方法：把项目中的模板文件 templates 拷贝到 dist 下的 manage 文件夹，刷新页面即可。</span><br><span class="line"></span><br><span class="line">问题<span class="number">3</span>：静态文件找不到</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>、首先在项目中的 settings 文件中添加如下代码，其中 static 是项目中的静态文件位置，static_root 是 static 下的一个空文件夹，然后执行 python manage.py collectstatic 命令将静态文件收录到 static_root 中</span><br><span class="line"></span><br><span class="line">STATIC_ROOT = os.path.join(BASE_DIR, <span class="string">&#x27;static&#x27;</span>, <span class="string">&#x27;static_root&#x27;</span>)</span><br><span class="line"><span class="number">2</span>、然后在 urls.py 中添加如下代码：</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> static</span><br><span class="line"><span class="keyword">from</span> project_1 <span class="keyword">import</span> settings</span><br><span class="line">urlpatterns += static.static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/11/03/Flask-%E4%B9%8B%E4%BF%A1%E5%8F%B7%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/">Flask 之信号与信号量</a>
+            
+            
+            <a class="next" rel="next" href="/2021/01/12/Golang/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本数据类型</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
