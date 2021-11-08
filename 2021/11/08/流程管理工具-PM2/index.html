@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>流程管理工具 - PM2 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">流程管理工具 - PM2</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-November-8&nbsp;&nbsp;23:38:10</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="生产级部署-Python-脚本，崩溃可自启！"><a href="#生产级部署-Python-脚本，崩溃可自启！" class="headerlink" title="生产级部署 Python 脚本，崩溃可自启！"></a>生产级部署 Python 脚本，崩溃可自启！</h1><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6de3101138~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><ul>
+<li><p>  生产级的流程管理工具 – PM2，通常我们说到 PM2 的时候，都是在说如何部署 Node.js 程序，但是实际上 PM2 很强大，不仅仅可以用来管理 Node.js，它还可以用来管理 Python、PHP、Ruby、perl 等等。</p>
+</li>
+<li><p>  这里就以 Python 举例子，来看看 PM2 如何部署管理 Python 脚本。</p>
+</li>
+</ul>
+<h2 id="二、PM2-Python"><a href="#二、PM2-Python" class="headerlink" title="二、PM2 - Python"></a>二、PM2 - Python</h2><ul>
+<li><p>  PM2 是一个生产级流程管理器，可以轻松管理后台进程，在 Python 的世界中，PM2 是可以和 Supervisord 相媲美的，并且 PM2 还有一些非常棒的功能。</p>
+</li>
+<li><p>  使用 PM2，让崩溃重启、观察、检查日志甚至部署应用程序，都变的简单，并且 PM2 非常重视在命令行界面的操作体验，因此 PM2 非常易于使用和掌握。</p>
+</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6de37bd26b~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<ul>
+<li>  PM2 发展到今天，已经 5 年了，在 Github 上有超过 6500w 次下载，已经成为在生产服务器中运行 Node.js 的首选方式之一。但是它也支持 Python。</li>
+</ul>
+<h2 id="三、安装-PM2"><a href="#三、安装-PM2" class="headerlink" title="三、安装 PM2"></a>三、安装 PM2</h2><ul>
+<li>  PM2 依赖于 Node.js，所以需要提前安装 Node，这一步非常简单</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>  其他平台如何安装 Node.js，可自行查找教程。</p>
+</li>
+<li><p>  有了 Node 的环境后，就可以通过 npm 来安装 PM2 了。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install pm2 -g</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  要初始化 PM2 ，可以使用 <code>pm2 ls</code> 命令，此时就可以看到一个很友好的界面。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6de364c496~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<h2 id="四、启动-Python"><a href="#四、启动-Python" class="headerlink" title="四、启动 Python"></a>四、启动 Python</h2><ul>
+<li><p>  使用 PM2 启动应用非常的简单，它讲根据脚本扩展自动匹配解释器，用以运行指定的应用程序</p>
+</li>
+<li><p>  我们先创建一个简单的 Python 应用程序，例如：hello.py</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Start: %s&quot;</span> % time.ctime())</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  接下来用 PM2 去启动 Python 脚本</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start hello.py</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  然后在 Terminal 里就可以看到该进程了。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6de3477007~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<ul>
+<li><p>  到这一步，这个 Python 程序就将永远的运行下去，这意味着如果该进程退出或者抛出异常，它将被自动重启。</p>
+</li>
+<li><p>  此处的 mode 为 fork，也就是关闭当前的 Terminal 窗口，它依然可以检查到此应用的状态。</p>
+</li>
+<li><p>  想要查看 PM2 运行管理的应用程序，可以使用 <code>pm2 ls</code> 命令进行查看。</p>
+</li>
+</ul>
+<h2 id="五、检查日志"><a href="#五、检查日志" class="headerlink" title="五、检查日志"></a>五、检查日志</h2><ul>
+<li>  通过 PM2 运行的程序，如果想要查看 Log，可以输入 <code>pm2 logs</code> 命令。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6de3111d42~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<ul>
+<li><p>  如果想要指定查看某个进程的 Log，可以使用 <code>pm2 logs &lt;app_name&gt;</code> 进行指定。</p>
+</li>
+<li><p>  另外 PM2 还提供了自动化的日志轮换功能，但是需要安装 <code>pm2-logrotate</code></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 install pm2-logrotate</span><br></pre></td></tr></table></figure>
+
+<p><code>pm2-logrotate</code> 将提供每天日志轮换更新的功能，并保持总的日志控件大小为 10M。</p>
+<h2 id="六、查看某进程的信息"><a href="#六、查看某进程的信息" class="headerlink" title="六、查看某进程的信息"></a>六、查看某进程的信息</h2><ul>
+<li>  想要查看当前使用 PM2 启动的程序的详细信息，可以使用 <code>pm2 describe &lt;app_name&gt;</code> 命令进行查看。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6e945ca1e6~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<ul>
+<li>  在输出中，可以看到日志文件的路径，已经解释器等信息。</li>
+</ul>
+<h2 id="七、管理-PM2-的进程状态"><a href="#七、管理-PM2-的进程状态" class="headerlink" title="七、管理 PM2 的进程状态"></a>七、管理 PM2 的进程状态</h2><p>介绍完启动和查看日志，再看几个简单的管理命令。</p>
+<p><em>1.</em> <strong>停止某个程序</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 stop hello</span><br></pre></td></tr></table></figure>
+
+<p><em>2.</em> <strong>重启某个程序</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 restart hello</span><br></pre></td></tr></table></figure>
+
+<p><em>3.</em> <strong>从进程列表中停止和删除某个程序</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 delete hello</span><br></pre></td></tr></table></figure>
+
+<h2 id="八、服务器重启时，依然保持运行"><a href="#八、服务器重启时，依然保持运行" class="headerlink" title="八、服务器重启时，依然保持运行"></a>八、服务器重启时，依然保持运行</h2><ul>
+<li><p>  使用 PM2 启动 Python 程序之后，PM2 只能保证启动的这个 Python 程序发生意外崩溃的时候，对他进行重启。如果你希望在重启服务器的时候，依然保持应用程序在线，则需要设置 init 脚本，用以告诉系统启动 PM2 以及你的应用程序。</p>
+</li>
+<li><p>  想让 PM2 跟随系统启动，只需要运行此命令。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 startup</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>startup</code> 可以生成一个设置环境变量的命令。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6e9445c81f~tplv-t2oaga2asx-watermark.awebp" alt="æªå¾ - ä&quot; -  2018-09-19-13-05-39"></p>
+<ul>
+<li><p>  复制/粘贴此命令的最后一行，执行后将在系统重启时，自动启动 PM2。</p>
+</li>
+<li><p>  现在已经可以重启 PM2 了，还需要告诉 PM2 那些进程状态需要在重启时保持不变，只需要输入命令：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 save</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  这将创建一个转存文件，记录当前由 PM2 管理的进程状态，PM2 将在重启时，按照之前的状态恢复他们。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6e94306536~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<h2 id="九、监听-CPU-内存信息"><a href="#九、监听-CPU-内存信息" class="headerlink" title="九、监听 CPU/内存信息"></a>九、监听 CPU/内存信息</h2><ul>
+<li><p>  要监听 CPU/内存并检查有关进程的一些信息，需要使用 <code>pm2 monit</code> 命令。</p>
+</li>
+<li><p>  这将打开一个 termcaps 界面，允许试试了解正在运行的应用程序。</p>
+</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/9/16656c6e945dd031~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<ul>
+<li>  还可以使用 <code>pm2 show &lt;app_name&gt;</code> 获取有关应用程序的所有可能信息。</li>
+</ul>
+<h2 id="十、使用-Ecosystem-文件"><a href="#十、使用-Ecosystem-文件" class="headerlink" title="十、使用 Ecosystem 文件"></a>十、使用 Ecosystem 文件</h2><ul>
+<li><p>  如果有多个程序需要启动，或者在启动的时候需要传递不同的参数、选项等，可以使用 eocsystem 文件对应用程序进行配置。</p>
+</li>
+<li><p>  Eocsystem 需要通过 ecosystem.config.js 文件进行配置，此文件可以通过 <code>pm2 init</code> 命令生成。生成好后，我们可以在其中配置一些配置信息。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  apps : [&#123;</span><br><span class="line">    name: <span class="string">&#x27;echo-python&#x27;</span>,</span><br><span class="line">    cmd: <span class="string">&#x27;hello.py&#x27;</span>,</span><br><span class="line">    args: <span class="string">&#x27;arg1 arg2&#x27;</span>,</span><br><span class="line">    autorestart: false,</span><br><span class="line">    watch: true,</span><br><span class="line">    pid: <span class="string">&#x27;/path/to/pid/file.pid&#x27;</span>,</span><br><span class="line">    instances: <span class="number">4</span>,</span><br><span class="line">    max_memory_restart: <span class="string">&#x27;1G&#x27;</span>,</span><br><span class="line">    env: &#123;</span><br><span class="line">      ENV: <span class="string">&#x27;development&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    env_production : &#123;</span><br><span class="line">      ENV: <span class="string">&#x27;production&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: <span class="string">&#x27;echo-python-3&#x27;</span>,</span><br><span class="line">    cmd: <span class="string">&#x27;hello.py&#x27;</span>,</span><br><span class="line">    interpreter: <span class="string">&#x27;python3&#x27;</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>  在这个例子中，我们声明了两个应用程序，通过 <code>interpreter</code> 配置程序启动的解释器，一个使用 Python2 （默认）运行，另一个使用 Python3 运行。</p>
+</li>
+<li><p>  启动它，依然使用 <code>pm2 start</code> 命令。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start ecosystem.config.js</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  单独重启 “production” (env_production)：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 restart ecosystem.config.js --env production</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>  <code>Ecosystem.config.js</code> 文件中，很多配置都是可以通过命令来指定，例如，可以通过 <code>--interpreter</code> 来指定解析程序。</p>
+</li>
+<li><p>  通常我们会同时安装 Python2.x 和 Python3.x 的环境，而 PM2 在默认情况下，是通过脚本文件后缀来判断的，如果没有后缀就需要强制指定 <code>--interpreter</code>。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;.sh&quot;: &quot;bash&quot;,</span><br><span class="line">  &quot;.py&quot;: &quot;python&quot;,</span><br><span class="line">  &quot;.rb&quot;: &quot;ruby&quot;,</span><br><span class="line">  &quot;.coffee&quot; : &quot;coffee&quot;,</span><br><span class="line">  &quot;.php&quot;: &quot;php&quot;,</span><br><span class="line">  &quot;.pl&quot; : &quot;perl&quot;,</span><br><span class="line">  &quot;.js&quot; : &quot;node&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>  这些配置信息也标记了 PM2 支持的脚本程序。</p>
+</li>
+<li><p>  那么如果需要使用 Python3.x 来执行某个脚本，就需要 <code>--interpreter</code> 了。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start hello.py --interpreter=python3</span><br></pre></td></tr></table></figure>
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li><p>  虽然这里使用 Python 来举例，但是本文所有相关命令，是可以适用其他 PM2 支持的脚本程序。</p>
+</li>
+<li><p>  PM2 还有很多强大的功能，比如说利用 SSH 轻松部署到服务器、负载均衡等等都是一些不错的功能，有兴趣可以查阅文档。</p>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/11/03/Flask-%E4%B9%8B%E4%BF%A1%E5%8F%B7%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/">Flask 之信号与信号量</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
