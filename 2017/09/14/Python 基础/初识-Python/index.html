@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>初识 Python | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">初识 Python</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2017-September-14&nbsp;&nbsp;13:59:54</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Python/">Python</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、计算机组成原理"><a href="#一、计算机组成原理" class="headerlink" title="一、计算机组成原理"></a>一、计算机组成原理</h2><h3 id="1-什么是编程？"><a href="#1-什么是编程？" class="headerlink" title="1. 什么是编程？"></a>1. 什么是编程？</h3><ol>
+<li><p>编程本质就是一门语言，语言是一种事物与另一种事物沟通的工具，所以编程语言也是一种事物与另一种事物沟通的工具</p>
+</li>
+<li><p>人 —-&gt; 编程语言 —-&gt; 计算机</p>
+<ul>
+<li>  在 IT 领域，人通过编程语言与计算机沟通，以此来奴役计算机</li>
+</ul>
+</li>
+<li><p>两个步骤：</p>
+<ul>
+<li>理清逻辑思路</li>
+<li>用计算机能听懂的语言（即编程语言）来命令计算机工作</li>
+</ul>
+</li>
+<li><p>程序由功能（代码）和数据组成</p>
+</li>
+<li><p>软件是存放程序的文件，用来控制计算机，是计算机的灵魂</p>
+</li>
+</ol>
+<h3 id="2-计算机的硬件组成与运行原理"><a href="#2-计算机的硬件组成与运行原理" class="headerlink" title="2. 计算机的硬件组成与运行原理"></a>2. 计算机的硬件组成与运行原理</h3><ul>
+<li><h5 id="计算机的核心硬件组成都是为了模仿人的某一器官或者功能"><a href="#计算机的核心硬件组成都是为了模仿人的某一器官或者功能" class="headerlink" title="计算机的核心硬件组成都是为了模仿人的某一器官或者功能"></a>计算机的核心硬件组成都是为了模仿人的某一器官或者功能</h5></li>
+</ul>
+<ol>
+<li><p>控制器 + 运算器 —-&gt; CPU ——————————————————————————– 大脑</p>
+<ul>
+<li>控制器：计算机的指挥系统，负责控制所有其他硬件的运行 —————————— 大脑</li>
+<li>运算器：负责数学运算与逻辑运算 ————————————————————— 大脑</li>
+</ul>
+</li>
+<li><p>存储器：内存与外存存储的分别为高低电频与磁频，统一用 0、1 表示</p>
+<ul>
+<li><p>内存：存的是电信号，断电数据丢失 ——————————————— 大脑的记忆功能</p>
+<ul>
+<li>特点：存取速度快，但只能临时存放数据</li>
+</ul>
+</li>
+<li><p>外存（磁盘）：存放的是磁信号，断电数据依然存在 ———————————— 笔记本</p>
+<ul>
+<li>特点：存取速度慢，但可以永久存放数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>输入设备：键盘、鼠标</p>
+</li>
+<li><p>输出设备：显示器、音响、打印机</p>
+</li>
+</ol>
+<h5 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h5><ul>
+<li>RAM：内存中大部分为 RAM 数据，即可读可写的数据，且为易失性存储，断电后数据全部消失</li>
+<li>ROM：内存中有少量 ROM（Read Only Memory）数据，即只读数据，无法更改，且为非易失性存储，断电后内容不会丢失</li>
+<li>EEPROM 和闪存：与 ROM 一样，也是非易失性的，但可以擦除和重写，不过重写时花费的时间比写入 RAM 要多</li>
+<li>CMOS：为易失性存储，计算机中一般用来保持当前时间和日期以及保存配置参数。CMOS 耗电非常少，常用一小块电池驱动，当电池失效时，相关配置和时间等都将丢失</li>
+</ul>
+<h5 id="三大核心硬件"><a href="#三大核心硬件" class="headerlink" title="三大核心硬件"></a>三大核心硬件</h5><h6 id="CPU、内存（主存）、硬盘"><a href="#CPU、内存（主存）、硬盘" class="headerlink" title="CPU、内存（主存）、硬盘"></a>CPU、内存（主存）、硬盘</h6><ul>
+<li><p>速度：硬盘 &lt; 内存 &lt; CPU。硬盘读写速度很慢，因此需要内存从硬盘快速提取数据（加载），交给 CPU 运行，可以通过高速缓存、寄存器提升运行速度</p>
+</li>
+<li><p>性能：内存限制计算机的性能，可以通过加内存条提升性能，通过更换固态硬盘提升软件启动速度</p>
+</li>
+</ul>
+<h3 id="3-多线程与多核"><a href="#3-多线程与多核" class="headerlink" title="3. 多线程与多核"></a>3. 多线程与多核</h3><ol>
+<li>单核：一个大脑</li>
+<li>双核：一个大脑，两个半球</li>
+<li>双核四线程：一个大脑，两个半球，每个半球一心两用<ul>
+<li>双核 &lt; 双核四线程 &lt; 四核，即双核四线程为真双核，假四核</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-指令集"><a href="#4-指令集" class="headerlink" title="4. 指令集"></a>4. 指令集</h3><ul>
+<li><p>精简指令集：单条指令比较简单，单条指令能做的事较少，因此基于精简指令集写程序需要指令条数更多，但稳定性更高（ARM 芯片）</p>
+</li>
+<li><p>复杂指令集：单条指令比较复杂，单条指令能做的事较多，因此基于复杂指令集写程序需要指令条数更少，但稳定性相对没有精简指令集高（x86）</p>
+</li>
+</ul>
+<h3 id="5-32位与64位"><a href="#5-32位与64位" class="headerlink" title="5. 32位与64位"></a>5. 32位与64位</h3><h5 id="32位"><a href="#32位" class="headerlink" title="32位"></a>32位</h5><ul>
+<li>CPU 一次性从内存取 32 个 2 进制数</li>
+</ul>
+<h5 id="64位"><a href="#64位" class="headerlink" title="64位"></a>64位</h5><ul>
+<li>CPU 一次性从内存取 64 个 2 进制数</li>
+</ul>
+<h3 id="6-磁盘"><a href="#6-磁盘" class="headerlink" title="6. 磁盘"></a>6. 磁盘</h3><ul>
+<li><p>数据都存放于一段一段的扇区，即磁道这个圆圈的一小段圆圈，从磁盘读取一段数据需要经历寻道时间和延迟时间</p>
+<ol>
+<li>平均寻道时间：机械手臂从一个柱面随机移动到相邻的柱面的时间成为寻到时间，找到了磁道就以为着招到了数据所在的那个圈圈，但是还不知道数据具体这个圆圈的具体位置</li>
+<li>机械臂到达正确的磁道之后还必须等待旋转到数据所在的扇区下，这段时间成为延迟时间</li>
+</ol>
+</li>
+<li><p>机械磁盘找到数据需要经历的时间=平均延迟时间+平均寻道时间</p>
+<ul>
+<li><p>以 7200 转/min 的机械硬盘为例，</p>
+<p>  ​        转一圈：8ms<br>  ​        平均延迟时间：转半圈 -&gt; 4ms<br>  ​        平均寻道时间：5ms</p>
+</li>
+</ul>
+</li>
+<li><p>所以机械磁盘慢是慢在找数据上，至于找到数据之后往内存读，这个速度是很快额</p>
+</li>
+</ul>
+<h3 id="7-计算机三层体系结构"><a href="#7-计算机三层体系结构" class="headerlink" title="7. 计算机三层体系结构"></a>7. 计算机三层体系结构</h3><ul>
+<li><p>应用程序（以图形表现）  –&gt; （内核、操作系统接口层）–&gt;  操作系统（即是代码）  –&gt;  计算机硬件</p>
+<ol>
+<li>应用程序：对操作系统进行封装，精简操作，以此来控制操作系统接口</li>
+<li>内核、操作系统接口：对操作系统进行分类、封装，简化操作</li>
+<li>操作系统：对计算机硬件功能进行封装，然后通过直接控制硬盘，来间接控制其他硬件，即控制计算机运行</li>
+<li>运行顺序：硬盘 –&gt; 操作系统代码 –&gt; 操作系统接口 –&gt; 内核 –&gt; 图形界面程序 –&gt; 应用程序</li>
+<li>操作顺序：应用程序（快捷方式） –&gt; 图形界面程序（寻找路径） –&gt; 操作系统接口 –&gt; 内核 –&gt; 硬盘 –&gt; 内存 –&gt; CPU</li>
+</ol>
+</li>
+</ul>
+<h2 id="二、Python入门"><a href="#二、Python入门" class="headerlink" title="二、Python入门"></a>二、Python入门</h2><ul>
+<li>  程序 = 数据 + 功能（代码）</li>
+</ul>
+<h3 id="1-操作系统的安装与启动"><a href="#1-操作系统的安装与启动" class="headerlink" title="1. 操作系统的安装与启动"></a>1. 操作系统的安装与启动</h3><ol>
+<li><p>BIOS（基础操作系统）：Basic input output system</p>
+<ul>
+<li><p>BIOS 存储与内存中，为 ROM 数据</p>
+</li>
+<li><p>BIOS 所配置的数据存储于内存中，为 CMOS 数据</p>
+</li>
+</ul>
+</li>
+<li><p>windows，Linux，Ios（主操作系统）</p>
+<ul>
+<li>存储于本地硬盘</li>
+<li>主系统配置数据存放于内存，为 RAM 数据</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-平台"><a href="#2-平台" class="headerlink" title="2. 平台"></a>2. 平台</h3><ul>
+<li><p>平台 = 计算机硬件 + 操作系统（一种计算机 + 一种操作系统 即为 一种平台）</p>
+</li>
+<li><p>跨平台性：开发出的软件可以在任意平台正常运行</p>
+</li>
+</ul>
+<h3 id="3-编程语言分类"><a href="#3-编程语言分类" class="headerlink" title="3. 编程语言分类"></a>3. 编程语言分类</h3><ol>
+<li><p>低级语言（底层语言）：机器语言、汇编语言</p>
+<ul>
+<li>机器语言：直接用计算机能理解的二进制指令去编写程序，是直接在控制计算机硬件<ul>
+<li>优点：运行效率高</li>
+<li>缺点：开发效率低<ul>
+<li>开发一个简单小功能需要用到的二进制指令条数都非常多</li>
+<li>二进制指令非常难以记忆</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>汇编语言：用英文标签取代二进制指令去编写程序，是直接在控制计算机硬件（只解决了机器语言难记的问题）</li>
+</ul>
+</li>
+<li><p>高级语言（上层语言）：用人类能理解的表达方式去编写程序[编译型（GO，C）、解释型（Python，Shell）] ，与操作系统进行工作</p>
+<ul>
+<li><p>编译型：编译型语言编写程序如果编译成功，第二次运行时不需要编译器</p>
+<p>  源代码 —— 编译器 —— 计算机能理解的指令</p>
+</li>
+<li><p>解释型：每次运行程序都要翻译，且解释型语言编写程序每次运行离不开解释器</p>
+</li>
+<li><p>第一次运行 Python 程序，Python 解释器会生成字节码文件；第二次运行 Python  程序的时候，Python解释器运行的是字节码文件</p>
+<p>  源代码 —— 解释器 ——计算机能理解的指令</p>
+<ul>
+<li>高级语言的开发效率受网速限制，且取决于语言的本身特性（网速 &lt; 硬盘 &lt; 内存 &lt; CPU）</li>
+<li>C语言保存了调用操作系统原生接口的功能，在高级语言中相对底层，所有语言的老父亲</li>
+<li>Python语言三大特性：<ul>
+<li>语法简洁，容易上手</li>
+<li>封装程度高</li>
+<li>非常丰富的第三方库</li>
+</ul>
+</li>
+<li>机器语言 &gt; 汇编语言 &gt; 编译型 &gt; 解释型（只比较语言，意义不大）</li>
+<li>开发效率和语言本身特性有关</li>
+</ul>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Python-%E5%9F%BA%E7%A1%80/"># Python 基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017/09/17/Python%20%E5%9F%BA%E7%A1%80/Python-%E5%9F%BA%E7%A1%80/">Python 基础</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
