@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>Django CBV 源码分析 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Django CBV 源码分析</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019-September-24&nbsp;&nbsp;19:24:59</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Web-%E6%A1%86%E6%9E%B6/">Web 框架</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、CBV-源码分析"><a href="#一、CBV-源码分析" class="headerlink" title="一、CBV 源码分析"></a>一、CBV 源码分析</h2><ul>
+<li>  在路由中写了 <code>IndexView.as_view()</code> –&gt; 实际上放了一个函数内存地址 –&gt; <code>view</code> 的内存地址</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@classonlymethod</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">view</span>(<span class="params">request, *args, **kwargs</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">view</span>(<span class="params">request, *args, **kwargs</span>):</span></span><br><span class="line">      	...</span><br><span class="line">        <span class="keyword">return</span> self.dispatch(request, *args, **kwargs)</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> view</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  当请求来了，跟路由匹配成功，就会执行 <code>view(request)</code></li>
+<li>  内部执行了 <code>self.dispatch(request, *args, **kwargs)</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">    <span class="comment"># &#x27;get&#x27;  in  [请求方式列表]</span></span><br><span class="line">    <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> self.http_method_names:</span><br><span class="line">         <span class="comment"># 通过反射去对象中拿 get 方法</span></span><br><span class="line">         <span class="comment"># handler 就是 get 这个方法</span></span><br><span class="line">        handler = <span class="built_in">getattr</span>(self, request.method.lower(), self.http_method_not_allowed)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        handler = self.http_method_not_allowed</span><br><span class="line">        <span class="keyword">return</span> handler(request, *args, **kwargs)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最终执行了 <code>handler(request, *args, **kwargs)</code><ul>
+<li>  如果是 <code>get</code> 请求，相当于执行了视图类中的 <code>get</code> 方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、DRF-之-APIView-执行流程分析"><a href="#二、DRF-之-APIView-执行流程分析" class="headerlink" title="二、DRF 之 APIView 执行流程分析"></a>二、DRF 之 APIView 执行流程分析</h2><ul>
+<li>  请求来了，由于会 <code>APIView</code> 中定义了 <code>as_view</code> 方法，且继承了 <code>APIView</code> ，因此会执行 <code>views.BookView.as_view()(request)</code> –&gt; 触发 <code>APIView</code> 的 <code>as_view</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@classmethod</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">as_view</span>(<span class="params">cls, **initkwargs</span>):</span></span><br><span class="line">    view = <span class="built_in">super</span>().as_view(**initkwargs)  <span class="comment"># 调用了View的as_view</span></span><br><span class="line">    <span class="keyword">return</span> csrf_exempt(view)  <span class="comment"># 去掉了csrf的认证，跟原来加装饰器一样</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  假设 <code>get</code> 请求来了，执行 <code>view()</code> – 最重要的 –&gt; <code>self.dispatch()</code> –&gt; <code>APIView</code> 的 <code>dispatch</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">	<span class="comment"># 把原来的 request 对象，包装成了新的 request 对象，是 drf 的 request</span></span><br><span class="line">   request = self.initialize_request(request, *args, **kwargs)</span><br><span class="line">   </span><br><span class="line">       <span class="keyword">try</span>:</span><br><span class="line">           <span class="comment"># 执行了三大认证：认证，权限，频率</span></span><br><span class="line">            self.initial(request, *args, **kwargs)</span><br><span class="line">           </span><br><span class="line">       <span class="comment"># 跟原来一模一样</span></span><br><span class="line">       <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> self.http_method_names:</span><br><span class="line">           handler = <span class="built_in">getattr</span>(self, request.method.lower(),</span><br><span class="line">                             self.http_method_not_allowed)</span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           handler = self.http_method_not_allowed</span><br><span class="line">           </span><br><span class="line">       <span class="comment"># 真正的执行视图类中的方法，如果有异常，被捕获了</span></span><br><span class="line">       response = handler(request, *args, **kwargs)</span><br><span class="line">   <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">       response = self.handle_exception(exc)</span><br><span class="line">   <span class="keyword">return</span> self.response</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>APIView</code> 干了三件事</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 把老的 request 对象包装成了新的 request 对象</span><br><span class="line">    - 通过 APIView 的 initialize_request，包装的</span><br><span class="line">    - 以后再在视图类中用的 request 对象，都是新的</span><br><span class="line">    </span><br><span class="line"><span class="number">2.</span> 在执行视图类中的方法之前，执行了三大认证</span><br><span class="line">    		self.perform_authentication(request)</span><br><span class="line">        self.check_permissions(request)</span><br><span class="line">        self.check_throttles(request)</span><br><span class="line">      </span><br><span class="line"><span class="number">3.</span> 处理全局异常</span><br></pre></td></tr></table></figure>
+
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">只要继承了 APIView，以后用的 request 对象，就是 drf 的 request 对象了</span><br><span class="line">在执行视图类的方法之前，会先执行三大认证，如果有异常，会被捕获并处理</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Django/"># Django</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/10/02/Django/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/">DRF 自动生成接口文档</a>
+            
+            
+            <a class="next" rel="next" href="/2019/01/21/Git/">Git</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

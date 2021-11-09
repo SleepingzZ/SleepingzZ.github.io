@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>DRF 自动生成接口文档 | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">DRF 自动生成接口文档</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019-October-2&nbsp;&nbsp;19:24:59</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Web-%E6%A1%86%E6%9E%B6/">Web 框架</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="自动生成接口文档"><a href="#自动生成接口文档" class="headerlink" title="自动生成接口文档"></a>自动生成接口文档</h2><ul>
+<li><p>  REST framework可以自动帮助我们生成接口文档</p>
+</li>
+<li><p>  接口文档以网页的方式呈现</p>
+</li>
+<li><p>  自动接口文档能生成的是继承自 <code>APIView</code> 及其子类的视图</p>
+</li>
+</ul>
+<h3 id="一、安装依赖"><a href="#一、安装依赖" class="headerlink" title="一、安装依赖"></a>一、安装依赖</h3><ul>
+<li>  REST_framewrok 生成接口文档需要 <code>coreapi</code> 库的支持。</li>
+</ul>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">pip install coreapi</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、设置接口文档访问路径"><a href="#二、设置接口文档访问路径" class="headerlink" title="二、设置接口文档访问路径"></a>二、设置接口文档访问路径</h3><ul>
+<li>  在总路由中添加接口文档路径</li>
+<li>  文档路由对应的视图配置为 <code>rest_framework.documentation.include_docs_urls</code></li>
+<li>  参数 <code>title</code> 为接口文档网站的标题</li>
+</ul>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">from rest_framework.documentation import include_docs_urls</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">urlpatterns = [</span></span><br><span class="line"><span class="xml">    ...</span></span><br><span class="line"><span class="xml">    path(&#x27;docs/&#x27;, include_docs_urls(title=&#x27;站点页面标题&#x27;))</span></span><br><span class="line"><span class="xml">]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="三、文档描述说明的定义位置"><a href="#三、文档描述说明的定义位置" class="headerlink" title="三、文档描述说明的定义位置"></a>三、文档描述说明的定义位置</h3><ol>
+<li>  单一方法的视图，可直接使用类视图的文档字符串</li>
+</ol>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">class BookListView(generics.ListAPIView):</span></span><br><span class="line"><span class="xml">    &quot;&quot;&quot;</span></span><br><span class="line"><span class="xml">    返回所有图书信息.</span></span><br><span class="line"><span class="xml">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>  包含多个方法的视图，在类视图的文档字符串中，分开方法定义</li>
+</ol>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">class BookListCreateView(generics.ListCreateAPIView):</span></span><br><span class="line"><span class="xml">    &quot;&quot;&quot;</span></span><br><span class="line"><span class="xml">    get:</span></span><br><span class="line"><span class="xml">    返回所有图书信息.</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    post:</span></span><br><span class="line"><span class="xml">    新建图书.</span></span><br><span class="line"><span class="xml">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>  对于视图集 ViewSet，仍在类视图的文档字符串中分开定义，但是应使用 <code>action</code> 名称区分</li>
+</ol>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">class BookInfoViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):</span></span><br><span class="line"><span class="xml">    &quot;&quot;&quot;</span></span><br><span class="line"><span class="xml">    list:</span></span><br><span class="line"><span class="xml">    返回图书列表数据</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    retrieve:</span></span><br><span class="line"><span class="xml">    返回图书详情数据</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    latest:</span></span><br><span class="line"><span class="xml">    返回最新的图书数据</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    read:</span></span><br><span class="line"><span class="xml">    修改图书的阅读量</span></span><br><span class="line"><span class="xml">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="四、访问接口文档网页"><a href="#四、访问接口文档网页" class="headerlink" title="四、访问接口文档网页"></a>四、访问接口文档网页</h3><ul>
+<li>  浏览器访问 <code>127.0.0.1:8000/docs/</code>，即可看到自动生成的接口文档。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggghbdeu1pj31is0u013r.jpg" alt="æ¥å£ææ¡£ç½é¡µ"></p>
+<ul>
+<li>  如果遇到报错</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># AttributeError: &#x27;AutoSchema&#x27; object has no attribute &#x27;get_link&#x27;</span><br><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line"> &#x27;DEFAULT_SCHEMA_CLASS&#x27;: &#x27;rest_framework.schemas.coreapi.AutoSchema&#x27;,</span><br><span class="line">    # 新版 drf schema_class 默认用的是 rest_framework.schemas.openapi.AutoSchema</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="两点说明："><a href="#两点说明：" class="headerlink" title="两点说明："></a>两点说明：</h5><ol>
+<li><p>  视图集 ViewSet 中的 <code>retrieve</code> 名称，在接口文档网站中叫做 <code>read</code></p>
+</li>
+<li><p>  参数的 Description 需要在模型类或序列化器类的字段中以 help_text 选项定义</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Student(models.Model):</span><br><span class="line">    ...</span><br><span class="line">    age = models.IntegerField(default=0, verbose_name=&#x27;年龄&#x27;, help_text=&#x27;年龄&#x27;)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class StudentSerializer(serializers.ModelSerializer):</span><br><span class="line">    class Meta:</span><br><span class="line">        model = Student</span><br><span class="line">        fields = &quot;__all__&quot;</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            &#x27;age&#x27;: &#123;</span><br><span class="line">                &#x27;required&#x27;: True,</span><br><span class="line">                &#x27;help_text&#x27;: &#x27;年龄&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Django/"># Django</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/11/08/Shell/">Shell</a>
+            
+            
+            <a class="next" rel="next" href="/2019/09/24/Django/Django-CBV-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Django CBV 源码分析</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

@@ -127,6 +127,68 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
@@ -170,11 +232,15 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@product_saved``.connect_via(app)``def` `updateCache(app, product):`` ``print``(product)</span><br></pre></td></tr></table></figure>
 
 <p><strong>Flask 中有以下核心信号:</strong></p>
-<p><strong>1.flask.template_rendered</strong></p>
+<ol>
+<li>  flask.template_rendered</li>
+</ol>
 <p>这个信号发送于一个模板被渲染成功后。信号传递的template是模板的实例，context是环境对象是一个字典。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `log_template_renders(sender, template, context, ``*``*``extra):`` ``sender.logger.debug(``&#x27;Rendering template &quot;%s&quot; with context %s&#x27;``,``      ``template.name ``or` `&#x27;string template&#x27;``,``      ``context)``from` `flask ``import` `template_rendered``template_rendered.connect(log_template_renders, app)</span><br></pre></td></tr></table></figure>
 
-<p><strong>2.flask.request_started</strong></p>
+<ol start="2">
+<li>  flask.request_started</li>
+</ol>
 <p>这个信号发送于请求开始之前，且请求环境设置完成之后。因为请求环境已经绑定， 所以订阅者可以用标准的全局代理，如 request 来操作请求。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `log_request(sender, ``*``*``extra):`` ``sender.logger.debug(``&#x27;Request context is set up&#x27;``)``from` `flask ``import` `request_started``request_started.connect(log_request, app)``flask.request_finished</span><br></pre></td></tr></table></figure>
 
@@ -190,13 +256,17 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `close_db_connection(sender, ``*``*``extra):`` ``session.close()``from` `flask ``import` `appcontext_tearing_down``request_tearing_down.connect(close_db_connection, app)</span><br></pre></td></tr></table></figure>
 
 <p>在 Flask 版本 0.9 中，这还会传递一个exc关键字参数，如果这个参数存在的话。 这个参数是引发崩溃的异常的引用。</p>
-<p><strong>3.flask.appcontext_tearing_down</strong></p>
+<ol start="3">
+<li>  flask.appcontext_tearing_down</li>
+</ol>
 <p>当应用环境崩溃时发送这个信号。这个信号总是会发送，甚至是因为一个异常引发的 崩溃。侦听这个信号的函数会在常规崩溃处理器后被调用，但是你无法回馈这个信号。</p>
 <p>订阅示例:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `close_db_connection(sender, ``*``*``extra):`` ``session.close()``from` `flask ``import` `request_tearing_down``appcontext_tearing_down.connect(close_db_connection, app)</span><br></pre></td></tr></table></figure>
 
 <p>这还会传递一个exc关键字参数，如果这个参数存在的话。这个参数是引发崩溃的 异常的引用。</p>
-<p><strong>4.flask.appcontext_pushed</strong></p>
+<ol start="4">
+<li>  flask.appcontext_pushed</li>
+</ol>
 <p>当一个应用的环境被压入时，应用会发送这个信号。这个信号通常用于在单元测试中 临时钩接信息。例如可以用于改变g对象中现存的资源。</p>
 <p>用法示例:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from` `contextlib ``import` `contextmanagerfrom``flask ``import` `appcontext_pushed``@contextmanagerdef` `user_set(app, user):`` ``def` `handler(sender, ``*``*``kwargs):``  ``g.user ``=` `user`` ``with appcontext_pushed.connected_to(handler, app):``  ``yield</span><br></pre></td></tr></table></figure>
@@ -204,14 +274,20 @@
 <p>在测试代码中这样写:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def` `test_user_me(``self``):`` ``with user_set(app, ``&#x27;john&#x27;``):``  ``c ``=` `app.test_client()``  ``resp ``=` `c.get(``&#x27;/users/me&#x27;``)``  ``assert` `resp.data ``=``=` `&#x27;username=john&#x27;``New ``in` `version ``0.10``.</span><br></pre></td></tr></table></figure>
 
-<p><strong>5.appcontext_popped</strong></p>
+<ol start="5">
+<li>  appcontext_popped</li>
+</ol>
 <p>当一个应用的环境被弹出时，应用会发送这个信号。这个信号通常写成appcontext_tearing_down 信号。</p>
-<p><strong>6.flask.message_flashed</strong></p>
-<p>当应用闪现一个消息时会发出这个信号。message<code>参数是消息内容， </code>category参数是消息类别。</p>
+<ol start="6">
+<li>  flask.message_flashed</li>
+</ol>
+<p>当应用闪现一个消息时会发出这个信号。<code>message</code> 参数是消息内容， <code>category</code> 参数是消息类别。</p>
 <p>订阅示例:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recorded ``=` `[]``def` `record(sender, message, category, ``*``*``extra):`` ``recorded.append((message, category))``from` `flask ``import` `message_flashed``message_flashed.connect(record, app)</span><br></pre></td></tr></table></figure>
 
-<p>**小结<br>**信号可以让你在一瞬间安全地订阅它们。例如，这些临时的订阅对测试很有帮助。使用信号时，不要让信号订阅者（接收者）发生异常，因为异常会造成程序中断。</p>
+<h5 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h5><ul>
+<li>  信号可以让你在一瞬间安全地订阅它们。例如，这些临时的订阅对测试很有帮助。使用信号时，不要让信号订阅者（接收者）发生异常，因为异常会造成程序中断。</li>
+</ul>
 
         </div>
 
