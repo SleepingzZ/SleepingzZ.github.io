@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="SleepingzZ">
+
+
+
+
+
+<title>初识 Java | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">SleepingzZ&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">SleepingzZ&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">初识 Java</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">SleepingzZ</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-December-19&nbsp;&nbsp;15:37:52</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Java/">Java</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="初识-Java"><a href="#初识-Java" class="headerlink" title="初识 Java"></a>初识 Java</h1><h2 id="一、Java-语言特性"><a href="#一、Java-语言特性" class="headerlink" title="一、Java 语言特性"></a>一、Java 语言特性</h2><ul>
+<li>  开源、免费、纯面向对象、跨平台性</li>
+</ul>
+<ol>
+<li>简单性<ul>
+<li>  相对 C++ 而言，Java 中不在支持多继承，C++支持多继承，多继承较为复杂</li>
+<li>  C++ 中有指针，Java 屏蔽了指针的概念</li>
+<li>  Java 底层由 C++实现，但不是 C 语言</li>
+</ul>
+</li>
+<li>面向对象<ul>
+<li>  Java 是纯面向对象的，更符合人的思维模式，更容易理解</li>
+</ul>
+</li>
+<li>跨平台性（可移植性）<ul>
+<li>  Java 程序可以做到一次编译，到处运行 – 即编译之后不做任何修改即可在任意操作系统上运行</li>
+<li>  Java 程序运行于 Java 虚拟机之上，简称 JVM，再由 Java 虚拟机与底层操作系统记性交互</li>
+</ul>
+</li>
+<li>健壮性<ul>
+<li>  自动垃圾回收机制 – GC 机制</li>
+<li>  Java 语言运行过程中产生的垃圾是会被自动回收</li>
+</ul>
+</li>
+<li>  多线程</li>
+<li>  安全性</li>
+</ol>
+<h2 id="二、Java-的加载与执行"><a href="#二、Java-的加载与执行" class="headerlink" title="二、Java 的加载与执行"></a>二、Java 的加载与执行</h2><ul>
+<li>Java 程序运行包含两个阶段<ol>
+<li>  编译阶段</li>
+<li>  运行阶段</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li><p>编译阶段</p>
+<ul>
+<li>  检查 Java 源程序是否符合 Java 语法，符合 Java 语法才能够使用 <code>javac.exe</code> 进行编译，生成正常的字节码文件 <code>xxx.class</code></li>
+<li>  字节码文件不是纯粹的二进制，这种文件无法在操作系统当中直接执行</li>
+<li>  class 文件生成之后，删除 Java 源文件并不会影响 Java 程序的执行</li>
+<li>  编译结束后，可以将 class 文件拷贝到其他操作系统运行</li>
+</ul>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac xxx.java </span><br></pre></td></tr></table></figure></li>
+<li><p>运行阶段</p>
+<ul>
+<li>  JDK 安装之后，除了自带一个 <code>javac.exe</code> 之外，还有另一个工具/命令，叫做 <code>java.exe</code> 命令，主要负责运行阶段</li>
+</ul>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java 类名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>java.exe</code> –&gt; Java 虚拟机（JVM）–&gt; JVM 启动类加载器 ClassLoader</li>
+<li>  ClassLoader 回去硬盘上搜索 <code>xxx.class</code> 文件，找到该字节码文件装载到 JVM 中</li>
+<li>  JVM 将 <code>xxx.class</code> 字节码文件解释成二进制数据</li>
+<li>  最后由操作系统执行二进制和底层硬件平台进行交互</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>SleepingzZ</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Java-%E5%9F%BA%E7%A1%80/"># Java 基础</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/11/10/Django/Django-JWT-%E8%AE%A4%E8%AF%81%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">Django JWT 认证源码剖析</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SleepingzZ | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
