@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Celeste°">
+
+
+
+
+
+<title>Goroutine | 淡而无味也是一种味道</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">嘉禾望岗_站</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">嘉禾望岗_站</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Goroutine</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Celeste°</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2022-June-4&nbsp;&nbsp;22:57:06</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/category/Go/">Go</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Go-语言基础之并发"><a href="#Go-语言基础之并发" class="headerlink" title="Go 语言基础之并发"></a>Go 语言基础之并发</h1><ul>
+<li>并发编程在当前软件领域是一个非常重要的概念, 随着 CPU 等硬件的发展, 我们无一例外的想让我们的程序运行的快一点、再快一点。而 Go 语言在语言层面天生支持并发, 充分利用现代 CPU 的多核优势</li>
+</ul>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
+<p>串行、并行与并发</p>
+</blockquote>
+<ul>
+<li>串行: 按时间线顺序执行任务</li>
+<li>并发: 同一时间段内执行多个任务</li>
+<li>并行: 同一时刻执行多个任务</li>
+</ul>
+<blockquote>
+<p>进程、线程和协程</p>
+</blockquote>
+<ul>
+<li>进程(Process): 程序在操作系统中的一次执行过程, 系统进行资源分配和调度的一个独立单位</li>
+<li>线程(Thread): 操作系统基于进程开启的轻量级进程, 是操作系统调度执行的最小单位</li>
+<li>协程(Coroutine): 非操作系统提供而是由用户自行创建和控制的用户态‘线程’, 比线程更轻量级</li>
+</ul>
+<blockquote>
+<p>并发模型</p>
+</blockquote>
+<ul>
+<li>常见的并发模型有以下几种：<ol>
+<li>线程 &amp; 锁模型</li>
+<li><em><strong>Actor</strong></em> 模型</li>
+<li><em><strong>CSP</strong></em> 模型</li>
+<li><em><strong>Fork</strong></em> &amp; <em><strong>Join</strong></em> 模型</li>
+</ol>
+</li>
+<li><em><strong>Go</strong></em> 语言中的并发程序主要是通过基于 ***CSP(***communicating sequential processes) 的 <code>goroutine</code> ******和 <code>channel</code> 来实现, 当然也支持使用传统的多线程共享内存的并发方式</li>
+</ul>
+<h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a><em><strong>Goroutine</strong></em></h2><ul>
+<li><em><strong>Goroutine</strong></em> 是 <em><strong>Go</strong></em> 语言支持并发的核心, 在一个 <em><strong>Go</strong></em> 程序中同时创建成百上千个 <em><strong>goroutine</strong></em> 是非常普遍的, 一个 <em><strong>goroutine</strong></em> 会以一个很小的栈开始其生命周期, 一般只需要2KB。区别于操作系统线程由系统内核进行调度,  <em><strong>goroutine</strong></em> 是由 <em><strong>Go</strong></em> 运行时(runtime)负责调度</li>
+<li><em><strong>Go</strong></em> 运行时会智能地将 m 个 <em><strong>goroutine</strong></em> 合理地分配给 n 个操作系统线程，实现类似 m:n 的调度机制, 不再需要 <em><strong>Go</strong></em> 开发者自行在代码层面维护一个线程池</li>
+<li><em><strong>Goroutine</strong></em> 是 <em><strong>Go</strong></em> 程序中最基本的并发执行单元。每一个 <em><strong>Go</strong></em> 程序都至少包含一个 <em><strong>goroutine →</strong></em> <code>main goroutine</code>，当 <em><strong>Go</strong></em> 程序启动时它会自动创建</li>
+<li>在 <em><strong>Go</strong></em> 语言编程中你不需要去自己写进程、线程、协程, 你的技能包里只有一个技能 → <em><strong>goroutine</strong></em>, 当你需要让某个任务并发执行的时候，你只需要把这个任务包装成一个函数，开启一个  <em><strong>goroutine</strong></em> 去执行这个函数就可以了</li>
+</ul>
+<h3 id="go-关键字"><a href="#go-关键字" class="headerlink" title="go 关键字"></a><code>go</code> 关键字</h3><ul>
+<li>在 <em><strong>Go</strong></em> 中使用 <em><strong>goroutine</strong></em> 非常简单, 只需要在函数或方法调用前加上 <code>go</code> 关键字就可以创建一个 <em><strong>goroutine</strong></em>, 从而让该函数或方法在新创建的 <em><strong>goroutine</strong></em> 中执行</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> f()  <span class="comment">// 创建一个新的 goroutine 运行函数f</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>匿名函数也支持使用 <code>go</code> 关键字创建 <em><strong>goroutine</strong></em> 去执行</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>一个 <em><strong>goroutine</strong></em> 必定对应一个函数/方法，可以创建多个 <em><strong>goroutine</strong></em> 去执行相同的函数/方法</li>
+</ul>
+<h3 id="启动单个-goroutine"><a href="#启动单个-goroutine" class="headerlink" title="启动单个 goroutine"></a>启动单个 <em><strong>goroutine</strong></em></h3><ul>
+<li>启动 <em><strong>goroutine</strong></em> 的方式非常简单，只需要在调用函数(普通函数和匿名函数)前加上一个 <code>go</code> 关键字</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hello</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	hello()</span><br><span class="line">	fmt.Println(<span class="string">&quot;你好&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Result:</span><br><span class="line">hello</span><br><span class="line">你好</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/creambluea/Downloads/goroutine01.png"></p>
+<ul>
+<li>尝试在 <code>hello</code> 函数前加上关键字 <code>go</code> , 启动一个 <em><strong>goroutine</strong></em> 去执行 <code>hello</code> 函数</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hello</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">go</span> hello()</span><br><span class="line">	fmt.Println(<span class="string">&quot;你好&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Result:</span><br><span class="line">你好</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其实在 <em><strong>Go</strong></em> 程序启动时, <em><strong>Go</strong></em> 程序就会为 <code>main</code> 函数创建一个默认的 <em><strong>goroutine</strong></em> 。在示例代码中, 在 <em><strong>main</strong></em> 函数中使用 <code>go</code> 关键字创建了另外一个 <em><strong>goroutine</strong></em> 去执行 <code>hello</code> 函数, 而此时 <code>main</code> <em><strong>goroutine</strong></em> 还在继续往下执行, 我们的程序中此时存在两个并发执行的 <em><strong>goroutine</strong></em>。当 <code>main</code> 函数结束时整个程序也就结束了, 同时 <em><strong>main goroutine</strong></em> 也结束了, 所有由 <em><strong>main goroutine</strong></em> 创建的 <em><strong>goroutine</strong></em> 也会一同退出。也就是说 <code>main</code> 函数退出太快, 另外一个 <em><strong>goroutine</strong></em> 中的函数还未执行完程序就退出了, 导致未打印出“hello”。</li>
+<li><em><strong>main goroutine</strong> 就像是《权利的游戏》中的夜王, 其他的 <strong>goroutine</strong> 都是夜王转化出的异鬼, 夜王一死它转化的那些异鬼也就全部 GG了。</em></li>
+<li>所以我们要想办法让 <code>main</code> 函数‘“等一等”将在另一个 <em><strong>goroutine</strong></em> 中运行的 <code>hello</code> 函数。其中最简单粗暴的方式就是在 <code>main</code> 函数中 <code>time.Sleep</code> 一秒钟了, 以此来保证新的 goroutine 能够被正常创建和执行</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hello</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">go</span> hello()</span><br><span class="line">	fmt.Println(<span class="string">&quot;你好&quot;</span>)</span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Result:</span><br><span class="line">你好</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为什么会先打印 <code>你好</code> 呢？这是因为在程序中创建 <em><strong>goroutine</strong></em> 执行函数需要一定的开销, 而与此同时 <code>main</code> 函数所在的 <em><strong>goroutine</strong></em> 是继续执行的</li>
+</ul>
+<p><img src="/Users/creambluea/Downloads/goroutine02.png"></p>
+<ul>
+<li>但是使用 <code>time.Sleep</code> 让 <em><strong>main goroutine</strong></em> 等待  <em><strong>hello goroutine</strong></em> 执行结束是不优雅的, 也是不准确的</li>
+<li><em><strong>Go</strong></em> 通过 <code>sync</code> 包为我们提供了一些常用的并发原语, 当你并不关心并发操作的结果或者有其它方式收集并发操作的结果时, <code>WaitGroup</code> 是实现等待一组并发操作完成的好方法</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hello</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Begin Go&quot;</span>)</span><br><span class="line">	wg.Done()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	wg.Add(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">go</span> hello()</span><br><span class="line">	fmt.Println(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">	wg.Wait()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Result:</span><br><span class="line">Hello</span><br><span class="line">Begin Go</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动多个-goroutine"><a href="#启动多个-goroutine" class="headerlink" title="启动多个 goroutine"></a>启动多个 <em><strong>goroutine</strong></em></h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hello</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">defer</span> wg.Done() <span class="comment">// goroutine结束就登记 -1</span></span><br><span class="line">	fmt.Printf(<span class="string">&quot;This is %d\n&quot;</span>, i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		wg.Add(<span class="number">1</span>) <span class="comment">// 启动一个 goroutine 就登记 +1</span></span><br><span class="line">		hello(i)</span><br><span class="line">	&#125;</span><br><span class="line">	wg.Wait() <span class="comment">// 等待所有登记的 goroutine 都结束</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多次执行上面的代码会发现每次终端上打印数字的顺序都不一致: 10个 <em><strong>goroutine</strong></em> 是并发执行的, 而 <em><strong>goroutine</strong></em> 的调度是随机的</li>
+</ul>
+<h3 id="动态栈"><a href="#动态栈" class="headerlink" title="动态栈"></a>动态栈</h3><ul>
+<li>操作系统的线程一般都有固定的栈内存(通常为 2MB), 而 <em><strong>Go</strong></em> 语言中的 <em><strong>goroutine</strong></em> 非常轻量级, 一个 <em><strong>goroutine</strong></em> 的初始栈空间很小(一般为 2KB), 所以在 <em><strong>Go</strong></em> 语言中一次创建数万个 <em><strong>goroutine</strong></em> 也是可能的。并且 <em><strong>goroutine</strong></em> 的栈不是固定的, 可以根据需要动态地增大或缩小, <em><strong>Go</strong></em> 的 <em><strong>runtime</strong></em> 会自动为 <em><strong>goroutine</strong></em> 分配合适的栈空间</li>
+</ul>
+<h3 id="goroutine-调度"><a href="#goroutine-调度" class="headerlink" title="goroutine 调度"></a><strong><em>goroutine</em> 调度</strong></h3><ul>
+<li>操作系统内核在调度时会挂起当前正在执行的线程并将寄存器中的内容保存到内存中, 然后选出接下来要执行的线程并从内存中恢复该线程的寄存器信息, 然后恢复执行该线程的现场并开始执行线程。从一个线程切换到另一个线程需要完整的上下文切换。因为可能需要多次内存访问, 索引这个切换上下文的操作开销较大, 会增加运行的 <em><strong>CPU</strong></em> 周期</li>
+<li>区别于操作系统内核调度操作系统线程, <em><strong>goroutine</strong></em> 的调度是 <em><strong>Go</strong></em> 语言运行时(<strong>runtime</strong>)层面的实现, 是完全由 <em><strong>Go</strong></em> 语言本身实现的一套调度系统 → <em><strong>go scheduler</strong></em>。它的作用是按照一定的规则将所有的 <em><strong>goroutine</strong></em> 调度到操作系统线程上执行</li>
+<li>在经历数个版本的迭代之后, 目前 <em><strong>Go</strong></em> 语言的调度器采用的是 <code>GPM</code> 调度模型</li>
+</ul>
+<p><img src="/Users/creambluea/Downloads/gpm.png"></p>
+<ul>
+<li>其中：<ul>
+<li>G：表示 <em><strong>goroutine</strong></em>, 每执行一次 <code>go f()</code> 就创建一个 G, 包含要执行的函数和上下文信息</li>
+<li>全局队列(<em><strong>Global Queue</strong></em>)：存放等待运行的 G</li>
+<li>P：表示 <em><strong>goroutine</strong></em> 执行所需的资源, 最多有 <em><strong>GOMAXPROCS</strong></em> 个。</li>
+<li>P 的本地队列：同全局队列类似, 存放的也是等待运行的 G, 存的数量有限, 不超过256个。新建 G 时, G 优先加入到 P 的本地队列, 如果本地队列满了会批量移动部分 G 到全局队列。</li>
+<li>M：线程想运行任务就得获取 P, 从 P 的本地队列获取 G, 当 P 的本地队列为空时, M 也会尝试从全局队列或其他 P 的本地队列获取 G。M 运行 G, G 执行之后, M 会从 P 获取下一个 G, 不断重复下去。</li>
+<li><em><strong>Goroutine</strong></em> 调度器和操作系统调度器是通过 M 结合起来的, 每个 M 都代表了1个内核线程, 操作系统调度器负责把内核线程分配到 <em><strong>CPU</strong></em> 的核上执行</li>
+</ul>
+</li>
+<li>单从线程调度讲, <em><strong>Go</strong></em> 相比起其他语言的优势在于 <em><strong>OS</strong></em> 线程是由 <em><strong>OS</strong></em> 内核来调度的,  <em><strong>goroutine</strong></em> 则是由 <em><strong>Go</strong></em> 运行时(<em><strong>runtime</strong></em>)自己的调度器调度的, 完全是在用户态下完成的,  不涉及内核态与用户态之间的频繁切换, 包括内存的分配与释放, 都是在用户态维护着一块大的内存池,  不直接调用系统的 <code>malloc</code> 函数(除非内存池需要改变), 成本比调度 <em><strong>OS</strong></em> 线程低很多。 另一方面充分利用了多核的硬件资源, 近似的把若干 <em><strong>goroutine</strong></em> 均分在物理线程上,  再加上本身 <em><strong>goroutine</strong></em> 的超轻量级, 以上种种特性保证了 <em><strong>goroutine</strong></em> 调度方面的性能</li>
+</ul>
+<h3 id="GOMAXPROCS"><a href="#GOMAXPROCS" class="headerlink" title="GOMAXPROCS"></a><em><strong>GOMAXPROCS</strong></em></h3><ul>
+<li><em><strong>Go</strong></em> 运行时的调度器使用 <code>GOMAXPROCS</code> 参数来确定需要使用多少个 <em><strong>OS</strong></em> 线程来同时执行 <em><strong>Go</strong></em> 代码。默认值是机器上的 <em><strong>CPU</strong></em> 核心数</li>
+<li><em><strong>Go</strong></em> 可以通过 <code>runtime.GOMAXPROCS</code> 函数设置当前程序并发时占用的 <em><strong>CPU</strong></em> 逻辑核心数。(Go1.5版本之前, 默认使用的是单核心执行。Go1.5 版本之后, 默认使用全部的 CPU 核心数)</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Celeste°</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Failure is not a tragedy, <strong>But giving up is!<strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tag/Go-Basics/"># Go_Basics</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/12/19/Java/%E5%88%9D%E8%AF%86%20Java/">初识 Java</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Celeste° | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
