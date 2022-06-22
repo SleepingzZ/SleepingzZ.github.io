@@ -13,7 +13,7 @@
 
 
 
-<title>初识 Python | 淡而无味也是一种味道</title>
+<title>变量与常量 | 淡而无味也是一种味道</title>
 
 
 
@@ -193,7 +193,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">初识 Python</h1>
+            <h1 class="post-title">变量与常量</h1>
             
                 <div class="post-meta">
                     
@@ -202,7 +202,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">2017-September-14&nbsp;&nbsp;13:59:54</a>
+                        Date: <a href="#">2017-September-17&nbsp;&nbsp;14:53:58</a>
                         </span>
                     
                     
@@ -218,30 +218,51 @@
         </header>
 
         <div class="post-content">
-            <h1 id="什么是-Python"><a href="#什么是-Python" class="headerlink" title="什么是 Python"></a>什么是 Python</h1><ul>
-<li><em><strong>Python</strong></em> 是一种广泛使用的<strong>解释型</strong>、<strong>强类型</strong>的<strong>动态语言</strong><ol>
-<li>解释型 → 每次运行程序都要翻译，且解释型语言编写程序每次运行离不开解释器</li>
-<li>强类型 → 数据类型不可以被忽略的语言 即变量的数据类型一旦被定义，那就不会再改变</li>
-<li>动态型 → 运行时才进行数据类型检查 即在变量赋值时，才确定变量的数据类型，不用事先给变量指定数据类型</li>
-</ol>
-</li>
-<li><em><strong>Python</strong></em> 支持多种编程范型，包括函数式、指令式、反射式、结构化和面向对象编程。它拥有<strong>动态类型系统</strong>和<strong>垃圾回收</strong><br>  功能，能够自动管理内存使用，并且其本身拥有一个巨大而广泛的标准库。</li>
-<li><em><strong>Python</strong></em> 的语言结构以及<strong>面向对象</strong>的方法旨在帮助程序员为小型的和大型的项目编写清晰的、合乎逻辑的代码</li>
+            <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="什么是变量"><a href="#什么是变量" class="headerlink" title="什么是变量"></a>什么是变量</h2><ul>
+<li>变 → 事物的状态是可以变化的</li>
+<li>量 → 事物的状态</li>
+<li>变量 → 一种语法机制, 可以把事物的状态储存起来, 并且可以取出来修改, 本质是一种存取内存的机制</li>
 </ul>
-<h1 id="内存管理机制"><a href="#内存管理机制" class="headerlink" title="内存管理机制"></a>内存管理机制</h1><blockquote>
-<p>垃圾回收机制 <em><strong>GC</strong></em></p>
-</blockquote>
-<ol>
-<li><p>引用计数回收 → 计数判断为 0 即回收(<code>del</code> 函数为解除关联, 并非删除)</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span> </span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="keyword">del</span> x</span><br></pre></td></tr></table></figure></li>
-<li><p>分代回收 → 辅助回收, 解决引用技术效率问题, 对一部分长期使用变量降低扫描频率</p>
-</li>
-<li><p>标记/清楚 → 引用计数可能发生内存泄漏</p>
-</li>
+<h2 id="如何使用变量"><a href="#如何使用变量" class="headerlink" title="如何使用变量"></a>如何使用变量</h2><ul>
+<li>变量的使用遵循<strong>先定义</strong>, <strong>后引用</strong>原则</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">变量名 = 变量值</span><br><span class="line"><span class="built_in">print</span>(变量名)</span><br></pre></td></tr></table></figure>
+
+<h2 id="变量的三大组成部分"><a href="#变量的三大组成部分" class="headerlink" title="变量的三大组成部分"></a>变量的三大组成部分</h2><ul>
+<li>变量名 → 访问变量值</li>
+<li>赋值符号 → 将比那辆值对应的内存地址绑定给变量名</li>
+<li>变量值 → 记录事物的状态, 存储数据</li>
+</ul>
+<h2 id="变量名的命名规则"><a href="#变量名的命名规则" class="headerlink" title="变量名的命名规则"></a>变量名的命名规则</h2><ul>
+<li>见名知义</li>
+<li>规范<ol>
+<li>字母、数字、下划线</li>
+<li>不能以数字开头</li>
+<li>不能与 <em><strong>Python</strong></em> 关键字冲突</li>
 </ol>
-<ul>
-<li>PS: 如果想要回收 Python 程序的内存空间, 只能通过把变量值的引用计数减为 0 的方式实现</li>
-<li>小整数池(在 <em><strong>DOS</strong></em> 命令下该范围为 [-5, 256], 在 <em><strong>PyCharm</strong></em> 中该范围被进一步优化</li>
+</li>
+<li>命名风格<ol>
+<li>纯小写加下划线(推荐)</li>
+<li>驼峰体</li>
+</ol>
+</li>
+</ul>
+<h2 id="变量值"><a href="#变量值" class="headerlink" title="变量值"></a>变量值</h2><ul>
+<li>变量的量大特征<ol>
+<li><code>id</code> 号 → 变量值的身份证号, 反应的是内存地址, 但不是内存地址</li>
+<li><code>type</code> → 数据类型</li>
+</ol>
+</li>
+</ul>
+<h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><h2 id="什么是常量"><a href="#什么是常量" class="headerlink" title="什么是常量"></a>什么是常量</h2><ul>
+<li>程序运行过程中，值不会发生变化的量</li>
+</ul>
+<h2 id="常量的命名"><a href="#常量的命名" class="headerlink" title="常量的命名"></a>常量的命名</h2><ul>
+<li>在 <em><strong>Python</strong></em> 中，通常用全部大写的变量名表示常量 → <code>PI</code> = 3.14159265359</li>
+</ul>
+<h2 id="常量的本质"><a href="#常量的本质" class="headerlink" title="常量的本质"></a>常量的本质</h2><ul>
+<li>但事实上，从 <em><strong>Python</strong></em> 语法角度看，<code>PI</code> 仍然是一个变量，因为 <em><strong>Python</strong></em> 根本没有任何机制保证 <code>PI</code> 不会被改变。你完全可以给 <code>PI</code> 赋值为 10，不会弹出任何错误。所以，用全部大写的变量名表示常量只是一个习惯上的用法。</li>
+<li>常量通常放置在代码的最上部，并作为全局使用。</li>
 </ul>
 
         </div>
@@ -289,8 +310,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2017/09/17/Python%20%E5%9F%BA%E7%A1%80/%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F/">变量与常量</a>
+                <a class="prev" rel="prev" href="/2017/09/20/Python%20%E5%9F%BA%E7%A1%80/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3/">基本数据类型详解</a>
             
+            
+            <a class="next" rel="next" href="/2017/09/14/Python%20%E5%9F%BA%E7%A1%80/%E5%88%9D%E8%AF%86-Python/">初识 Python</a>
             
         </section>
 
