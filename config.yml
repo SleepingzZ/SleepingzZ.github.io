@@ -1,10 +1,10 @@
-baseURL: 'https://blog.noimpty.love/'
+baseURL: 'https://SleepingzZ.github.io/'
 title: Trip
 theme: hugo-theme-ladder
 license: MIT
 licenselink: 'https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE'
 description: 'I love, love a whole once.'
-homepage: 'https://blog.noimpty.love/'
+homepage: 'https://SleepingzZ.github.io/'
 defaultContentLanguage: 'en'
 googleAnalytics: G-7E4JNTL3ES
 enableRobotsTXT: true
