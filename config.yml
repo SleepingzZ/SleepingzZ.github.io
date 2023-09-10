@@ -30,7 +30,7 @@ params:
   comments:
     giscus:
       enable: true
-      repo: guangzhengli/hugo-ladder-exampleSite
+      repo: SleepingzZ/hugo-ladder-exampleSite
       repo_id: R_kgDOHyVOjg
       category: Announcements
       category_id: DIC_kwDOHyVOjs4CQsH7
@@ -93,7 +93,7 @@ languages:
           url: /guestbook
           weight: 5
         - name: Monitor
-          url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/SleepingzZ
+          url: https://analytics.umami.is/share/PcVQIPPzc5Sx29a9/Noimpty
           weight: 6
   zh:
     languageName: 中文
