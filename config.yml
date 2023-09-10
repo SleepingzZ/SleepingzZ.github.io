@@ -3,7 +3,7 @@ title: LADDER
 theme: hugo-theme-ladder
 license: MIT
 licenselink: 'https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE'
-description: 'A fast, clean Hugo theme'
+description: 'I love you, love a whole once'
 homepage: 'https://hugo-ladder.pages.dev'
 defaultContentLanguage: 'en'
 googleAnalytics: G-4WXJ5TEK2S
@@ -36,9 +36,9 @@ menu:
 params:
   brand: HOME
   avatarURL: /images/avatar.png
-  author: Hugo Ladder
-  authorDescription: A clean, fast hugo theme focused on Reading
-  info: Ladder is a clean, simple but beautiful theme with awesome features
+  author: Noimpty
+  authorDescription: 
+  info: To meet is to sign.
   favicon: /images/avatar.png
   options:
     showDarkMode: true
@@ -98,9 +98,9 @@ languages:
     languageName: EN
   zh:
     languageName: 中
-    author: Ladder 主题
-    authorDescription: 一个美观，快速并且专注于阅读的主题
-    info: 帮助开发者构建一个免费并且漂亮的博客网站，记录自己的思考并且提高自己的影响力
+    author: Noimpty
+    authorDescription: 
+    info: 遇见即是上上签。
     guestbook:
       title: 留言板
       description: 您的评论，会让该网站更精彩！
