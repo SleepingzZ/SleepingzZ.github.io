@@ -12,4 +12,4 @@ Then configure the GitHub page setting following:
 
 ![nsrExo](https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/nsrExo.png)
 
-🎉🎉🎉 Open the browser and enter: https://username.github.io 🎉🎉🎉
+🎉🎉🎉 Open the browser and enter: https://SleepingzZ.github.io 🎉🎉🎉
