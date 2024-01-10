@@ -1,18 +1,18 @@
-baseURL: 'https://hugo-ladder.pages.dev'
+baseURL: 'https://trip.noimpty.love'
 title: LADDER
 theme: hugo-theme-ladder
 license: MIT
 licenselink: 'https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE'
 description: 'I love you, love a whole once'
-homepage: 'https://hugo-ladder.pages.dev'
+homepage: 'https://trip.noimpty.love'
 defaultContentLanguage: 'en'
 googleAnalytics: G-4WXJ5TEK2S
 paginate: 10
 hasCJKLanguage: true
 copyright: "2023 GuangzhengLi All rights reserved"
 Author:
-  name: "Guangzheng Li"
-  email: "iguangzhengli@gmail.com"
+  name: "Hao Huang"
+  email: "celeste.anchor@gmail.com"
 menu:
   main:
     - name: Blog
@@ -36,7 +36,7 @@ menu:
 params:
   brand: HOME
   avatarURL: /images/avatar.png
-  author: Noimpty
+  author: Trip
   authorDescription: 
   info: To meet is to sign.
   favicon: /images/avatar.png
