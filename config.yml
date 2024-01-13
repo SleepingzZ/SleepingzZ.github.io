@@ -37,7 +37,7 @@ params:
   brand: HOME
   avatarURL: /images/avatar.png
   author: trip
-  authorDescription: 
+  authorDescription: I love you, love a whole once.
   info: To meet is to sign.
   favicon: /favicon.ico
   options:
@@ -98,15 +98,15 @@ languages:
     languageName: EN
   zh:
     languageName: 中
-    author: Noimpty
-    authorDescription: 
+    author: trio
+    authorDescription: 我爱你，爱了整整一个曾经。
     info: 遇见即是上上签。
     guestbook:
       title: 留言板
       description: 您的评论，会让该网站更精彩！
     menu:
       main:
-        - name: 文章
+        - name: 博客
           url: /blog
           weight: 1
         - name: 生活
