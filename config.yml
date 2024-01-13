@@ -1,10 +1,10 @@
-baseURL: 'https://trip.noimpty.love'
-title: LADDER
+baseURL: 'https://sleepingzz.github.io'
+title: CORNER
 theme: hugo-theme-ladder
 license: MIT
 licenselink: 'https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE'
 description: 'I love you, love a whole once'
-homepage: 'https://trip.noimpty.love'
+homepage: 'https://sleepingzz.github.io'
 defaultContentLanguage: 'en'
 googleAnalytics: G-4WXJ5TEK2S
 paginate: 10
@@ -36,10 +36,10 @@ menu:
 params:
   brand: HOME
   avatarURL: /images/avatar.png
-  author: Trip
+  author: trip
   authorDescription: 
   info: To meet is to sign.
-  favicon: /images/avatar.png
+  favicon: /favicon.ico
   options:
     showDarkMode: true
     enableImgZooming: true
