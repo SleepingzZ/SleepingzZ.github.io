@@ -4,8 +4,6 @@ title: "CSS 基础"
 description: "CSS is a language that describes the style of HTML documents"
 tags: ["Web", "CSS"]
 series: ["How to become a web developer"]
-
-[//]: # (image: "https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/OZcU7U.png")
 featured: true
 ---
 
