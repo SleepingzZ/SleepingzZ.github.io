@@ -15,11 +15,11 @@ Author:
   name: "trip."
   email: "celeste.anchor@gmail.com"
 params:
-  brand: HOME
+  brand: 首页
   avatarURL: /images/avatar.png
   author: trip.
-  authorDescription: To meet is to sign.
-  info: I love you, love a whole once.
+  authorDescription: 遇见即是上上签。
+  info: 我爱你，爱了整整一个曾经。
   favicon: /images/avatar.ico
   options:
     showDarkMode: true
