@@ -36,9 +36,9 @@ menu:
 params:
   brand: HOME
   avatarURL: /images/avatar.png
-  author: trip
-  authorDescription: I love you, love a whole once.
-  info: To meet is to sign.
+  author: trip.
+  authorDescription: To meet is to sign.
+  info: I love you, love a whole once.
   favicon: /favicon.ico
   options:
     showDarkMode: true
@@ -99,8 +99,8 @@ languages:
   zh:
     languageName: 中
     author: trio
-    authorDescription: 我爱你，爱了整整一个曾经。
-    info: 遇见即是上上签。
+    authorDescription: 遇见即是上上签。
+    info: 我爱你，爱了整整一个曾经。
     guestbook:
       title: 留言板
       description: 您的评论，会让该网站更精彩！
