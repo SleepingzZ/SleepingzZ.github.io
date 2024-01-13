@@ -1,10 +1,10 @@
-baseURL: 'https://trip.noimpty.love'
+baseURL: 'https://sleepingzz.github.io'
 title: LADDER
 theme: hugo-theme-ladder
 license: MIT
 licenselink: 'https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE'
 description: 'I love you, love a whole once'
-homepage: 'https://trip.noimpty.love'
+homepage: 'https://sleepingzz.github.io'
 defaultContentLanguage: 'en'
 googleAnalytics: G-4WXJ5TEK2S
 enableRobotsTXT: true
@@ -29,7 +29,7 @@ params:
   darkModeTheme: data-dark-mode
   comments:
     giscus:
-      enable: true
+      enable: false
       repo: guangzhengli/hugo-ladder-exampleSite
       repo_id: R_kgDOHyVOjg
       category: Announcements
