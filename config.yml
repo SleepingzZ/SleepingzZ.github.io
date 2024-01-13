@@ -17,9 +17,9 @@ Author:
 params:
   brand: HOME
   avatarURL: /images/avatar.png
-  author: Hugo Ladder
-  authorDescription: A clean, fast hugo theme focused on Reading
-  info: Build a free and beautiful blog site to record your thoughts and increase your influence
+  author: trip.
+  authorDescription: To meet is to sign.
+  info: I love you, love a whole once.
   favicon: /images/avatar.ico
   options:
     showDarkMode: true
@@ -97,15 +97,15 @@ languages:
           weight: 6
   zh:
     languageName: 中文
-    author: Ladder 主题
-    authorDescription: 一个美观，快速并且专注于阅读的主题
-    info: 帮助开发者构建一个免费并且漂亮的博客网站，记录自己的思考并且提高自己的影响力
+    author: trip.
+    authorDescription: 遇见即是上上签。
+    info: 我爱你，爱了整整一个曾经。
     guestbook:
       title: 留言板
       description: 您的评论，会让该网站更精彩！
     menu:
       main:
-        - name: 文章
+        - name: 博客
           url: /blog
           weight: 1
         - name: 生活
