@@ -1,10 +1,11 @@
-baseURL: 'https://sleepingzz.github.io'
+# EN config
+baseURL: 'https://trip.noimpty.love'
 title: CORNER
 theme: hugo-theme-ladder
 license: MIT
 licenselink: 'https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE'
 description: 'I love you, love a whole once'
-homepage: 'https://sleepingzz.github.io'
+homepage: 'https://trip.noimpty.love'
 defaultContentLanguage: 'en'
 googleAnalytics: G-4WXJ5TEK2S
 paginate: 10
